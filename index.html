@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HGE Creator — 인디게임 × 크리에이터 콜라보 플랫폼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+:root {
+  --bg:#08080f; --bg2:#0e0e1c; --bg3:#13132a; --surf:#1a1a30;
+  --white:#f4f4f8; --muted:#8888aa; --dim:#444466;
+  --acc:#5b5ef4; --acc2:#e040c0; --acc3:#00d9a0;
+  --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
+}
+body { background:var(--bg); color:var(--white); font-family:'Noto Sans KR',sans-serif; overflow-x:hidden; line-height:1.6; }
+img { display:block; max-width:100%; }
+a { text-decoration:none; color:inherit; }
+ul { list-style:none; }
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-thumb { background:var(--acc); border-radius:2px; }
+
+/* NAV */
+#nav {
+  position:fixed; inset:0 0 auto; z-index:200;
+  display:flex; align-items:center;
+  padding:0 3.5rem; height:64px;
+  background:rgba(8,8,15,0.92); backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--bdr);
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:4px; margin-right:auto; }
+.nav-logo em { color:var(--acc); font-style:normal; }
+.nav-menu { display:flex; align-items:center; gap:2.5rem; }
+.nav-menu a { font-size:.78rem; font-weight:500; letter-spacing:2px; color:var(--muted); font-family:'Space Mono',monospace; transition:color .2s; }
+.nav-menu a:hover,.nav-menu a.on { color:var(--white); }
+.nav-sns { display:flex; gap:1rem; margin-left:2rem; }
+.nav-sns a { width:32px; height:32px; border:1px solid var(--bdr2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.72rem; color:var(--muted); font-family:'Space Mono',monospace; transition:all .2s; }
+.nav-sns a:hover { border-color:var(--acc); color:var(--white); }
+
+/* HERO */
+#hero { padding-top:64px; height:100vh; min-height:640px; position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.hero-reel { position:absolute; inset:0; display:flex; }
+.hero-slide { flex:0 0 100%; height:100%; position:relative; }
+.hero-slide-art { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.hs1{background:linear-gradient(160deg,#0a0a22,#1c0c3a 50%,#0d1a3a);}
+.hs2{background:linear-gradient(160deg,#0f0a00,#2a1500 50%,#150a20);}
+.hs3{background:linear-gradient(160deg,#000d20,#001840 50%,#0a0020);}
+.hs4{background:linear-gradient(160deg,#1a0020,#30005a 50%,#0a0030);}
+.s-ov { position:absolute; inset:0; background:linear-gradient(to right,rgba(8,8,15,.85) 40%,rgba(8,8,15,.2)); }
+.s-ovb { position:absolute; inset:0; background:linear-gradient(to top,rgba(8,8,15,1) 0%,transparent 40%); }
+.s-emoji { position:relative; z-index:1; font-size:6rem; filter:drop-shadow(0 20px 60px rgba(0,0,0,.8)); }
+.hero-content { position:relative; z-index:10; text-align:center; padding:0 2rem; }
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:3px; color:var(--acc3);
+  padding:.35rem 1rem; border:1px solid rgba(0,217,160,.25); border-radius:999px;
+  background:rgba(0,217,160,.07); margin-bottom:1.5rem;
+  animation:fadeY .8s both;
+}
+.hero-eyebrow::before { content:'◆'; font-size:.4rem; }
+.hero-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.2rem,8vw,7rem); letter-spacing:6px; line-height:1; animation:fadeY .8s .1s both; }
+.hero-h1 .gr { background:linear-gradient(90deg,var(--acc),var(--acc2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero-sub { margin-top:1.2rem; font-size:1rem; color:var(--muted); line-height:1.8; animation:fadeY .8s .2s both; }
+.hero-actions { margin-top:2rem; display:flex; gap:1rem; justify-content:center; animation:fadeY .8s .3s both; }
+.btn-fill { padding:.75rem 2rem; background:var(--acc); color:#fff; font-weight:700; font-size:.82rem; border:none; border-radius:6px; cursor:pointer; letter-spacing:1px; transition:all .2s; font-family:'Space Mono',monospace; }
+.btn-fill:hover { background:#7274f8; transform:translateY(-2px); }
+.btn-out { padding:.75rem 2rem; background:transparent; color:var(--white); font-size:.82rem; border:1px solid var(--bdr2); border-radius:6px; letter-spacing:1px; transition:all .2s; font-family:'Space Mono',monospace; }
+.btn-out:hover { border-color:var(--white); }
+.hero-dots { position:absolute; bottom:5rem; left:50%; transform:translateX(-50%); display:flex; gap:.6rem; z-index:10; }
+.hero-dot { width:6px; height:6px; border-radius:50%; background:var(--dim); cursor:pointer; transition:all .3s; }
+.hero-dot.on { background:var(--acc); width:24px; border-radius:3px; }
+.hero-scr { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.4rem; z-index:10; color:var(--dim); font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:2px; animation:bob 2s infinite; }
+@keyframes fadeY { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+/* SECTIONS */
+.sec { padding:5rem 3.5rem; max-width:1300px; margin:0 auto; }
+.sec-bg2 { background:var(--bg2); }
+.sec-label { display:inline-flex; align-items:center; gap:.7rem; font-family:'Space Mono',monospace; font-size:.67rem; letter-spacing:3px; color:var(--acc); margin-bottom:.8rem; }
+.sec-label::before { content:''; width:20px; height:1px; background:var(--acc); }
+.sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; line-height:1.1; }
+.sec-desc { color:var(--muted); font-size:.92rem; margin-top:.8rem; line-height:1.8; }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
+.reveal.in { opacity:1; transform:none; }
+
+/* VOD CHIP */
+.chip-row { display:flex; gap:.6rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+.chip { padding:.4rem 1.1rem; border:1px solid var(--bdr2); border-radius:999px; font-size:.75rem; color:var(--muted); cursor:pointer; font-family:'Space Mono',monospace; letter-spacing:1px; transition:all .2s; background:transparent; }
+.chip:hover,.chip.on { background:var(--acc); border-color:var(--acc); color:#fff; }
+
+/* VOD GRID */
+.vod-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+.vod-card { position:relative; border-radius:10px; overflow:hidden; cursor:pointer; display:block; background:var(--bg3); border:1px solid var(--bdr); transition:transform .25s,box-shadow .25s; }
+.vod-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,.6); border-color:var(--bdr2); }
+.vod-feat { grid-column:span 2; }
+.vod-thumb { aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.vt1{background:linear-gradient(135deg,#0a2040,#1a5090);}
+.vt2{background:linear-gradient(135deg,#200a00,#6a2500);}
+.vt3{background:linear-gradient(135deg,#0a1030,#204080);}
+.vt4{background:linear-gradient(135deg,#200030,#600090);}
+.vt5{background:linear-gradient(135deg,#001a10,#004030);}
+.vt6{background:linear-gradient(135deg,#1a1000,#504000);}
+.vt-e{background:var(--surf);}
+.v-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(8,8,15,.95)); }
+.v-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; opacity:0; transition:opacity .2s; }
+.vod-card:hover .v-play { opacity:1; }
+.v-pbtn { width:54px; height:54px; border-radius:50%; background:rgba(91,94,244,.85); display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
+.v-pbtn svg { width:20px; fill:#fff; margin-left:3px; }
+.v-art { position:relative; z-index:1; font-size:3rem; }
+.vod-feat .v-art { font-size:4.5rem; }
+.v-tag { position:absolute; top:.8rem; left:.8rem; z-index:4; font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:1px; padding:.25rem .65rem; border-radius:999px; background:rgba(8,8,15,.7); border:1px solid var(--bdr2); color:var(--muted); }
+.v-ftag { position:absolute; top:.8rem; right:.8rem; z-index:4; font-family:'Space Mono',monospace; font-size:.62rem; padding:.25rem .65rem; border-radius:999px; background:rgba(91,94,244,.2); border:1px solid rgba(91,94,244,.4); color:#a0a2ff; }
+.v-info { padding:1rem 1.1rem 1.2rem; }
+.v-title { font-weight:700; font-size:.95rem; margin-bottom:.3rem; line-height:1.3; }
+.v-meta { display:flex; align-items:center; gap:1rem; font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); margin-top:.5rem; }
+.v-meta .dot { color:var(--dim); }
+.v-link { display:inline-flex; align-items:center; gap:.4rem; margin-top:.7rem; font-family:'Space Mono',monospace; font-size:.68rem; color:var(--acc); letter-spacing:1px; }
+.v-link svg { width:10px; }
+.v-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; height:100%; min-height:130px; color:var(--dim); font-size:.8rem; font-family:'Space Mono',monospace; letter-spacing:1px; }
+.v-plus { font-size:1.5rem; }
+
+/* CREATOR GRID */
+.creator-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem; }
+.c-card { background:var(--bg3); border:1px solid var(--bdr); border-radius:12px; overflow:hidden; transition:all .25s; cursor:pointer; position:relative; }
+.c-card:hover { border-color:var(--bdr2); transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.5); }
+.c-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; opacity:0; transition:opacity .2s; }
+.c-card[data-t="s"]::before{background:var(--acc);} .c-card[data-t="r"]::before{background:var(--acc2);} .c-card[data-t="f"]::before{background:var(--acc3);}
+.c-card:hover::before { opacity:1; }
+.c-av { width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.ca1{background:linear-gradient(135deg,#0f2060,#2040a0);}
+.ca2{background:linear-gradient(135deg,#300060,#6010a0);}
+.ca3{background:linear-gradient(135deg,#006020,#00a040);}
+.ca4{background:linear-gradient(135deg,#601000,#a02000);}
+.ca5{background:linear-gradient(135deg,#006060,#0090a0);}
+.ca6{background:linear-gradient(135deg,#400060,#800090);}
+.ca7{background:linear-gradient(135deg,#004060,#0060a0);}
+.ca8{background:linear-gradient(135deg,#502000,#904000);}
+.ca-e{background:var(--surf);}
+.c-av-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(19,19,42,.9)); }
+.c-av-art { position:relative; z-index:1; font-size:3.5rem; }
+.c-plat { position:absolute; bottom:.6rem; right:.6rem; z-index:2; display:flex; gap:.3rem; }
+.pb { font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:1px; padding:.2rem .5rem; border-radius:999px; border:1px solid var(--bdr2); background:rgba(8,8,15,.7); color:var(--muted); }
+.pb-tw{border-color:rgba(100,65,165,.5);color:#a090cc;} .pb-yt{border-color:rgba(255,0,0,.35);color:#ff8080;} .pb-ch{border-color:rgba(0,180,120,.35);color:#60d0a0;}
+.c-info { padding:.9rem 1rem 1.1rem; }
+.c-name { font-weight:700; font-size:.92rem; margin-bottom:.2rem; }
+.c-tag  { font-size:.75rem; color:var(--muted); }
+.c-tbadge { display:inline-block; margin-top:.5rem; font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:1px; padding:.2rem .6rem; border-radius:999px; }
+.tb-s{background:rgba(91,94,244,.12);color:#a0a2ff;border:1px solid rgba(91,94,244,.3);}
+.tb-r{background:rgba(224,64,192,.12);color:#f0a0e0;border:1px solid rgba(224,64,192,.3);}
+.tb-f{background:rgba(0,217,160,.12);color:#70e8c0;border:1px solid rgba(0,217,160,.3);}
+.c-add { border:1px dashed var(--dim); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.4rem; min-height:260px; color:var(--dim); font-size:.75rem; font-family:'Space Mono',monospace; letter-spacing:1px; background:transparent; }
+.add-ico { font-size:1.5rem; }
+
+/* PROJECT GRID */
+.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+.p-card { background:var(--bg3); border:1px solid var(--bdr); border-radius:12px; overflow:hidden; transition:all .25s; }
+.p-card:hover { border-color:var(--bdr2); transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.5); }
+.p-banner { height:140px; display:flex; align-items:center; justify-content:center; font-size:3rem; position:relative; overflow:hidden; }
+.pb1{background:linear-gradient(135deg,#080820,#1a1060);} .pb2{background:linear-gradient(135deg,#080820,#200840);} .pb3{background:linear-gradient(135deg,#080820,#002030);} .pb-e{background:var(--surf);}
+.p-status { position:absolute; top:.8rem; left:.8rem; font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:1.5px; padding:.25rem .65rem; border-radius:999px; }
+.ps-live{background:rgba(0,217,160,.15);border:1px solid rgba(0,217,160,.4);color:var(--acc3);}
+.ps-up{background:rgba(91,94,244,.15);border:1px solid rgba(91,94,244,.4);color:#a0a2ff;}
+.ps-done{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);}
+.p-body { padding:1.2rem 1.3rem 1.4rem; }
+.p-title { font-weight:700; font-size:1rem; margin-bottom:.4rem; }
+.p-desc { font-size:.82rem; color:var(--muted); line-height:1.7; }
+.p-meta { display:flex; align-items:center; gap:1rem; margin-top:.9rem; font-family:'Space Mono',monospace; font-size:.65rem; color:var(--dim); }
+.p-meta .hi { color:var(--acc3); }
+.p-add { border:1px dashed var(--dim); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; min-height:280px; color:var(--dim); font-size:.78rem; font-family:'Space Mono',monospace; letter-spacing:1px; }
+
+/* ABOUT */
+.about-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--bdr); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; }
+.astat { background:var(--bg3); padding:2rem; }
+.astat .n { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; letter-spacing:2px; background:linear-gradient(135deg,var(--acc),var(--acc2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
+.astat .l { color:var(--muted); font-size:.8rem; margin-top:.3rem; }
+.pill-row { display:flex; gap:.8rem; margin-top:2rem; flex-wrap:wrap; }
+.pill { padding:.5rem 1.1rem; border:1px solid var(--bdr2); border-radius:999px; font-size:.8rem; color:var(--muted); }
+.cta-row { display:flex; gap:1rem; margin-top:2.5rem; }
+
+/* JOIN */
+#join { padding:5rem 3.5rem; text-align:center; position:relative; overflow:hidden; }
+.join-bg { position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 100%,rgba(91,94,244,.1) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 50%,rgba(224,64,192,.08) 0%,transparent 70%); }
+.join-inner { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+.join-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.2rem,5vw,4rem); letter-spacing:3px; margin-bottom:1rem; }
+.join-title .gr { background:linear-gradient(90deg,var(--acc),var(--acc2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.join-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2.5rem 0; }
+.jcard { padding:1.4rem 1.2rem; border:1px solid var(--bdr); border-radius:10px; background:var(--bg3); font-size:.82rem; color:var(--muted); line-height:1.6; text-align:left; }
+.jcard strong { display:block; color:var(--white); margin-bottom:.3rem; font-size:.88rem; }
+.join-links { display:flex; gap:1.2rem; justify-content:center; margin-top:1.2rem; flex-wrap:wrap; }
+.j-link { display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.8rem; border:1px solid var(--bdr2); border-radius:999px; font-family:'Space Mono',monospace; font-size:.78rem; color:var(--acc); transition:all .2s; }
+.j-link:hover { border-color:var(--acc); background:rgba(91,94,244,.08); }
+
+/* FOOTER */
+footer { padding:1.8rem 3.5rem; border-top:1px solid var(--bdr); display:flex; align-items:center; justify-content:space-between; font-family:'Space Mono',monospace; font-size:.65rem; color:var(--dim); }
+.f-links { display:flex; gap:1.5rem; }
+footer a { color:var(--dim); transition:color .2s; }
+footer a:hover { color:var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#"><em>HGE</em> CREATOR</a>
+  <ul class="nav-menu">
+    <li><a href="#vod">방송</a></li>
+    <li><a href="#creators">크리에이터</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#about">소개</a></li>
+    <li><a href="#join">콜라보 신청</a></li>
+  </ul>
+  <div class="nav-sns">
+    <a href="https://x.com/HGE_Creator" target="_blank" title="X">𝕏</a>
+    <a href="https://hgecreator.com" target="_blank" title="Web">W</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-reel" id="reel">
+    <div class="hero-slide"><div class="hero-slide-art hs1"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">🐠</span></div></div>
+    <div class="hero-slide"><div class="hero-slide-art hs2"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">⚔️</span></div></div>
+    <div class="hero-slide"><div class="hero-slide-art hs3"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">⛏️</span></div></div>
+    <div class="hero-slide"><div class="hero-slide-art hs4"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">✈️</span></div></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">인디게임 × 크리에이터 콜라보 커뮤니티</div>
+    <h1 class="hero-h1">GAME<br><span class="gr">CREATOR</span></h1>
+    <p class="hero-sub">좋아하는 게임을 함께 즐기는 크리에이터 1,000명+<br>인디게임과 크리에이터의 상생 플랫폼, HGE Creator</p>
+    <div class="hero-actions">
+      <a href="#vod" class="btn-fill">방송 보러가기 ▶</a>
+      <a href="#creators" class="btn-out">크리에이터 보기</a>
+    </div>
+  </div>
+
+  <div class="hero-dots" id="dots">
+    <div class="hero-dot on" data-i="0"></div>
+    <div class="hero-dot" data-i="1"></div>
+    <div class="hero-dot" data-i="2"></div>
+    <div class="hero-dot" data-i="3"></div>
+  </div>
+
+  <div class="hero-scr">
+    <svg width="12" height="18" viewBox="0 0 12 18" fill="none">
+      <rect x="4" y="1" width="4" height="7" rx="2" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="6" y1="11" x2="6" y2="17" stroke="currentColor" stroke-width="1.2"/>
+      <polyline points="3,14 6,17 9,14" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    </svg>
+    SCROLL
+  </div>
+</section>
+
+<!-- ① VOD -->
+<section id="vod">
+  <div class="sec">
+    <div class="sec-head reveal" style="margin-bottom:2rem;">
+      <div class="sec-label">COLLAB BROADCASTS</div>
+      <h2 class="sec-title">콜라보 방송 모아보기</h2>
+      <p class="sec-desc">HGE Creator 소속 크리에이터들이 함께한 인디게임 콜라보 방송. 썸네일을 클릭해 방송을 확인하세요.</p>
+    </div>
+
+    <div class="chip-row reveal">
+      <button class="chip on" data-f="all">ALL</button>
+      <button class="chip" data-f="casual">캐주얼 / 시뮬레이션</button>
+      <button class="chip" data-f="strategy">카드 / 전략</button>
+      <button class="chip" data-f="defense">디펜스 / 방치형</button>
+      <button class="chip" data-f="novel">비주얼 노벨</button>
+    </div>
+
+    <div class="vod-grid reveal">
+
+      <a class="vod-card vod-feat" href="#" data-cat="casual">
+        <div class="vod-thumb vt1">
+          <div class="v-ov"></div>
+          <span class="v-tag">캐주얼 / 시뮬레이션</span>
+          <span class="v-ftag">FEATURED</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <span class="v-art">🐠</span>
+        </div>
+        <div class="v-info">
+          <div class="v-title">타이니 아쿠아리움 — 대규모 콜라보 방송</div>
+          <p class="v-meta"><span>GAMERSKY 퍼블리싱</span><span class="dot">·</span><span>크리에이터 58명</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-link">방송 목록 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card vod-feat" href="#" data-cat="novel">
+        <div class="vod-thumb vt4">
+          <div class="v-ov"></div>
+          <span class="v-tag">비주얼 노벨 / 인디</span>
+          <span class="v-ftag">역대 최대 규모</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <span class="v-art">✈️</span>
+        </div>
+        <div class="v-info">
+          <div class="v-title">비행? 청춘! — 2차창작 팬덤 형성 콜라보</div>
+          <p class="v-meta"><span>크리에이터 83명 참여</span><span class="dot">·</span><span>2차창작 연계</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-link">방송 목록 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="strategy">
+        <div class="vod-thumb vt2">
+          <div class="v-ov"></div>
+          <span class="v-tag">카드 / 전략</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <span class="v-art">⚔️</span>
+        </div>
+        <div class="v-info">
+          <div class="v-title">삼국 영웅 : 혈월의 전설</div>
+          <p class="v-meta"><span>18만+ 노출 증가</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="defense">
+        <div class="vod-thumb vt3">
+          <div class="v-ov"></div>
+          <span class="v-tag">디펜스 / 방치형</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <span class="v-art">⛏️</span>
+        </div>
+        <div class="v-info">
+          <div class="v-title">이세계 채광 디펜스</div>
+          <p class="v-meta"><span>유사 장르 가시성 확보</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- empty slots -->
+      <div class="vod-card" data-cat="_e">
+        <div class="vod-thumb vt-e"><div class="v-empty"><span class="v-plus">＋</span><span>방송 추가 예정</span></div></div>
+        <div class="v-info"><div class="v-title" style="color:var(--dim);">Coming Soon</div><p class="v-meta">—</p></div>
+      </div>
+      <div class="vod-card" data-cat="_e">
+        <div class="vod-thumb vt-e"><div class="v-empty"><span class="v-plus">＋</span><span>방송 추가 예정</span></div></div>
+        <div class="v-info"><div class="v-title" style="color:var(--dim);">Coming Soon</div><p class="v-meta">—</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ② CREATORS -->
+<section id="creators" class="sec-bg2">
+  <div class="sec">
+    <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;">
+      <div>
+        <div class="sec-label">CREATOR ROSTER</div>
+        <h2 class="sec-title">소속 크리에이터</h2>
+        <p class="sec-desc">인디게임을 사랑하는 스트리머 · 리뷰어 · 2차창작 크리에이터 1,000명+</p>
+      </div>
+      <div class="chip-row" style="margin-bottom:0;">
+        <button class="chip on" data-cf="all">ALL</button>
+        <button class="chip" data-cf="s">스트리머</button>
+        <button class="chip" data-cf="r">리뷰어</button>
+        <button class="chip" data-cf="f">2차창작</button>
+      </div>
+    </div>
+
+    <div class="creator-grid reveal">
+      <div class="c-card" data-t="s"><div class="c-av ca1"><div class="c-av-ov"></div><span class="c-av-art">🎮</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">인디게임 전문 스트리머</div><span class="c-tbadge tb-s">스트리머</span></div></div>
+      <div class="c-card" data-t="r"><div class="c-av ca2"><div class="c-av-ov"></div><span class="c-av-art">🎯</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">전략 · 카드게임 리뷰어</div><span class="c-tbadge tb-r">리뷰어</span></div></div>
+      <div class="c-card" data-t="f"><div class="c-av ca3"><div class="c-av-ov"></div><span class="c-av-art">🎨</span><div class="c-plat"><span class="pb pb-tw">Twitch</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">2차창작 · 노벨게임</div><span class="c-tbadge tb-f">2차창작</span></div></div>
+      <div class="c-card" data-t="s"><div class="c-av ca4"><div class="c-av-ov"></div><span class="c-av-art">⚡</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">RPG · 방치형 게임</div><span class="c-tbadge tb-s">스트리머</span></div></div>
+      <div class="c-card" data-t="r"><div class="c-av ca5"><div class="c-av-ov"></div><span class="c-av-art">🌿</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">힐링 · 시뮬레이션</div><span class="c-tbadge tb-r">리뷰어</span></div></div>
+      <div class="c-card" data-t="s"><div class="c-av ca6"><div class="c-av-ov"></div><span class="c-av-art">🔥</span><div class="c-plat"><span class="pb pb-tw">Twitch</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">액션 · 멀티플랫폼</div><span class="c-tbadge tb-s">스트리머</span></div></div>
+      <div class="c-card" data-t="f"><div class="c-av ca7"><div class="c-av-ov"></div><span class="c-av-art">💙</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">2차창작 · 팬아트</div><span class="c-tbadge tb-f">2차창작</span></div></div>
+      <div class="c-card" data-t="s"><div class="c-av ca8"><div class="c-av-ov"></div><span class="c-av-art">🎵</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span><span class="pb pb-yt">YT</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">멀티플랫폼 방송인</div><span class="c-tbadge tb-s">스트리머</span></div></div>
+      <div class="c-add"><span class="add-ico">＋</span><span>크리에이터 추가</span></div>
+      <div class="c-add"><span class="add-ico">＋</span><span>크리에이터 추가</span></div>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;">현재 표시된 크리에이터 외 <strong style="color:var(--white);">900명+</strong> 소속 중</p>
+      <a href="#join" class="btn-out">크리에이터 가입 문의</a>
+    </div>
+  </div>
+</section>
+
+<!-- ③ PROJECTS -->
+<section id="projects">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">COLLAB PROJECTS</div>
+      <h2 class="sec-title">진행 중인 프로젝트</h2>
+      <p class="sec-desc">현재 HGE Creator가 진행 중이거나 준비 중인 콜라보레이션 프로젝트</p>
+    </div>
+
+    <div class="proj-grid reveal">
+      <div class="p-card">
+        <div class="p-banner pb1"><span class="p-status ps-live">● LIVE</span><span>🎮</span></div>
+        <div class="p-body">
+          <div class="p-title">프로젝트명을 입력하세요</div>
+          <p class="p-desc">진행 중인 콜라보레이션 프로젝트 설명을 입력해주세요. 게임 장르, 참여 크리에이터 수, 기간 등을 기재할 수 있습니다.</p>
+          <div class="p-meta"><span class="hi">● 진행 중</span><span>·</span><span>크리에이터 ?명</span></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-banner pb2"><span class="p-status ps-up">UPCOMING</span><span>🃏</span></div>
+        <div class="p-body">
+          <div class="p-title">프로젝트명을 입력하세요</div>
+          <p class="p-desc">예정된 콜라보레이션 프로젝트 설명을 입력해주세요. 시작 예정일, 참여 규모 등을 기재하세요.</p>
+          <div class="p-meta"><span>예정</span><span>·</span><span>모집 예정</span></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-banner pb3"><span class="p-status" style="background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);">COMPLETED</span><span>✅</span></div>
+        <div class="p-body">
+          <div class="p-title">프로젝트명을 입력하세요</div>
+          <p class="p-desc">완료된 프로젝트 설명. 성과나 결과를 간략히 기재하실 수 있습니다.</p>
+          <div class="p-meta"><span>완료</span><span>·</span><span>결과 보기 →</span></div>
+        </div>
+      </div>
+      <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
+      <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
+      <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ ABOUT -->
+<section id="about" class="sec-bg2">
+  <div class="sec">
+    <div class="about-inner reveal">
+      <div>
+        <div class="sec-label">ABOUT HGE CREATOR</div>
+        <h2 class="sec-title">인디게임과<br>크리에이터의 상생</h2>
+        <p class="sec-desc" style="margin-top:1.2rem;">HGE Creator는 인디게임을 사랑하는 크리에이터들이 모인 커뮤니티 플랫폼입니다.<br><br><strong style="color:var(--white);">'게임의 재미'</strong>로 콜라보에 참여하는 크리에이터들이 인디게임 개발사와 직접 연결됩니다. 광고가 아닌 진정성 있는 콘텐츠로 게임과 크리에이터, 팬이 함께 성장합니다.</p>
+        <div class="pill-row"><span class="pill">스트리머 1,000+</span><span class="pill">인디게임 전문</span><span class="pill">글로벌 MCN 파트너</span><span class="pill">일본 · 중국 연계</span></div>
+        <div class="cta-row"><a href="#join" class="btn-fill">콜라보 문의하기</a><a href="https://hgecreator.com" target="_blank" class="btn-out">공식 웹사이트</a></div>
+      </div>
+      <div class="about-stats">
+        <div class="astat"><div class="n">1,000+</div><div class="l">소속 크리에이터</div></div>
+        <div class="astat"><div class="n">12+</div><div class="l">콜라보 게임 타이틀</div></div>
+        <div class="astat"><div class="n">83명</div><div class="l">최대 단일 콜라보 참여</div></div>
+        <div class="astat"><div class="n">2만+</div><div class="l">SNS 평균 조회수/콘텐츠</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ JOIN -->
+<section id="join">
+  <div class="join-bg"></div>
+  <div class="join-inner reveal">
+    <div class="sec-label" style="justify-content:center;">CONTACT & JOIN</div>
+    <h2 class="join-title">함께 <span class="gr">성장</span>해요</h2>
+    <p class="sec-desc" style="margin-bottom:0;">크리에이터로 합류하거나, 게임 콜라보를 원하는 개발사라면 언제든 연락주세요.</p>
+    <div class="join-cards">
+      <div class="jcard"><strong>🎙 크리에이터 합류</strong>인디게임 방송을 즐기는 스트리머·리뷰어·2차창작 크리에이터라면 누구나 지원 가능합니다.</div>
+      <div class="jcard"><strong>🎮 게임사 콜라보</strong>출시 예정이거나 홍보가 필요한 인디 게임이 있다면 콜라보레이션을 함께 기획합니다.</div>
+      <div class="jcard"><strong>🤝 파트너십</strong>스폰서십·협찬·이벤트 제휴 등 다양한 형태의 파트너십을 논의할 수 있습니다.</div>
+    </div>
+    <a href="mailto:kyle@hgecreator.com" class="btn-fill" style="font-size:.9rem;padding:.9rem 2.5rem;">kyle@hgecreator.com 으로 문의하기</a>
+    <div class="join-links">
+      <a href="https://hgecreator.com" target="_blank" class="j-link">hgecreator.com</a>
+      <a href="https://x.com/HGE_Creator" target="_blank" class="j-link">X @HGE_Creator</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 HGE CREATOR</span>
+  <div class="f-links">
+    <a href="https://hgecreator.com">hgecreator.com</a>
+    <a href="https://x.com/HGE_Creator">X @HGE_Creator</a>
+    <a href="mailto:kyle@hgecreator.com">kyle@hgecreator.com</a>
+  </div>
+</footer>
+
+<script>
+/* HERO */
+const slides=[...document.querySelectorAll('.hero-slide')];
+const dots=[...document.querySelectorAll('.hero-dot')];
+let cur=0,tmr;
+slides.forEach((s,i)=>s.style.transform=`translateX(${i*100}%)`);
+function go(i){
+  cur=(i+slides.length)%slides.length;
+  slides.forEach((s,j)=>{s.style.transition='transform .9s cubic-bezier(.77,0,.18,1)';s.style.transform=`translateX(${(j-cur)*100}%)`;});
+  dots.forEach((d,j)=>d.classList.toggle('on',j===cur));
+}
+dots.forEach(d=>d.addEventListener('click',()=>{clearInterval(tmr);go(+d.dataset.i);tmr=setInterval(()=>go(cur+1),5000);}));
+tmr=setInterval(()=>go(cur+1),5000);
+
+/* VOD FILTER */
+document.querySelectorAll('[data-f]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    b.closest('.chip-row').querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const f=b.dataset.f;
+    const cards=[...document.querySelectorAll('.vod-grid .vod-card')];
+    cards.forEach(c=>{
+      const cat=c.dataset.cat||'';
+      const show=f==='all'||cat===f||cat==='_e';
+      c.style.display=show?'':'none';
+      c.style.gridColumn='';
+    });
+    if(f==='all'){
+      const vis=cards.filter(c=>c.style.display!=='none');
+      if(vis[0])vis[0].style.gridColumn='span 2';
+      if(vis[1])vis[1].style.gridColumn='span 2';
+    }
+  });
+});
+
+/* CREATOR FILTER */
+document.querySelectorAll('[data-cf]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    b.closest('.chip-row').querySelectorAll('[data-cf]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const f=b.dataset.cf;
+    document.querySelectorAll('[data-t]').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.t===f)?'':'none';
+    });
+  });
+});
+
+/* REVEAL */
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* NAV ACTIVE */
+const as=[...document.querySelectorAll('.nav-menu a')];
+const ss=[...document.querySelectorAll('section[id]')];
+window.addEventListener('scroll',()=>{
+  let id='';
+  ss.forEach(s=>{if(window.scrollY>=s.offsetTop-100)id=s.id;});
+  as.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+},{passive:true});
+</script>
+</body>
+</html>
