@@ -96,12 +96,12 @@ ul { list-style:none; }
 .vod-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,.6); border-color:var(--bdr2); }
 .vod-feat { grid-column:span 2; }
 .vod-thumb { aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.vt1{background-image: url('https://cLOfLuV.github.io/images/vod/tiny.webp');}
-.vt2{background:linear-gradient(135deg,#200a00,#6a2500);}
-.vt3{background:linear-gradient(135deg,#0a1030,#204080);}
-.vt4{background:linear-gradient(135deg,#200030,#600090);}
-.vt5{background:linear-gradient(135deg,#001a10,#004030);}
-.vt6{background:linear-gradient(135deg,#1a1000,#504000);}
+.vt1{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/tiny.webp') center/cover;}
+.vt2{background:#200a00 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/samguk.webp') center/cover;}
+.vt3{background:#0a1030 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/isekai.webp') center/cover;}
+.vt4{background:#200030 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/biheng.webp') center/cover;}
+.vt5{background:#001a10 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/peble.webp') center/cover;}
+.vt6{background:#1a1000 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/eggduck.webp') center/cover;} center/cover;}
 .vt-e{background:var(--surf);}
 .v-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(8,8,15,.95)); }
 .v-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; opacity:0; transition:opacity .2s; }
@@ -279,7 +279,7 @@ footer a:hover { color:var(--muted); }
           <span class="v-tag">캐주얼 / 시뮬레이션</span>
           <span class="v-ftag">FEATURED</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">🐠</span>
+          <span class="v-art"></span>
         </div>
         <div class="v-info">
           <div class="v-title">타이니 아쿠아리움 — 대규모 콜라보 방송</div>
@@ -294,7 +294,7 @@ footer a:hover { color:var(--muted); }
           <span class="v-tag">비주얼 노벨 / 인디</span>
           <span class="v-ftag">역대 최대 규모</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">✈️</span>
+          <span class="v-art"></span>
         </div>
         <div class="v-info">
           <div class="v-title">비행? 청춘! — 2차창작 팬덤 형성 콜라보</div>
@@ -308,7 +308,7 @@ footer a:hover { color:var(--muted); }
           <div class="v-ov"></div>
           <span class="v-tag">카드 / 전략</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">⚔️</span>
+          <span class="v-art"></span>
         </div>
         <div class="v-info">
           <div class="v-title">삼국 영웅 : 혈월의 전설</div>
@@ -322,7 +322,7 @@ footer a:hover { color:var(--muted); }
           <div class="v-ov"></div>
           <span class="v-tag">디펜스 / 방치형</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">⛏️</span>
+          <span class="v-art"></span>
         </div>
         <div class="v-info">
           <div class="v-title">이세계 채광 디펜스</div>
@@ -331,16 +331,33 @@ footer a:hover { color:var(--muted); }
         </div>
       </a>
 
-      <!-- empty slots -->
-      <div class="vod-card" data-cat="_e">
-        <div class="vod-thumb vt-e"><div class="v-empty"><span class="v-plus">＋</span><span>방송 추가 예정</span></div></div>
-        <div class="v-info"><div class="v-title" style="color:var(--dim);">Coming Soon</div><p class="v-meta">—</p></div>
-      </div>
-      <div class="vod-card" data-cat="_e">
-        <div class="vod-thumb vt-e"><div class="v-empty"><span class="v-plus">＋</span><span>방송 추가 예정</span></div></div>
-        <div class="v-info"><div class="v-title" style="color:var(--dim);">Coming Soon</div><p class="v-meta">—</p></div>
-      </div>
+     <a class="vod-card" href="#" data-cat="rpg">
+  <div class="vod-thumb vt5">
+    <div class="v-ov"></div>
+    <span class="v-tag">RPG / 액션</span>
+    <span class="v-ftag" style="background:rgba(0,217,160,.15);border-color:rgba(0,217,160,.4);color:#00d9a0;">NEW</span>
+    <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+  </div>
+  <div class="v-info">
+    <div class="v-title">페블나이츠</div>
+    <p class="v-meta"><span>얼리 엑세스</span><span class="dot">·</span><span>2025</span></p>
+    <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+  </div>
+</a>
 
+<a class="vod-card" href="#" data-cat="casual2">
+  <div class="vod-thumb vt6">
+    <div class="v-ov"></div>
+    <span class="v-tag">캐주얼 / 키우기</span>
+    <span class="v-ftag" style="background:rgba(0,217,160,.15);border-color:rgba(0,217,160,.4);color:#00d9a0;">NEW</span>
+    <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+  </div>
+  <div class="v-info">
+    <div class="v-title">에그덕 키우기</div>
+    <p class="v-meta"><span>방치형 클리커</span><span class="dot">·</span><span>2025</span></p>
+    <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+  </div>
+</a>
     </div>
   </div>
 </section>
@@ -405,17 +422,17 @@ footer a:hover { color:var(--muted); }
       <div class="p-card">
         <div class="p-banner pb2"><span class="p-status ps-up">UPCOMING</span><span>🃏</span></div>
         <div class="p-body">
-          <div class="p-title">프로젝트명을 입력하세요</div>
-          <p class="p-desc">예정된 콜라보레이션 프로젝트 설명을 입력해주세요. 시작 예정일, 참여 규모 등을 기재하세요.</p>
+          <div class="p-title">공개 예정</div>
+          <p class="p-desc">공개 예정인 프로젝트입니다..</p>
           <div class="p-meta"><span>예정</span><span>·</span><span>모집 예정</span></div>
         </div>
       </div>
       <div class="p-card">
-        <div class="p-banner pb3"><span class="p-status" style="background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);">COMPLETED</span><span>✅</span></div>
+        <div class="p-banner pb3"><span class="p-status" style="background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);">UPCOMING</span><span>✅</span></div>
         <div class="p-body">
-          <div class="p-title">프로젝트명을 입력하세요</div>
-          <p class="p-desc">완료된 프로젝트 설명. 성과나 결과를 간략히 기재하실 수 있습니다.</p>
-          <div class="p-meta"><span>완료</span><span>·</span><span>결과 보기 →</span></div>
+          <div class="p-title">공개 예정</div>
+          <p class="p-desc">공개 예정인 프로젝트입니다.</p>
+          <div class="p-meta"><span>예정</span><span>·</span><span>모집 예정</span></div>
         </div>
       </div>
       <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
