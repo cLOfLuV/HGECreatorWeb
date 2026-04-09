@@ -128,10 +128,20 @@ ul { list-style:none; }
 .c-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; opacity:0; transition:opacity .2s; }
 .c-card[data-t="s"]::before{background:var(--acc);} .c-card[data-t="r"]::before{background:var(--acc2);} .c-card[data-t="f"]::before{background:var(--acc3);}
 .c-card:hover::before { opacity:1; }
+.c-img {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center top;
+}
+.c-img-fallback {
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.5rem;
+}
 .c-av { width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.ca1{background:linear-gradient(135deg,#0f2060,#2040a0);}
-.ca2{background:linear-gradient(135deg,#300060,#6010a0);}
-.ca3{background:linear-gradient(135deg,#006020,#00a040);}
+.ca1{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/creator/rucu.webp') center/cover;}
+.ca2{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/creator/nanu.webp') center/cover;}
+.ca3{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/creator/pipi.webp') center/cover;}
 .ca4{background:linear-gradient(135deg,#601000,#a02000);}
 .ca5{background:linear-gradient(135deg,#006060,#0090a0);}
 .ca6{background:linear-gradient(135deg,#400060,#800090);}
@@ -229,8 +239,8 @@ footer a:hover { color:var(--muted); }
 
   <div class="hero-content">
     <div class="hero-eyebrow">현재 웹사이트 제작 중!</div>
-    <h1 class="hero-h1">GAME<br><span class="gr">CREATOR</span></h1>
-    <p class="hero-sub">게임을 좋아하는 게임을 함께 즐기는 크리에이터 1,000명+<br>게임과 크리에이터의 상생 플랫폼, HGE Creator</p>
+    <h1 class="hero-h1">HGE<br><span class="gr">CREATOR</span></h1>
+    <p class="hero-sub">게임을 통해 성장하는 크리에이터!<br>게임과 크리에이터의 상생 플랫폼, HGE Creator</p>
     <div class="hero-actions">
       <a href="#vod" class="btn-fill">방송 보러가기 ▶</a>
       <a href="#creators" class="btn-out">크리에이터 보기</a>
@@ -340,7 +350,7 @@ footer a:hover { color:var(--muted); }
   </div>
   <div class="v-info">
     <div class="v-title">페블나이츠</div>
-    <p class="v-meta"><span>얼리 엑세스</span><span class="dot">·</span><span>2025</span></p>
+    <p class="v-meta"><span>얼리 엑세스</span><span class="dot">·</span><span>2026</span></p>
     <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
   </div>
 </a>
@@ -354,7 +364,7 @@ footer a:hover { color:var(--muted); }
   </div>
   <div class="v-info">
     <div class="v-title">에그덕 키우기</div>
-    <p class="v-meta"><span>방치형 클리커</span><span class="dot">·</span><span>2025</span></p>
+    <p class="v-meta"><span>방치형 클리커</span><span class="dot">·</span><span>2026</span></p>
     <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
   </div>
 </a>
@@ -373,30 +383,23 @@ footer a:hover { color:var(--muted); }
       </div>
       <div class="chip-row" style="margin-bottom:0;">
         <button class="chip on" data-cf="all">ALL</button>
-        <button class="chip" data-cf="s">스트리머</button>
-        <button class="chip" data-cf="r">리뷰어</button>
-        <button class="chip" data-cf="f">2차창작</button>
+        <button class="chip" data-cf="스트리머">스트리머</button>
+        <button class="chip" data-cf="리뷰어">리뷰어</button>
+        <button class="chip" data-cf="2차창작">2차창작</button>
       </div>
     </div>
 
-    <div class="creator-grid reveal">
-      <div class="c-card" data-t="s"><div class="c-av ca1"><div class="c-av-ov"></div><span class="c-av-art">🎮</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">인디게임 전문 스트리머</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-card" data-t="r"><div class="c-av ca2"><div class="c-av-ov"></div><span class="c-av-art">🎯</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">전략 · 카드게임 리뷰어</div><span class="c-tbadge tb-r">리뷰어</span></div></div>
-      <div class="c-card" data-t="f"><div class="c-av ca3"><div class="c-av-ov"></div><span class="c-av-art">🎨</span><div class="c-plat"><span class="pb pb-tw">Twitch</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">2차창작 · 노벨게임</div><span class="c-tbadge tb-f">2차창작</span></div></div>
-      <div class="c-card" data-t="s"><div class="c-av ca4"><div class="c-av-ov"></div><span class="c-av-art">⚡</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">RPG · 방치형 게임</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-card" data-t="r"><div class="c-av ca5"><div class="c-av-ov"></div><span class="c-av-art">🌿</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">힐링 · 시뮬레이션</div><span class="c-tbadge tb-r">리뷰어</span></div></div>
-      <div class="c-card" data-t="s"><div class="c-av ca6"><div class="c-av-ov"></div><span class="c-av-art">🔥</span><div class="c-plat"><span class="pb pb-tw">Twitch</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">액션 · 멀티플랫폼</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-card" data-t="f"><div class="c-av ca7"><div class="c-av-ov"></div><span class="c-av-art">💙</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">2차창작 · 팬아트</div><span class="c-tbadge tb-f">2차창작</span></div></div>
-      <div class="c-card" data-t="s"><div class="c-av ca8"><div class="c-av-ov"></div><span class="c-av-art">🎵</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span><span class="pb pb-yt">YT</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">멀티플랫폼 방송인</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-add"><span class="add-ico">＋</span><span>크리에이터 추가</span></div>
-      <div class="c-add"><span class="add-ico">＋</span><span>크리에이터 추가</span></div>
+    <!-- 로딩 표시 -->
+    <div id="creator-loading" style="text-align:center;padding:3rem;color:var(--muted);font-size:.9rem;">
+      크리에이터 목록 불러오는 중...
     </div>
 
-    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
-      <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;">현재 표시된 크리에이터 외 <strong style="color:var(--white);">900명+</strong> 콜라보 활동 중</p>
-      <a href="https://discord.gg/WzXTnaEBeY" class="btn-out" target="_blank">
-  크리에이터 가입 문의
-</a>
+    <!-- 카드가 여기에 자동으로 들어옴 -->
+    <div class="creator-grid" id="creator-grid"></div>
+
+    <div style="text-align:center;margin-top:2.5rem;">
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;" id="creator-count"></p>
+      <a href="https://discord.gg/WzXTnaEBeY" class="btn-out" target="_blank">크리에이터 가입 문의</a>
     </div>
   </div>
 </section>
@@ -407,7 +410,7 @@ footer a:hover { color:var(--muted); }
     <div class="sec-head reveal">
       <div class="sec-label">HGE PROJECTS</div>
       <h2 class="sec-title">진행 중인 프로젝트</h2>
-      <p class="sec-desc">현재 HGE Creator가 진행 중이거나 준비 중인 콜라보레이션 프로젝트</p>
+      <p class="sec-desc">현재 HGE Creator가 진행 중이거나 준비 중인 프로젝트</p>
     </div>
 
     <div class="proj-grid reveal">
@@ -455,8 +458,8 @@ footer a:hover { color:var(--muted); }
       </div>
       <div class="about-stats">
         <div class="astat"><div class="n">1,000+</div><div class="l">크리에이터</div></div>
-        <div class="astat"><div class="n">12+</div><div class="l">콜라보 게임 타이틀</div></div>
-        <div class="astat"><div class="n">83명</div><div class="l">최대 단일 콜라보 참여</div></div>
+        <div class="astat"><div class="n">20+</div><div class="l">콜라보 게임 타이틀</div></div>
+        <div class="astat"><div class="n">94명</div><div class="l">최대 단일 콜라보 참여</div></div>
         <div class="astat"><div class="n">2만+</div><div class="l">SNS 평균 조회수/콘텐츠</div></div>
       </div>
     </div>
@@ -551,6 +554,157 @@ window.addEventListener('scroll',()=>{
   ss.forEach(s=>{if(window.scrollY>=s.offsetTop-100)id=s.id;});
   as.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
 },{passive:true});
+
+/* ── CREATORS FROM GOOGLE SHEETS ── */
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUbZJIPam640i4hzKCkF7LEjSm5wASDrUGdGOSKLls6ytMx_kBdC8EIRQhviMX9HxCf9w5Kj1q0DpR/pub?output=csv';
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cur = '';
+  let inQ = false;
+
+  text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '"') {
+      if (inQ && text[i+1] === '"') { cur += '"'; i++; }
+      else { inQ = !inQ; }
+    } else if (ch === ',' && !inQ) {
+      row.push(cur.trim());
+      cur = '';
+    } else if (ch === '\n' && !inQ) {
+      row.push(cur.trim());
+      if (row.some(c => c !== '')) rows.push(row);
+      row = [];
+      cur = '';
+    } else {
+      if (inQ || ch !== '\n') cur += ch;
+    }
+  }
+  if (cur || row.length > 0) {
+    row.push(cur.trim());
+    if (row.some(c => c !== '')) rows.push(row);
+  }
+  return rows;
+}
+
+function driveToImg(url) {
+  // https://drive.google.com/open?id=XXXXX → 썸네일 URL로 변환
+  const match = url.match(/id=([a-zA-Z0-9_-]+)/);
+  if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w400`;
+  return url;
+}
+
+function getPlatformBadges(platformStr) {
+  const map = {
+    'chzzk':   { cls:'pb-ch', label:'CHZZK' },
+    'youtube': { cls:'pb-yt', label:'YouTube' },
+    'twitch':  { cls:'pb-tw', label:'Twitch' },
+  };
+  return platformStr.split(',')
+    .map(p => p.trim().toLowerCase())
+    .filter(p => map[p])
+    .map(p => `<span class="pb ${map[p].cls}">${map[p].label}</span>`)
+    .join('');
+}
+
+const TYPE_BADGE = {
+  '스트리머': 'tb-s',
+  '리뷰어':   'tb-r',
+  '2차창작':  'tb-f',
+};
+
+async function loadCreators() {
+  try {
+    const res = await fetch(SHEET_CSV_URL);
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    // 1행 = 헤더
+    const headers = rows[0];
+
+    // 열 인덱스를 헤더 이름으로 찾기
+    const idx = {
+      name:     headers.findIndex(h => h.includes('활동명')),
+      type:     headers.findIndex(h => h.includes('활동 분야')),
+      genre:    headers.findIndex(h => h.includes('게임 장르')),
+      platform: headers.findIndex(h => h.includes('플랫폼')),
+      link:     headers.findIndex(h => h.includes('채널 링크')),
+      photo:    headers.findIndex(h => h.includes('프로필 사진')),
+      approved: headers.findIndex(h => h.includes('승인')),
+    };
+
+    const creators = rows.slice(1)
+      .filter(row => row.length > 2)  // 빈 행 제거
+      .filter(row => {
+        // 승인 열이 없으면 전부 표시, 있으면 TRUE만
+        if (idx.approved === -1) return false;
+        return (row[idx.approved] || '').trim().toUpperCase() === 'TRUE';
+      })
+      .map(row => ({
+        name:     row[idx.name]     || '',
+        type:     row[idx.type]     || '',
+        genre:    row[idx.genre]    || '',
+        platform: row[idx.platform] || '',
+        link:     row[idx.link]     || '#',
+        photo:    row[idx.photo]    || '',
+      }));
+
+    renderCreators(creators);
+  } catch(e) {
+    document.getElementById('creator-loading').textContent = '크리에이터 목록을 불러오지 못했습니다.';
+    console.error(e);
+  }
+}
+
+function renderCreators(creators) {
+  const grid = document.getElementById('creator-grid');
+  const loading = document.getElementById('creator-loading');
+  const count = document.getElementById('creator-count');
+
+  loading.style.display = 'none';
+  count.innerHTML = `현재 1036명</strong> 콜라보 활동 중`;
+
+  grid.innerHTML = creators.map(c => {
+    const badgeCls = TYPE_BADGE[c.type] || 'tb-s';
+    const imgUrl = c.photo ? driveToImg(c.photo) : '';
+    const avatarHtml = imgUrl
+      ? `<img class="c-img" src="${imgUrl}" alt="${c.name}" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+
+    return `
+      <a class="c-card" data-t="${c.type}" href="${c.link}" target="_blank" rel="noopener">
+        <div class="c-av">
+          ${avatarHtml}
+          <div class="c-img-fallback" style="${imgUrl ? 'display:none' : ''}">🎮</div>
+          <div class="c-av-ov"></div>
+          <div class="c-plat">${getPlatformBadges(c.platform)}</div>
+        </div>
+        <div class="c-info">
+          <div class="c-name">${c.name}</div>
+          <div class="c-tag">${c.genre}</div>
+          <span class="c-tbadge ${badgeCls}">${c.type}</span>
+        </div>
+      </a>`;
+  }).join('');
+
+  // 필터
+  document.querySelectorAll('[data-cf]').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('[data-cf]').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      const f = b.dataset.cf;
+      document.querySelectorAll('#creator-grid .c-card').forEach(c => {
+        c.style.display = (f === 'all' || c.dataset.t === f) ? '' : 'none';
+      });
+    });
+  });
+}
+
+loadCreators();
 </script>
 </body>
 </html>
