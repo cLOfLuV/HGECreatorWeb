@@ -788,7 +788,7 @@ function renderCreators(creators) {
   const count = document.getElementById('creator-count');
 
   loading.style.display = 'none';
-  count.innerHTML = `현재 1253명 콜라보 활동 중`;
+  count.innerHTML = `1,253 creators currently active`;
 
   grid.innerHTML = creators.map(c => {
     const badgeCls = TYPE_BADGE[c.type] || 'tb-s';
