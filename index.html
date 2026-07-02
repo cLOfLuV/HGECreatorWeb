@@ -115,6 +115,10 @@ ul { list-style:none; }
 .vt6{background:#0a1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/whitepitol.webp') center/cover;}
 .vt7{background:#1a1000 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/gladimaker.webp') center/cover;}
 .vt8{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/tiny.webp') center/cover;}
+.vt9{background:#1a0a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/unionvirus.webp') center/cover;}
+.vt10{background:#0a0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/thecoma.webp') center/cover;}
+.vt11{background:#0d1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/7trials.webp') center/cover;}
+.vt12{background:#0a1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/cosmiccoop.webp') center/cover;}
 .vt-e{background:var(--surf);}
 .v-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(8,8,15,.95)); }
 .v-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; opacity:0; transition:opacity .2s; }
@@ -489,6 +493,60 @@ footer a:hover { color:var(--muted); }
         </div>
       </a>
 
+      <!-- Row 4: 위니언 바이러스 + The Coma + 7Trials + Cosmic Coop -->
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt9">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 스토리</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">위니언 바이러스</div>
+          <p class="v-meta"><span>공포 / 스토리</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt10">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 스토리</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">The Coma</div>
+          <p class="v-meta"><span>공포 / 스토리</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="rpg">
+        <div class="vod-thumb vt11">
+          <div class="v-ov"></div>
+          <span class="v-tag">3D 로그라이트</span>
+          <span class="v-ftag" style="background:rgba(224,64,192,.15);border-color:rgba(224,64,192,.4);color:#f0a0e0;">HGE 독점 선공개</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">7Trials</div>
+          <p class="v-meta"><span>3D 로그라이트</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt12">
+          <div class="v-ov"></div>
+          <span class="v-tag">농장 경영</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Cosmic Coop</div>
+          <p class="v-meta"><span>농장 경영</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -788,7 +846,7 @@ function renderCreators(creators) {
   const count = document.getElementById('creator-count');
 
   loading.style.display = 'none';
-  count.innerHTML = `현재 1253명 콜라보 활동 중`;
+  count.innerHTML = `현재 1345명 콜라보 활동 중`;
 
   grid.innerHTML = creators.map(c => {
     const badgeCls = TYPE_BADGE[c.type] || 'tb-s';
