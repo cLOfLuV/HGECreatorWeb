@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indie RGB : Restart Game Burning — HGE Creator</title>
+<meta name="description" content="출시 후 시간이 지난 인디게임 3작을 선정해, 인디게임 스트리머들이 2주간 대규모 스트리밍을 진행합니다. 접수 마감 2026.10.25">
+<meta property="og:title" content="Indie RGB : Restart Game Burning">
+<meta property="og:description" content="내 게임, 다시 불을 붙일 때 — 인디게임 3작 선정 · 2주간 대규모 스트리밍">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cLOfLuV.github.io/HGECreatorWeb/images/project/indiergb-og.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+:root {
+  --bg:#08080f; --bg2:#0e0e1c; --bg3:#13132a; --surf:#1a1a30;
+  --white:#f4f4f8; --muted:#8888aa; --dim:#444466;
+  --acc:#5b5ef4; --acc2:#e040c0; --acc3:#00d9a0;
+  --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
+  /* Indie RGB 캠페인 키컬러 */
+  --r:#e5484d; --g:#30a46c; --b:#3e63dd;
+}
+body { background:var(--bg); color:var(--white); font-family:'Noto Sans KR',sans-serif; overflow-x:hidden; line-height:1.6; }
+img { display:block; max-width:100%; }
+a { text-decoration:none; color:inherit; }
+ul { list-style:none; }
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-thumb { background:var(--acc); border-radius:2px; }
+
+/* NAV */
+#nav { position:fixed; inset:0 0 auto; z-index:200; display:flex; align-items:center; padding:0 3.5rem; height:64px; background:rgba(8,8,15,0.92); backdrop-filter:blur(18px); border-bottom:1px solid var(--bdr); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:4px; margin-right:auto; }
+.nav-logo em { color:var(--acc); font-style:normal; }
+.nav-menu { display:flex; align-items:center; gap:2.5rem; }
+.nav-menu a { font-size:.78rem; font-weight:500; letter-spacing:2px; color:var(--muted); font-family:'Space Mono',monospace; transition:color .2s; }
+.nav-menu a:hover,.nav-menu a.on { color:var(--white); }
+.nav-sns { display:flex; gap:1rem; margin-left:2rem; }
+.nav-sns a { width:32px; height:32px; border:1px solid var(--bdr2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.72rem; color:var(--muted); font-family:'Space Mono',monospace; transition:all .2s; }
+.nav-sns a:hover { border-color:var(--acc); color:var(--white); }
+
+/* SECTION 공통 */
+.sec { padding:5rem 3.5rem; max-width:1300px; margin:0 auto; }
+.sec-bg2 { background:var(--bg2); }
+.sec-label { display:inline-flex; align-items:center; gap:.7rem; font-family:'Space Mono',monospace; font-size:.67rem; letter-spacing:3px; color:var(--acc); margin-bottom:.8rem; }
+.sec-label::before { content:''; width:20px; height:1px; background:var(--acc); }
+.sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; line-height:1.1; }
+.sec-title-ko { font-size:clamp(1.5rem,3vw,2.1rem); font-weight:900; letter-spacing:-.02em; line-height:1.3; }
+.sec-desc { color:var(--muted); font-size:.92rem; margin-top:.8rem; line-height:1.8; }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
+.reveal.in { opacity:1; transform:none; }
+
+/* HERO */
+#rgbhero { position:relative; padding:calc(64px + 5rem) 3.5rem 5rem; overflow:hidden; border-bottom:1px solid var(--bdr); }
+.rgb-bar { position:absolute; top:64px; left:0; right:0; height:4px; display:flex; z-index:3; }
+.rgb-bar i { flex:1; }
+.rgb-bar i:nth-child(1){background:var(--r);} .rgb-bar i:nth-child(2){background:var(--g);} .rgb-bar i:nth-child(3){background:var(--b);}
+.hero-glow { position:absolute; left:50%; bottom:-42%; width:min(1500px,150%); height:120%; transform:translateX(-50%); pointer-events:none;
+  background:
+    radial-gradient(closest-side, rgba(229,72,77,.30), transparent 70%) -18% 100%/46% 88% no-repeat,
+    radial-gradient(closest-side, rgba(48,164,108,.30), transparent 70%) 50% 100%/48% 100% no-repeat,
+    radial-gradient(closest-side, rgba(62,99,221,.30), transparent 70%) 118% 100%/46% 92% no-repeat; }
+.hero-inner { position:relative; z-index:2; max-width:1300px; margin:0 auto; }
+.rgb-eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:3px; color:var(--acc3); padding:.35rem 1rem; border:1px solid rgba(0,217,160,.25); border-radius:999px; background:rgba(0,217,160,.07); margin-bottom:1.6rem; }
+.rgb-eyebrow::before { content:'◆'; font-size:.4rem; }
+.rgb-word { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.4rem,10vw,8rem); letter-spacing:2px; line-height:.95; }
+.rgb-word .r{color:var(--r);text-shadow:0 0 40px rgba(229,72,77,.55);}
+.rgb-word .g{color:var(--g);text-shadow:0 0 40px rgba(48,164,108,.55);}
+.rgb-word .b{color:var(--b);text-shadow:0 0 44px rgba(62,99,221,.65);}
+.rgb-tag { font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(.7rem,1.6vw,1rem); letter-spacing:.28em; color:var(--muted); margin-top:.9rem; }
+.rgb-tag .r{color:var(--r);} .rgb-tag .g{color:var(--g);} .rgb-tag .b{color:var(--b);}
+.rgb-slogan { font-size:clamp(1.4rem,3.4vw,2.4rem); font-weight:900; letter-spacing:-.03em; margin-top:2rem; line-height:1.35; }
+.rgb-lead { color:var(--muted); font-size:clamp(.88rem,1.4vw,1rem); line-height:1.9; margin-top:1rem; max-width:640px; }
+.hero-actions { margin-top:2.4rem; display:flex; gap:1rem; flex-wrap:wrap; }
+.btn-fill { padding:.85rem 2.1rem; background:var(--acc); color:#fff; font-weight:700; font-size:.82rem; border:none; border-radius:6px; cursor:pointer; letter-spacing:1px; transition:all .2s; font-family:'Space Mono',monospace; display:inline-block; }
+.btn-fill:hover { background:#7274f8; transform:translateY(-2px); }
+.btn-out { padding:.85rem 2.1rem; background:transparent; color:var(--white); font-size:.82rem; border:1px solid var(--bdr2); border-radius:6px; letter-spacing:1px; transition:all .2s; font-family:'Space Mono',monospace; display:inline-block; }
+.btn-out:hover { border-color:var(--white); }
+
+/* D-DAY */
+.dday { margin-top:2.6rem; display:inline-flex; align-items:stretch; border:1px solid var(--bdr2); border-radius:10px; overflow:hidden; background:rgba(19,19,42,.6); backdrop-filter:blur(6px); }
+.dd-cell { padding:.9rem 1.4rem; text-align:center; border-right:1px solid var(--bdr); }
+.dd-cell:last-child { border-right:none; }
+.dd-n { font-family:'Bebas Neue',sans-serif; font-size:1.9rem; letter-spacing:2px; line-height:1; }
+.dd-l { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:2px; color:var(--muted); margin-top:.35rem; }
+.dd-note { padding:.9rem 1.4rem; display:flex; align-items:center; font-size:.78rem; color:var(--muted); border-left:1px solid var(--bdr); }
+.dd-note b { color:var(--white); font-weight:700; margin-left:.45rem; }
+
+/* STAT ROW */
+.stat-row { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--bdr); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; margin-top:2.5rem; }
+.stat { background:var(--bg3); padding:1.6rem 1.4rem; }
+.stat .n { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,3vw,2.8rem); letter-spacing:2px; line-height:1; }
+.stat:nth-child(1) .n{color:var(--r);} .stat:nth-child(2) .n{color:var(--g);} .stat:nth-child(3) .n{color:var(--b);} .stat:nth-child(4) .n{color:var(--acc3);}
+.stat .l { color:var(--muted); font-size:.78rem; margin-top:.45rem; line-height:1.5; }
+
+/* WHY */
+.why-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:3rem; align-items:start; }
+.why-quote { font-size:clamp(1.1rem,2vw,1.5rem); font-weight:700; line-height:1.6; letter-spacing:-.02em; }
+.why-quote em { font-style:normal; color:var(--r); }
+.why-body { color:var(--muted); font-size:.92rem; line-height:1.95; }
+.why-body p + p { margin-top:1.1rem; }
+.why-body strong { color:var(--white); font-weight:700; }
+
+/* STEPS */
+.steps { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; margin-top:2.5rem; counter-reset:s; }
+.step { background:var(--bg3); border:1px solid var(--bdr); border-radius:12px; padding:1.5rem 1.3rem 1.6rem; position:relative; }
+.step::before { counter-increment:s; content:'0' counter(s); font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px; color:var(--dim); display:block; margin-bottom:.7rem; }
+.step h4 { font-size:.95rem; font-weight:700; margin-bottom:.45rem; }
+.step p { font-size:.8rem; color:var(--muted); line-height:1.7; }
+.step:nth-child(1){border-top:2px solid var(--r);} .step:nth-child(3){border-top:2px solid var(--g);} .step:nth-child(5){border-top:2px solid var(--b);}
+
+/* CARD GRID */
+.card-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:2.5rem; }
+.card-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:2.5rem; }
+.card { background:var(--bg3); border:1px solid var(--bdr); border-radius:12px; padding:1.6rem 1.5rem 1.7rem; }
+.card h4 { font-size:1rem; font-weight:700; margin-bottom:.6rem; display:flex; align-items:center; gap:.6rem; }
+.card h4 .w { font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:1px; padding:.2rem .6rem; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid var(--bdr2); color:var(--muted); }
+.card p { font-size:.85rem; color:var(--muted); line-height:1.85; }
+.card ul.tick { margin-top:.4rem; }
+.card ul.tick li { font-size:.85rem; color:var(--muted); line-height:1.8; padding-left:1.4rem; position:relative; }
+.card ul.tick li + li { margin-top:.5rem; }
+.card ul.tick li::before { content:'✓'; position:absolute; left:0; color:var(--acc3); font-size:.8rem; }
+
+/* REQUIREMENT LIST */
+.req { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:2.5rem; }
+.req-item { display:flex; gap:1rem; align-items:flex-start; background:var(--bg3); border:1px solid var(--bdr); border-radius:10px; padding:1.2rem 1.3rem; }
+.req-no { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:1px; color:var(--acc); line-height:1.2; flex:none; }
+.req-item h5 { font-size:.92rem; font-weight:700; margin-bottom:.25rem; }
+.req-item p { font-size:.8rem; color:var(--muted); line-height:1.7; }
+.note { margin-top:1.4rem; font-size:.8rem; color:var(--dim); line-height:1.8; border-left:2px solid var(--bdr2); padding-left:1rem; }
+
+/* TIMELINE TABLE */
+.tl { margin-top:2.5rem; border:1px solid var(--bdr); border-radius:10px; overflow:hidden; }
+.tl-row { display:grid; grid-template-columns:190px 1fr; gap:0; border-bottom:1px solid var(--bdr); }
+.tl-row:last-child { border-bottom:none; }
+.tl-d { background:var(--bg3); padding:1rem 1.3rem; font-family:'Space Mono',monospace; font-size:.76rem; letter-spacing:1px; color:var(--white); display:flex; align-items:center; gap:.6rem; }
+.tl-d .dot { width:6px; height:6px; border-radius:50%; background:var(--dim); flex:none; }
+.tl-row.hot .tl-d .dot { background:var(--r); box-shadow:0 0 10px var(--r); }
+.tl-t { padding:1rem 1.3rem; font-size:.86rem; color:var(--muted); display:flex; align-items:center; }
+.tl-row.hot .tl-t { color:var(--white); font-weight:700; }
+
+/* STREAMER BLOCK */
+.streamer { border:1px solid var(--bdr2); border-radius:14px; padding:2.4rem 2.2rem; background:
+  radial-gradient(ellipse 60% 70% at 100% 0%, rgba(62,99,221,.12), transparent 70%), var(--bg3); }
+.streamer h3 { font-size:clamp(1.2rem,2.4vw,1.7rem); font-weight:900; letter-spacing:-.03em; line-height:1.4; }
+.streamer p { color:var(--muted); font-size:.9rem; line-height:1.9; margin-top:.9rem; max-width:640px; }
+.streamer .hero-actions { margin-top:1.8rem; }
+
+/* FAQ */
+.faq { margin-top:2.5rem; border-top:1px solid var(--bdr); }
+.faq details { border-bottom:1px solid var(--bdr); }
+.faq summary { padding:1.2rem .2rem; cursor:pointer; font-size:.94rem; font-weight:700; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:1rem; transition:color .2s; }
+.faq summary::-webkit-details-marker { display:none; }
+.faq summary::after { content:'+'; font-family:'Space Mono',monospace; color:var(--acc); font-size:1.1rem; flex:none; }
+.faq details[open] summary::after { content:'−'; }
+.faq summary:hover { color:var(--acc); }
+.faq .a { padding:0 .2rem 1.4rem; font-size:.86rem; color:var(--muted); line-height:1.9; }
+
+/* FINAL CTA */
+#apply { padding:5.5rem 3.5rem; text-align:center; position:relative; overflow:hidden; border-top:1px solid var(--bdr); }
+.apply-bg { position:absolute; inset:0; pointer-events:none; background:
+  radial-gradient(ellipse 34% 60% at 30% 100%, rgba(229,72,77,.16), transparent 70%),
+  radial-gradient(ellipse 34% 70% at 50% 100%, rgba(48,164,108,.16), transparent 70%),
+  radial-gradient(ellipse 34% 60% at 70% 100%, rgba(62,99,221,.16), transparent 70%); }
+.apply-inner { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+.apply-title { font-size:clamp(1.5rem,3.4vw,2.4rem); font-weight:900; letter-spacing:-.03em; line-height:1.4; }
+.apply-inner .hero-actions { justify-content:center; }
+.contact { margin-top:2rem; font-family:'Space Mono',monospace; font-size:.76rem; color:var(--muted); letter-spacing:1px; }
+.contact a { color:var(--acc); }
+
+/* STICKY MOBILE CTA */
+.sticky-cta { display:none; }
+
+/* FOOTER */
+footer { padding:1.8rem 3.5rem; border-top:1px solid var(--bdr); display:flex; align-items:center; justify-content:space-between; font-family:'Space Mono',monospace; font-size:.65rem; color:var(--dim); }
+.f-links { display:flex; gap:1.5rem; }
+footer a { color:var(--dim); transition:color .2s; }
+footer a:hover { color:var(--muted); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  .steps { grid-template-columns:repeat(2,1fr); }
+  .why-grid { grid-template-columns:1fr; gap:2rem; }
+  .stat-row { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:768px) {
+  #nav { padding:0 1.2rem; }
+  .nav-menu { display:none; }
+  .nav-sns { margin-left:auto; }
+  #rgbhero { padding:calc(64px + 3rem) 1.2rem 3.5rem; }
+  .sec { padding:3.5rem 1.2rem; }
+  #apply { padding:4rem 1.2rem 6rem; }
+  footer { padding:1.4rem 1.2rem 5.5rem; flex-direction:column; gap:.8rem; text-align:center; }
+  .f-links { flex-wrap:wrap; justify-content:center; gap:1rem; }
+  .card-2,.card-3,.req { grid-template-columns:1fr; }
+  .tl-row { grid-template-columns:1fr; }
+  .tl-d { border-bottom:1px solid var(--bdr); }
+  .dday { width:100%; flex-wrap:wrap; }
+  .dd-note { border-left:none; border-top:1px solid var(--bdr); width:100%; }
+  .streamer { padding:1.8rem 1.4rem; }
+  .hero-actions .btn-fill,.hero-actions .btn-out { flex:1; text-align:center; min-width:150px; }
+  .sticky-cta { display:block; position:fixed; left:0; right:0; bottom:0; z-index:300; padding:.7rem 1.2rem; background:rgba(8,8,15,.95); backdrop-filter:blur(14px); border-top:1px solid var(--bdr2); }
+  .sticky-cta a { display:block; text-align:center; padding:.85rem; background:var(--acc); color:#fff; font-family:'Space Mono',monospace; font-size:.82rem; font-weight:700; letter-spacing:1px; border-radius:6px; }
+}
+@media (max-width:560px) {
+  .hero-actions { flex-direction:column; }
+  .hero-actions .btn-fill,.hero-actions .btn-out { width:100%; flex:none; letter-spacing:0; }
+}
+@media (max-width:480px) {
+  .steps { grid-template-columns:1fr; }
+  .stat-row { grid-template-columns:1fr; }
+  .dd-cell { flex:1; padding:.8rem .6rem; }
+  .dd-note { justify-content:center; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="../"><em>HGE</em> CREATOR</a>
+  <ul class="nav-menu">
+    <li><a href="../#vod">방송</a></li>
+    <li><a href="../#creators">크리에이터</a></li>
+    <li><a href="../#projects">프로젝트</a></li>
+    <li><a href="../#about">소개</a></li>
+    <li><a href="#apply" class="on">RGB 접수</a></li>
+  </ul>
+  <div class="nav-sns">
+    <a href="https://x.com/HGE_Creator" target="_blank" rel="noopener" title="X">𝕏</a>
+    <a href="https://hgecreator.com" target="_blank" rel="noopener" title="Web">W</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="rgbhero">
+  <div class="rgb-bar"><i></i><i></i><i></i></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <span class="rgb-eyebrow">HGE CREATOR CAMPAIGN · SEASON 1</span>
+    <h1 class="rgb-word">Indie <span class="r">R</span><span class="g">G</span><span class="b">B</span></h1>
+    <div class="rgb-tag"><span class="r">R</span>ESTART <span class="g">G</span>AME <span class="b">B</span>URNING</div>
+    <p class="rgb-slogan">내 게임, 다시 불을 붙일 때</p>
+    <p class="rgb-lead">
+      출시된 후 시간이 지난 인디게임 3작을 선정·발굴하여,<br>
+      인디게임 스트리머들이 2주간 대규모 스트리밍 캠페인을 진행합니다.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn-fill" href="https://docs.google.com/forms/d/e/1FAIpQLSdLMdJr7S0bptU1bk5djcQzSVLpevEYqzhBQB_9YnpfpIkqrQ/viewform" target="_blank" rel="noopener">참가 게임 신청하기</a>
+      <a class="btn-out" href="https://discord.gg/hgecreator" target="_blank" rel="noopener">HGE Creator Discord 참여하기</a>
+    </div>
+
+    <div class="dday" id="dday">
+      <div class="dd-cell"><div class="dd-n" id="dd-day">--</div><div class="dd-l">DAYS</div></div>
+      <div class="dd-cell"><div class="dd-n" id="dd-hour">--</div><div class="dd-l">HOURS</div></div>
+      <div class="dd-cell"><div class="dd-n" id="dd-min">--</div><div class="dd-l">MINUTES</div></div>
+      <div class="dd-note">접수 마감 <b>2026. 10. 25 (일) 23:59</b></div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="n">3작품</div><div class="l">선정 규모</div></div>
+      <div class="stat"><div class="n">2주간</div><div class="l">스트리밍 기간</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- WHY -->
+<section id="about-rgb" class="sec-bg2">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">WHY INDIE RGB</div>
+      <h2 class="sec-title-ko">끝난 게임은 없습니다.<br>마케팅이 끝났을 뿐입니다.</h2>
+    </div>
+    <div class="why-grid reveal" style="margin-top:2.5rem;">
+      <div>
+        <p class="why-quote">
+          게임이 재미없어서가 아니라,<br><em>알릴 방법이 남아 있지 않기</em> 때문입니다.
+        </p>
+      </div>
+      <div class="why-body">
+        <p>한국 인디게임의 대부분은 출시 첫 2~4주에 노출이 집중됩니다. 그리고 그 시기가 지나면, 게임의 완성도와 무관하게 조용해집니다. 이미 마케팅 예산은 소진됐고, 다시 알릴 수단은 마땅치 않습니다.</p>
+        <p>그런데 뉴미디어 생태계에서는 이야기가 조금 다릅니다. <strong>"신작이 아니어도 재미있으면 본다"</strong>는 소비 패턴이 자리 잡은 지 오래입니다. 스트리밍은 출시일에 종속되지 않는, 사실상 유일한 노출 채널입니다.</p>
+        <p>Indie RGB는 이 두 가지 사실 사이에서 출발한 캠페인입니다. 묻힌 게임을 다시 꺼내, <strong>스트리밍으로 역주행 사례를 만들어 인디게임과 크리에이터 간의 좋은 협업 선사례</strong>를 이루고자 합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section>
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">HOW IT WORKS</div>
+      <h2 class="sec-title-ko">이렇게 진행됩니다</h2>
+      <p class="sec-desc">신청부터 성과보고서까지, 개발사가 부담하는 비용은 없습니다.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <h4>신청 접수</h4>
+        <p>구글폼으로 참가 게임을 접수합니다. 작성에 약 10~15분이 소요됩니다.</p>
+      </div>
+      <div class="step">
+        <h4>1차 심사</h4>
+        <p>HGE Creator 매니저단이 직접 플레이하여 방송 적합도를 평가합니다.</p>
+      </div>
+      <div class="step">
+        <h4>크리에이터 투표</h4>
+        <p>숏리스트를 대상으로 소속 크리에이터가 직접 방송하고 싶은 게임에 투표합니다.</p>
+      </div>
+      <div class="step">
+        <h4>최종 3작 발표</h4>
+        <p>선정작을 공식 채널에 공개하고, 개발사에 개별 안내드립니다.</p>
+      </div>
+      <div class="step">
+        <h4>대규모 스트리밍</h4>
+        <p>2주간 집중 방송을 진행합니다. 종료 후 성과보고서를 제공합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section class="sec-bg2">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">REQUIREMENTS</div>
+      <h2 class="sec-title-ko">지원 자격</h2>
+      <p class="sec-desc">아래 네 가지를 모두 충족하는 게임이라면 신청하실 수 있습니다.</p>
+    </div>
+    <div class="req reveal">
+      <div class="req-item">
+        <div class="req-no">01</div>
+        <div>
+          <h5>한국어 공식 지원</h5>
+          <p>UI·시스템 텍스트 이상 한국어를 지원해야 합니다. 기계 번역만 적용된 경우 심사에서 감점됩니다.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-no">02</div>
+        <div>
+          <h5>Steam 출시 PC 게임</h5>
+          <p>Steam에 출시되어 현재 판매 중인 PC 게임이어야 합니다.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-no">03</div>
+        <div>
+          <h5>정식 출시 후 3개월 이상</h5>
+          <p>접수 마감일 기준으로 정식 출시(1.0) 후 3개월 이상 경과해야 합니다. 얼리 액세스 시작일이 아닌 정식 출시일 기준입니다.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="req-no">04</div>
+        <div>
+          <h5>스트리밍 · 수익 창출 허용</h5>
+          <p>스트리밍, 영상 업로드, 영상 수익 창출을 허용해야 합니다.</p>
+        </div>
+      </div>
+    </div>
+    <p class="note reveal">
+      다음의 경우 심사 대상에서 제외됩니다 — 성인용(R18) 등급물 또는 국내 심의 미필작 / 저작권·상표권 분쟁 진행 중 / 진행이 불가능한 크리티컬 버그 미해결 / 최근 6개월 이내 HGE Creator 콜라보 진행작 / 캠페인 기간 중 서비스 종료 예정.
+    </p>
+  </div>
+</section>
+
+<!-- CRITERIA -->
+<section>
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">CRITERIA</div>
+      <h2 class="sec-title-ko">심사 기준</h2>
+    </div>
+    <div class="card-2 reveal">
+      <div class="card" style="border-top:2px solid var(--r);">
+        <h4>스트리밍 적합도 <span class="w">배점 최상</span></h4>
+        <p>선정성·폭력성·트라우마 유발 요소가 적을수록 유리합니다. HGE Creator 매니저단이 개발사 제공 CD키로 직접 플레이하여 평가합니다.</p>
+        <p style="margin-top:1rem;color:var(--white);font-weight:700;font-size:.85rem;">요소가 있다고 해서 무조건 탈락하는 것은 아닙니다.</p>
+        <p style="margin-top:.4rem;">다만 사전에 고지되지 않은 요소가 방송 중 발견될 경우 플랫폼 제재로 이어질 수 있어, 미고지 시에는 심사에서 제외됩니다. 신청서에 솔직하게 기재해 주세요.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--g);">
+        <h4>출시 경과 기간 <span class="w">가산점</span></h4>
+        <p>정식 출시일이 오래된 게임일수록 가산점이 있습니다.</p>
+        <p style="margin-top:1rem;">이 캠페인은 신작을 위한 것이 아닙니다. 출시하고 시간이 흘러 조용해진 게임, 그래서 다시 알릴 방법이 마땅치 않은 게임을 위해 만들어졌습니다. 오래되었다는 것이 이 캠페인에서는 약점이 아니라 자격입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="sec-bg2">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">WHAT YOU GET</div>
+      <h2 class="sec-title-ko">선정 게임에 제공되는 것</h2>
+      <p class="sec-desc">모두 무상으로 제공되며, 개발사가 부담하는 비용은 없습니다.</p>
+    </div>
+    <div class="card-3 reveal">
+      <div class="card">
+        <h4>캠페인 운영 전반</h4>
+        <ul class="tick">
+          <li>일정 조율 및 캠페인 전 과정 운영</li>
+          <li>참여자 관리 및 방송 독려</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>채널 · SNS</h4>
+        <ul class="tick">
+          <li>HGE Creator 공식 채널 게시</li>
+          <li>앰버서더 SNS 게시 독려</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>데이터 · 피드백</h4>
+        <ul class="tick">
+          <li>방송 적합도 테스트 피드백 리포트</li>
+          <li>캠페인 종료 후 성과보고서 (PDF)</li>
+          <li>참여 크리에이터 방송 · 영상 링크 정리</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section>
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">SCHEDULE</div>
+      <h2 class="sec-title-ko">일정</h2>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-row hot">
+        <div class="tl-d"><span class="dot"></span>~ 2026. 10. 25</div>
+        <div class="tl-t">참가 게임 신청 접수 (10월 25일 일요일 23:59 마감)</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-d"><span class="dot"></span>2026. 10. 25 ~</div>
+        <div class="tl-t">1차 심사 · 방송 적합도 테스트 진행 (심사용 CD키 요청)</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-d"><span class="dot"></span>심사 완료 후</div>
+        <div class="tl-t">숏리스트 공개 및 소속 크리에이터 투표</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-d"><span class="dot"></span>투표 종료 후</div>
+        <div class="tl-t">최종 3작 발표 — 공식 채널 공지 및 개발사 개별 안내</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-d"><span class="dot"></span>발표 이후</div>
+        <div class="tl-t">2주간 대규모 스트리밍 진행</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-d"><span class="dot"></span>캠페인 종료 후</div>
+        <div class="tl-t">개발사별 성과보고서 전달</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STREAMER -->
+<section class="sec-bg2">
+  <div class="sec">
+    <div class="streamer reveal">
+      <div class="sec-label" style="color:var(--b);">FOR STREAMERS</div>
+      <h3>나만의 작은 게임, 다시 불을 붙일 때</h3>
+      <p>
+        출시된 후 잊혀져 가는 인디게임을 직접 발굴해보세요. 내 손으로 만드는 불후의 명작게임 역주행.<br>
+        게임 스트리머라면 나만의 작은 게임을 직접 투표하고, 방송하세요.
+        HGE Creator 소속 크리에이터는 숏리스트 투표에 참여할 수 있으며, 선정작 스트리밍에 우선 배정됩니다.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-fill" href="https://discord.gg/hgecreator" target="_blank" rel="noopener" style="background:var(--b);">크리에이터로 참여하기</a>
+        <a class="btn-out" href="../#creators">크리에이터 소개 보기</a>
+      </div>
+      <p style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:1px;margin-top:1.4rem;">VOTE OPENS · 2026. 10. 25 ~</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="sec-label">FAQ</div>
+      <h2 class="sec-title-ko">자주 묻는 질문</h2>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>얼리 액세스 중인 게임도 신청할 수 있나요?</summary>
+        <div class="a">정식 출시(1.0)를 마친 게임만 신청하실 수 있습니다. 경과 기간도 얼리 액세스 시작일이 아닌 정식 출시일 기준으로 산정합니다.</div>
+      </details>
+      <details>
+        <summary>선정성이나 폭력성 요소가 있으면 무조건 탈락인가요?</summary>
+        <div class="a">아닙니다. 요소가 있다는 사실 자체로 탈락하지는 않습니다. 다만 사전에 고지되지 않은 요소가 방송 중 발견되면 크리에이터가 플랫폼 제재를 받을 수 있어, 미고지 시에는 심사에서 제외됩니다. 신청서에 솔직하게 기재해 주시는 편이 유리합니다.</div>
+      </details>
+      <details>
+        <summary>한 개발사가 여러 작품을 신청해도 되나요?</summary>
+        <div class="a">가능합니다. 작품별로 신청서를 각각 작성해 주세요. 다만 선정은 작품 단위로 이루어지며, 3작 모두 같은 개발사에서 선정되지는 않습니다.</div>
+      </details>
+      <details>
+        <summary>해외 개발사도 신청할 수 있나요?</summary>
+        <div class="a">한국어를 공식 지원하는 게임이라면 국적과 무관하게 신청하실 수 있습니다. 다만 캠페인 운영과 커뮤니케이션은 한국어로 진행됩니다.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="apply">
+  <div class="apply-bg"></div>
+  <div class="apply-inner reveal">
+    <div class="sec-label" style="justify-content:center;">APPLY NOW</div>
+    <h2 class="apply-title">인디게임 개발자라면 다시 한 번,<br>내 게임에 불을 붙여보세요.</h2>
+    <p class="sec-desc">작성에는 약 10~15분이 소요됩니다. 접수 마감은 2026년 10월 25일(일) 23:59입니다.</p>
+    <div class="hero-actions">
+      <a class="btn-fill" href="https://docs.google.com/forms/d/e/1FAIpQLSdLMdJr7S0bptU1bk5djcQzSVLpevEYqzhBQB_9YnpfpIkqrQ/viewform" target="_blank" rel="noopener">참가 게임 신청하기</a>
+      <a class="btn-out" href="../">HGE Creator 홈</a>
+    </div>
+    <p class="contact">문의 : <a href="mailto:kyle@hgecreator.com">kyle@hgecreator.com</a></p>
+    <p style="margin-top:2.2rem;font-size:.82rem;color:var(--dim);line-height:1.8;">HGE Creator는 한국 인디게임 시장과 뉴미디어의 상생을 응원합니다.</p>
+  </div>
+</section>
+
+<!-- STICKY CTA (mobile) -->
+<div class="sticky-cta">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdLMdJr7S0bptU1bk5djcQzSVLpevEYqzhBQB_9YnpfpIkqrQ/viewform" target="_blank" rel="noopener">참가 게임 신청하기</a>
+</div>
+
+<footer>
+  <div>© 2026 HGE CREATOR. ALL RIGHTS RESERVED.</div>
+  <div class="f-links">
+    <a href="../">HOME</a>
+    <a href="https://x.com/HGE_Creator" target="_blank" rel="noopener">X</a>
+    <a href="mailto:kyle@hgecreator.com">CONTACT</a>
+  </div>
+</footer>
+
+<script>
+/* 접수 마감 카운트다운 — 2026-10-05 23:59:59 KST */
+(function () {
+  var deadline = new Date('2026-10-25T23:59:59+09:00').getTime();
+  var d = document.getElementById('dd-day'),
+      h = document.getElementById('dd-hour'),
+      m = document.getElementById('dd-min'),
+      note = document.querySelector('.dd-note');
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var gap = deadline - Date.now();
+    if (gap <= 0) {
+      var box = document.getElementById('dday');
+      if (box) box.innerHTML = '<div class="dd-note" style="border-left:none;">접수가 마감되었습니다. 다음 시즌을 기다려 주세요.</div>';
+      return;
+    }
+    d.textContent = Math.floor(gap / 86400000);
+    h.textContent = pad(Math.floor(gap / 3600000) % 24);
+    m.textContent = pad(Math.floor(gap / 60000) % 60);
+    if (note && gap < 7 * 86400000) note.style.color = 'var(--r)';
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+
+/* 스크롤 등장 */
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
