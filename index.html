@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HGE Creator — 게임 × 크리에이터 콜라보 플랫폼</title>
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -205,6 +200,15 @@ ul { list-style:none; }
 .p-card:hover { border-color:var(--bdr2); transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.5); }
 .p-banner { height:140px; display:flex; align-items:center; justify-content:center; font-size:3rem; position:relative; overflow:hidden; }
 .pb1{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/project/dream.webp') center/cover;} .pb2{background:#200a00 url('https://cLOfLuV.github.io/HGECreatorWeb/images/project/hgecup.webp') center/cover;} .pb3{background:linear-gradient(135deg,#080820,#002030);} .pb-e{background:var(--surf);}
+/* Indie RGB 프로젝트 배너 */
+.pb4{background:#08080f;position:relative;}
+.pb4::after{content:'';position:absolute;inset:0;background:
+  radial-gradient(closest-side,rgba(229,72,77,.42),transparent 72%) 18% 118%/44% 130% no-repeat,
+  radial-gradient(closest-side,rgba(48,164,108,.42),transparent 72%) 50% 118%/46% 150% no-repeat,
+  radial-gradient(closest-side,rgba(62,99,221,.42),transparent 72%) 82% 118%/44% 136% no-repeat;}
+.pb4 .p-rgbword{position:relative;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:2.1rem;letter-spacing:2px;line-height:1;}
+.pb4 .p-rgbword .r{color:#e5484d;} .pb4 .p-rgbword .g{color:#30a46c;} .pb4 .p-rgbword .b{color:#3e63dd;}
+a.p-card{display:block;}
 .p-status { position:absolute; top:.8rem; left:.8rem; font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:1.5px; padding:.25rem .65rem; border-radius:999px; }
 .ps-live{background:rgba(0,217,160,.15);border:1px solid rgba(0,217,160,.4);color:var(--acc3);}
 .ps-up{background:rgba(91,94,244,.15);border:1px solid rgba(91,94,244,.4);color:#a0a2ff;}
@@ -323,6 +327,7 @@ footer a:hover { color:var(--muted); }
     <li><a href="#vod">방송</a></li>
     <li><a href="#creators">크리에이터</a></li>
     <li><a href="#projects">프로젝트</a></li>
+    <li><a href="./indie-rgb/">INDIE RGB</a></li>
     <li><a href="#about">소개</a></li>
     <li><a href="#join">콜라보 신청</a></li>
   </ul>
@@ -784,14 +789,17 @@ footer a:hover { color:var(--muted); }
           <div class="p-meta"><span>예정</span><span>·</span><span>모집 예정</span></div>
         </div>
       </div>
-      <div class="p-card">
-        <div class="p-banner pb3"><span class="p-status" style="background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);">UPCOMING</span><span>✅</span></div>
-        <div class="p-body">
-          <div class="p-title">공개 예정</div>
-          <p class="p-desc">공개 예정인 프로젝트입니다.</p>
-          <div class="p-meta"><span>예정</span><span>·</span><span>모집 예정</span></div>
+      <a class="p-card" href="./indie-rgb/">
+        <div class="p-banner pb4">
+          <span class="p-status ps-live">● 접수 중</span>
+          <span class="p-rgbword">Indie <span class="r">R</span><span class="g">G</span><span class="b">B</span></span>
         </div>
-      </div>
+        <div class="p-body">
+          <div class="p-title">Indie RGB : Restart Game Burning</div>
+          <p class="p-desc">출시 후 시간이 지난 인디게임 3작을 선정해, 2주간 진행하는 대규모 홍보 스트리밍 캠페인</p>
+          <div class="p-meta"><span class="hi">● 참가 게임 접수 중</span><span>·</span><span>~ 10.25 마감</span></div>
+        </div>
+      </a>
       <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
       <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
       <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
