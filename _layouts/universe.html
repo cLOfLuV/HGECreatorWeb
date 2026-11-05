@@ -27,7 +27,7 @@
   "@type": "Article",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.subtitle | default: page.lead | default: U.description | strip_html | jsonify }},
-  {%- if page.cover != blank %}
+  {%- if page.cover and page.cover != "" %}
   "image": [{{ page.cover | absolute_url | jsonify }}],
   {%- endif %}
   "datePublished": {{ page.date | date_to_xmlschema | jsonify }},

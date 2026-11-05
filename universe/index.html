@@ -27,13 +27,13 @@ permalink: /universe/
 {%- if cover %}
 {%- assign ccat = U.categories | where: "key", cover.category | first %}
 <section class="u-wrap u-cover">
-  <a class="u-cover-img" href="{{ cover.url }}" tabindex="-1" aria-hidden="true">{% if cover.cover != blank %}<img src="{{ cover.cover | relative_url }}" alt="">{% endif %}</a>
+  <a class="u-cover-img" href="{{ cover.url }}" tabindex="-1" aria-hidden="true">{% if cover.cover and cover.cover != "" %}<img src="{{ cover.cover | relative_url }}" alt="">{% endif %}</a>
   <div class="u-cover-text">
     <p class="u-eyebrow">COVER STORY</p>
     {% include universe-badge.html cat=cover.category %}
     <h2 class="u-cover-title"><a href="{{ cover.url }}">{{ cover.title | escape }}</a></h2>
-    {%- if cover.subtitle != blank %}<p class="u-cover-quote">“{{ cover.subtitle | escape }}”</p>{% endif %}
-    <p class="u-byline">{% if cover.interviewee.name != blank %}{{ cover.interviewee.name | escape }} · {% endif %}{{ U.formats[cover.format] }} · {{ cover.date | date: "%Y.%m.%d" }}</p>
+    {%- if cover.subtitle and cover.subtitle != "" %}<p class="u-cover-quote">“{{ cover.subtitle | escape }}”</p>{% endif %}
+    <p class="u-byline">{% if cover.interviewee.name and cover.interviewee.name != "" %}{{ cover.interviewee.name | escape }} · {% endif %}{{ U.formats[cover.format] }} · {{ cover.date | date: "%Y.%m.%d" }}</p>
     <a class="u-btn u-btn-line u-btn-lg" href="{{ cover.url }}">인터뷰 읽기 →</a>
   </div>
 </section>

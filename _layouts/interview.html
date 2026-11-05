@@ -14,40 +14,40 @@ layout: universe
       <span class="u-fmt">{{ U.formats[page.format] }}</span>
     </div>
     <h1 class="u-atitle">{{ page.title | escape }}</h1>
-    {%- if page.subtitle != blank %}
+    {%- if page.subtitle and page.subtitle != "" %}
     <p class="u-asub">“{{ page.subtitle | escape }}”</p>
     {%- endif %}
     <p class="u-byline">글 {{ page.author | default: "HGE Universe 편집부" | escape }} · <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%Y년 %-m월 %-d일" }}</time> · {{ minutes }}분</p>
   </header>
 
-  {%- if page.cover != blank %}
+  {%- if page.cover and page.cover != "" %}
   <figure class="u-wrap u-hero">
     <div class="u-hero-img"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_caption | default: page.title | escape }}"></div>
-    {%- if page.cover_caption != blank %}<figcaption>{{ page.cover_caption | escape }}</figcaption>{% endif %}
+    {%- if page.cover_caption and page.cover_caption != "" %}<figcaption>{{ page.cover_caption | escape }}</figcaption>{% endif %}
   </figure>
   {%- endif %}
 
   <div class="u-col">
-    {%- if page.lead != blank %}
+    {%- if page.lead and page.lead != "" %}
     <p class="u-lead">{{ page.lead | escape | newline_to_br }}</p>
     {%- endif %}
 
-    {%- if page.interviewee.name != blank %}
+    {%- if page.interviewee.name and page.interviewee.name != "" %}
     <aside class="u-profile" aria-label="인터뷰이 소개">
-      <span class="u-avatar">{% if page.interviewee.photo != blank %}<img src="{{ page.interviewee.photo | relative_url }}" alt="">{% else %}{{ who | slice: 0 }}{% endif %}</span>
+      <span class="u-avatar">{% if page.interviewee.photo and page.interviewee.photo != "" %}<img src="{{ page.interviewee.photo | relative_url }}" alt="">{% else %}{{ who | slice: 0 }}{% endif %}</span>
       <div>
         <p class="u-profile-name">{{ who | escape }}</p>
-        {%- if page.interviewee.bio != blank %}<p class="u-profile-bio">{{ page.interviewee.bio | escape }}</p>{% endif %}
+        {%- if page.interviewee.bio and page.interviewee.bio != "" %}<p class="u-profile-bio">{{ page.interviewee.bio | escape }}</p>{% endif %}
         {%- assign L = page.interviewee.links -%}
         {%- capture anylink %}{{ L.chzzk }}{{ L.soop }}{{ L.youtube }}{{ L.x }}{{ L.steam }}{{ L.homepage }}{% endcapture -%}
-        {%- if anylink != blank %}
+        {%- if anylink and anylink != "" %}
         <p class="u-pills">
-          {%- if L.chzzk != blank %}<a href="{{ L.chzzk }}" target="_blank" rel="noopener">치지직</a>{% endif -%}
-          {%- if L.soop != blank %}<a href="{{ L.soop }}" target="_blank" rel="noopener">SOOP</a>{% endif -%}
-          {%- if L.youtube != blank %}<a href="{{ L.youtube }}" target="_blank" rel="noopener">YouTube</a>{% endif -%}
-          {%- if L.x != blank %}<a href="{{ L.x }}" target="_blank" rel="noopener">X</a>{% endif -%}
-          {%- if L.steam != blank %}<a href="{{ L.steam }}" target="_blank" rel="noopener">Steam</a>{% endif -%}
-          {%- if L.homepage != blank %}<a href="{{ L.homepage }}" target="_blank" rel="noopener">홈페이지</a>{% endif -%}
+          {%- if L.chzzk and L.chzzk != "" %}<a href="{{ L.chzzk }}" target="_blank" rel="noopener">치지직</a>{% endif -%}
+          {%- if L.soop and L.soop != "" %}<a href="{{ L.soop }}" target="_blank" rel="noopener">SOOP</a>{% endif -%}
+          {%- if L.youtube and L.youtube != "" %}<a href="{{ L.youtube }}" target="_blank" rel="noopener">YouTube</a>{% endif -%}
+          {%- if L.x and L.x != "" %}<a href="{{ L.x }}" target="_blank" rel="noopener">X</a>{% endif -%}
+          {%- if L.steam and L.steam != "" %}<a href="{{ L.steam }}" target="_blank" rel="noopener">Steam</a>{% endif -%}
+          {%- if L.homepage and L.homepage != "" %}<a href="{{ L.homepage }}" target="_blank" rel="noopener">홈페이지</a>{% endif -%}
         </p>
         {%- endif %}
       </div>
@@ -58,13 +58,13 @@ layout: universe
 {{ content }}
     </div>
 
-    {%- if page.game.name != blank %}
+    {%- if page.game.name and page.game.name != "" %}
     <aside class="u-game" aria-label="이 인터뷰의 게임">
-      {%- if page.game.image != blank %}<span class="u-game-img"><img src="{{ page.game.image | relative_url }}" alt="" loading="lazy"></span>{% endif %}
+      {%- if page.game.image and page.game.image != "" %}<span class="u-game-img"><img src="{{ page.game.image | relative_url }}" alt="" loading="lazy"></span>{% endif %}
       <div class="u-game-text">
         <p class="u-kicker" style="color:var(--cat-ink)">이 인터뷰의 게임</p>
         <p class="u-game-name">{{ page.game.name | escape }}</p>
-        {%- if page.game.steam != blank %}<a class="u-btn u-btn-ink" href="{{ page.game.steam }}" target="_blank" rel="noopener">Steam에서 보기 →</a>{% endif %}
+        {%- if page.game.steam and page.game.steam != "" %}<a class="u-btn u-btn-ink" href="{{ page.game.steam }}" target="_blank" rel="noopener">Steam에서 보기 →</a>{% endif %}
       </div>
     </aside>
     {%- endif %}

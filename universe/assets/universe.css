@@ -162,6 +162,8 @@ a.u-badge:hover { color: var(--cat-ink); }
 .u-body h2 { margin-top: 64px; font-family: var(--serif); font-weight: 900; font-size: 28px; line-height: 1.4; }
 .u-body h3 { margin-top: 40px; font-size: 20px; font-weight: 700; }
 .u-body a { text-decoration: underline; text-underline-offset: 3px; }
+.u-body hr { border: 0; height: 1px; background: var(--line); margin: 48px 0 !important; }
+.u-body em { font-style: normal; font-weight: 700; color: var(--cat-ink); }
 .u-body ul, .u-body ol { padding-left: 1.4em; }
 .u-body blockquote { margin: 56px 0; padding: 36px 8px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); text-align: center; }
 .u-body blockquote p { margin: 0; font-family: var(--serif); font-weight: 700; font-size: 30px; line-height: 1.55; }
