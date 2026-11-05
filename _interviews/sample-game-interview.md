@@ -1,31 +1,34 @@
 ---
-title: "[개발팀명]이 말하는 첫 스트리머 콜라보"
+title: '[개발팀명]이 말하는 첫 스트리머 콜라보'
 address: sample-game-interview
-subtitle: "[인터뷰에서 뽑은 한 줄 인용 — 메인 카드에도 그대로 나갑니다]"
+subtitle: '[인터뷰에서 뽑은 한 줄 인용 — 메인 카드에도 그대로 나갑니다]'
 category: GAME
 format: cover
 date: 2026-11-05
 cover: /images/vod/nientum.webp
-cover_caption: "[대표 이미지 캡션 · 출처]"
+cover_caption: '[대표 이미지 캡션 · 출처]'
 author: Kyle
 interviewee:
-  name: "[개발팀명]"
-  photo: ""
-  bio: "[한 줄 소개 — 대표작, 팀 규모, 활동 지역]"
+  name: '[개발팀명]'
+  photo: ''
+  bio: '[한 줄 소개 — 대표작, 팀 규모, 활동 지역]'
   links:
-    steam: "https://store.steampowered.com/"
-    x: ""
-    youtube: ""
-lead: "[리드문 — 인터뷰이를 소개하는 3~5문장. 어떤 게임을 만든 팀인지, HGE Creator와 어떤 콜라보를 했는지, 왜 지금 이 이야기를 읽어야 하는지를 씁니다.]"
+    chzzk: ''
+    soop: ''
+    youtube: ''
+    x: ''
+    steam: https://store.steampowered.com/
+    homepage: ''
+lead: '[리드문 — 인터뷰이를 소개하는 3~5문장. 어떤 게임을 만든 팀인지, HGE Creator와 어떤 콜라보를 했는지, 왜 지금 이 이야기를 읽어야 하는지를 씁니다.]'
 game:
-  name: "[게임명]"
-  steam: "https://store.steampowered.com/"
+  name: '[게임명]'
+  steam: https://store.steampowered.com/
   image: /images/vod/nientum.webp
 tags:
   - 인디게임
   - 콜라보비하인드
 published: false
-featured: true
+featured: false
 featured_order: 2
 ---
 
