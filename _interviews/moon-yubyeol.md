@@ -23,7 +23,7 @@ lead: '"검은 베레모에 흑백의 실루엣. 첫인상은 조금 시크하�
 game: null
 tags:
   - '**'
-published: false
+published: true
 featured: true
 featured_order: 1
 ---
