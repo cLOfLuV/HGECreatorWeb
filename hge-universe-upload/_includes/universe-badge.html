@@ -1,0 +1,2 @@
+{%- assign bc = site.data.universe.categories | where: "key", include.cat | first -%}
+{%- if bc -%}<a class="u-badge" href="/universe/{{ bc.slug }}/" style="--cat:{{ bc.color }};--cat-tint:{{ bc.tint }};--cat-ink:{{ bc.ink }}"><i aria-hidden="true"></i>{{ bc.key }}</a>{%- endif -%}

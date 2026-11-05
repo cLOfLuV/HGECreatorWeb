@@ -1,0 +1,162 @@
+# HGE Universe 글쓰기 화면 설정 (Sveltia CMS)
+# 저장하면 아래 저장소·브랜치에 바로 커밋되고, 1~2분 뒤 사이트에 반영됩니다.
+
+backend:
+  name: github
+  repo: cLOfLuV/HGECreatorWeb
+  branch: cLOfLuV-patch-2
+  commit_messages:
+    create: "Universe: 새 인터뷰 {{slug}}"
+    update: "Universe: 인터뷰 수정 {{slug}}"
+    delete: "Universe: 인터뷰 삭제 {{slug}}"
+    uploadMedia: "Universe: 이미지 업로드 {{path}}"
+    deleteMedia: "Universe: 이미지 삭제 {{path}}"
+
+site_url: https://hgecreator.com/universe/
+display_url: https://hgecreator.com/universe/
+
+media_folder: universe/images/uploads
+public_folder: /universe/images/uploads
+
+collections:
+  - name: interviews
+    label: 인터뷰
+    label_singular: 인터뷰
+    description: "HGE Universe 인터뷰 원고입니다. '공개'를 켜야 사이트에 보이고, 끈 채로 저장하면 임시저장입니다."
+    folder: _interviews
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{fields.address}}"
+    summary: "{{title}} · {{category}}"
+    sortable_fields: [date, title, category]
+    view_filters:
+      - label: 공개된 글
+        field: published
+        pattern: true
+      - label: 임시저장
+        field: published
+        pattern: false
+      - label: 메인 노출 중
+        field: featured
+        pattern: true
+    fields:
+      - name: title
+        label: 제목
+        widget: string
+        hint: "30자 안팎. 예) 호러게임만 300시간, ○○의 방송 철학"
+
+      - name: address
+        label: 주소 (영문)
+        widget: string
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', '영문 소문자, 숫자, 하이픈(-)만 쓸 수 있어요']
+        hint: "기사 주소가 됩니다. 예) first-collab-story → hgecreator.com/universe/first-collab-story/ · 처음 저장한 뒤에는 바꾸지 마세요."
+
+      - name: subtitle
+        label: 부제 (한 줄 인용)
+        widget: string
+        hint: "인터뷰에서 뽑은 한 줄. 메인 카드와 공유 미리보기에도 나옵니다."
+
+      - name: category
+        label: 카테고리
+        widget: select
+        options: [STREAMER, ARTIST, GAME, SPECIAL]
+
+      - name: format
+        label: 포맷
+        widget: select
+        default: standard
+        options:
+          - { label: 커버 인터뷰, value: cover }
+          - { label: 스탠다드 인터뷰, value: standard }
+          - { label: 10문 10답, value: qna10 }
+
+      - name: date
+        label: 발행일
+        widget: datetime
+        format: YYYY-MM-DD
+        time_format: false
+        hint: "최신순 정렬 기준입니다."
+
+      - name: cover
+        label: 대표 이미지 (가로 16:9)
+        widget: image
+        hint: "가로 1600px 권장, 1MB 이하 JPG/WebP"
+
+      - name: cover_caption
+        label: 대표 이미지 캡션
+        widget: string
+        required: false
+
+      - name: author
+        label: 글쓴이
+        widget: string
+        default: Kyle
+
+      - name: interviewee
+        label: 인터뷰이
+        widget: object
+        fields:
+          - { name: name, label: 이름 (게임팀은 팀명), widget: string }
+          - { name: photo, label: 프로필 사진 (정사각형), widget: image, required: false }
+          - { name: bio, label: 한 줄 소개, widget: string, required: false }
+          - name: links
+            label: 링크 (비워두면 안 보임)
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - { name: chzzk, label: 치지직, widget: string, required: false }
+              - { name: soop, label: SOOP, widget: string, required: false }
+              - { name: youtube, label: YouTube, widget: string, required: false }
+              - { name: x, label: X, widget: string, required: false }
+              - { name: steam, label: Steam, widget: string, required: false }
+              - { name: homepage, label: 홈페이지, widget: string, required: false }
+
+      - name: lead
+        label: 리드문
+        widget: text
+        hint: "인터뷰이를 소개하는 3~5문장. 본문 맨 위에 크게 나옵니다."
+
+      - name: body
+        label: 본문
+        widget: markdown
+        hint: "질문은 'Q.'로 시작하는 문단, 답변은 그 아래 문단. 중간 제목은 제목 2(Heading 2), 강조 인용은 인용(Quote). 유튜브 주소를 한 줄에 단독으로 붙여넣으면 영상이 됩니다. 사진의 대체 텍스트(Alt)는 캡션으로 나옵니다."
+
+      - name: game
+        label: 관련 게임 (선택)
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: name, label: 게임 이름, widget: string, required: false }
+          - { name: steam, label: Steam 주소, widget: string, required: false }
+          - { name: image, label: 게임 이미지, widget: image, required: false }
+
+      - name: tags
+        label: 태그
+        widget: list
+        required: false
+        hint: "예) 치지직, 호러게임"
+
+      - name: published
+        label: 공개
+        widget: boolean
+        default: false
+        hint: "켜야 사이트에 보입니다. 꺼두면 임시저장."
+
+      - name: featured
+        label: 메인 노출
+        widget: boolean
+        default: false
+        hint: "켜면 hgecreator.com 메인의 HGE UNIVERSE 칸에 나옵니다 (최대 4편)."
+
+      - name: featured_order
+        label: 메인 노출 순서
+        widget: number
+        value_type: int
+        min: 1
+        max: 4
+        required: false
+        hint: "1이 큰 카드(커버 스토리), 2~4는 작은 카드"
