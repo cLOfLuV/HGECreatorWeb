@@ -58,7 +58,7 @@ layout: universe
 {{ content }}
     </div>
 
-    {%- if page.game.name and page.game.name != "" %}
+    {%- if page.game.show == true and page.game.name and page.game.name != "" %}
     <aside class="u-game" aria-label="이 인터뷰의 게임">
       {%- if page.game.image and page.game.image != "" %}<span class="u-game-img"><img src="{{ page.game.image | relative_url }}" alt="" loading="lazy"></span>{% endif %}
       <div class="u-game-text">
