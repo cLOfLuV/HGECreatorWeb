@@ -1,5 +1,7 @@
 # HGE Universe 공통 설정
-# 인터뷰 신청 버튼이 연결되는 주소입니다. 구글폼을 만들면 그 주소로 바꿔주세요.
+# 인터뷰 신청 버튼이 여는 주소 (웹진의 모든 '인터뷰 신청' 버튼에 적용)
+# 구글 폼을 만든 뒤, 아래 따옴표 안을 폼 신청 주소(https://forms.gle/... 형태)로 바꿔주세요.
+# https 주소면 버튼을 누를 때 새 탭으로 열립니다.
 apply_url: "mailto:kyle@hgecreator.com?subject=HGE%20Universe%20%EC%9D%B8%ED%84%B0%EB%B7%B0%20%EC%8B%A0%EC%B2%AD"
 
 tagline: 게임과 크리에이터가 만드는 작은 우주

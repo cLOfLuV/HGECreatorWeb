@@ -33,7 +33,7 @@ layout: universe
   <div class="u-emptybox">
     <p class="u-emptybox-title">{{ cat.key }} 행성의 첫 인터뷰를 준비하고 있어요</p>
     <p>인터뷰를 하고 싶은 크리에이터라면 먼저 신청해 주세요.</p>
-    <a class="u-btn u-btn-fill" href="{{ U.apply_url }}">인터뷰 신청하기</a>
+    <a class="u-btn u-btn-fill" href="{{ U.apply_url }}"{% if U.apply_url contains "http" %} target="_blank" rel="noopener"{% endif %}>인터뷰 신청하기</a>
   </div>
   {%- endif %}
 </section>

@@ -41,7 +41,7 @@
       {%- endfor %}
       {%- endunless %}
     </nav>
-    <a class="u-btn u-btn-fill u-btn-sm" href="{{ U.apply_url }}">인터뷰 신청</a>
+    <a class="u-btn u-btn-fill u-btn-sm" href="{{ U.apply_url }}"{% if U.apply_url contains "http" %} target="_blank" rel="noopener"{% endif %}>인터뷰 신청</a>
   </div>
 </div>
 
@@ -56,7 +56,7 @@
       <a href="/">HGE Creator</a>
       <a href="/universe/about/">웹진 소개</a>
       <a href="https://x.com/HGE_Creator" target="_blank" rel="noopener">X (@HGE_Creator)</a>
-      <a href="{{ U.apply_url }}">인터뷰 신청</a>
+      <a href="{{ U.apply_url }}"{% if U.apply_url contains "http" %} target="_blank" rel="noopener"{% endif %}>인터뷰 신청</a>
     </nav>
   </div>
 </footer>
