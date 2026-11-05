@@ -1,0 +1,27 @@
+---
+layout: null
+permalink: /universe/rss.xml
+---
+{%- assign U = site.data.universe -%}
+{%- assign all = site.interviews | sort: "date" | reverse -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>HGE Universe</title>
+  <link>{{ "/universe/" | absolute_url }}</link>
+  <atom:link href="{{ page.url | absolute_url }}" rel="self" type="application/rss+xml" />
+  <description>{{ U.description | xml_escape }}</description>
+  <language>ko</language>
+  <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+  {%- for it in all limit: 30 %}
+  <item>
+    <title>{{ it.title | xml_escape }}</title>
+    <link>{{ it.url | absolute_url }}</link>
+    <guid isPermaLink="true">{{ it.url | absolute_url }}</guid>
+    <pubDate>{{ it.date | date_to_rfc822 }}</pubDate>
+    <category>{{ it.category }}</category>
+    <description>{{ it.subtitle | default: it.lead | xml_escape }}</description>
+  </item>
+  {%- endfor %}
+</channel>
+</rss>

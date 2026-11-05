@@ -18,6 +18,29 @@
 <meta property="og:image" content="{{ page.cover | absolute_url }}">
 <meta name="twitter:card" content="summary_large_image">
 {%- endif %}
+<link rel="alternate" type="application/rss+xml" title="HGE Universe" href="/universe/rss.xml">
+{%- if page.collection == 'interviews' %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.subtitle | default: page.lead | default: U.description | strip_html | jsonify }},
+  {%- if page.cover != blank %}
+  "image": [{{ page.cover | absolute_url | jsonify }}],
+  {%- endif %}
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.date | date_to_xmlschema | jsonify }},
+  "author": {"@type": "Person", "name": {{ page.author | default: "HGE Universe 편집부" | jsonify }}},
+  "publisher": {"@type": "Organization", "name": "HGE Creator", "url": "https://hgecreator.com/", "logo": {"@type": "ImageObject", "url": "https://hgecreator.com/android-chrome-512x512.png"}},
+  "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+  "articleSection": {{ page.category | jsonify }},
+  "keywords": {{ page.tags | join: ", " | jsonify }},
+  "inLanguage": "ko-KR"
+}
+</script>
+{%- endif %}
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">

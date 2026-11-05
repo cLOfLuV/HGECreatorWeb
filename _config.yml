@@ -16,12 +16,20 @@ collections:
     output: true
     permalink: /universe/:name/
 
+# 검색엔진용 사이트맵(/sitemap.xml) 자동 생성 — GitHub Pages 기본 지원 플러그인
+plugins:
+  - jekyll-sitemap
+
 defaults:
   - scope:
       path: ""
       type: interviews
     values:
       layout: interview
+  - scope:
+      path: "universe/admin"
+    values:
+      sitemap: false
 
 exclude:
   - README.md

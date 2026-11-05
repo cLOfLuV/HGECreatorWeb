@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HGE Creator — 게임 × 크리에이터 콜라보 플랫폼</title>
+<meta name="description" content="2,000명 이상의 크리에이터가 함께하는 게임 × 크리에이터 콜라보 플랫폼 HGE Creator. 인디게임 콜라보와 크리에이터 인터뷰 웹진 HGE Universe를 만나보세요.">
+<link rel="canonical" href="https://hgecreator.com/">
+<link rel="alternate" hreflang="ko" href="https://hgecreator.com/">
+<link rel="alternate" hreflang="en" href="https://hgecreator.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://hgecreator.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HGE Creator">
+<meta property="og:title" content="HGE Creator — 게임 × 크리에이터 콜라보 플랫폼">
+<meta property="og:description" content="2,000명 이상의 크리에이터가 함께하는 게임 × 크리에이터 콜라보 플랫폼">
+<meta property="og:url" content="https://hgecreator.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -1346,6 +1356,7 @@ function renderCreators(creators) {
 
 /* IP 기반 언어 자동 감지 */
 (async()=>{
+  if(/bot|crawl|spider|slurp|yeti|daum|bingpreview|lighthouse/i.test(navigator.userAgent)) return; // 검색 로봇은 한국어 페이지 그대로
   if(sessionStorage.getItem('lang-checked')) return;
   sessionStorage.setItem('lang-checked','1');
   try{
