@@ -1,7 +1,7 @@
 ---
 title: 문유별, 별무리의 마음을 별로 기록하는 달의 요원
 address: moon-yubyeol
-subtitle: 시크한 줄 알고 들어왔다가, 편한 친구 같은 사람이구나! 하고 느껴지는 방송이면 좋겠어요!
+subtitle: 시크한 줄 알고 들어왔다가, 편한 친구 같은 사람이구나! 하고 느껴지는 방송이면 좋겠어요.
 category: STREAMER
 format: cover
 date: 2026-11-06
