@@ -11,7 +11,7 @@ author: 유혜나 기자
 interviewee:
   name: 오데트
   photo: /universe/images/uploads/odette-avatar.jpg
-  bio: 치지직 버츄얼 스트리머 · 인디 게임·로그라이크 · 팬덤 '리쭈단
+  bio: 치지직 버츄얼 스트리머 · 인디 게임·로그라이크 · 팬덤 '리쭈단'
   links:
     chzzk: https://chzzk.naver.com/0f406b5bff5e6f5221f95c10de420232
     soop: ''
