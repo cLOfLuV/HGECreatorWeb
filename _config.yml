@@ -30,6 +30,16 @@ defaults:
       path: "universe/admin"
     values:
       sitemap: false
+  # 검색엔진 소유 확인용 파일은 사이트맵에서 뺍니다
+  - scope:
+      path: "google16a3006916b84ab6.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "naver0254f2d9b454d70529d6e0f7ee4feaed.html"
+    values:
+      sitemap: false
 
 exclude:
   - README.md
+  - hge-universe-upload   # 업로드용 압축 폴더가 실수로 올라가도 사이트에 나오지 않게
