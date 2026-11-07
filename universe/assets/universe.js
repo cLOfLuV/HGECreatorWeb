@@ -98,6 +98,27 @@
       }
     });
 
+    /* 답변 중간에 사진·영상이 끼어 있으면, 그 뒤 문단도 같은 답변으로 이어 붙이기 */
+    var isMedia = function (el) {
+      return el && (el.tagName === 'FIGURE' || (el.classList && el.classList.contains('u-video')));
+    };
+    Array.prototype.slice.call(body.children).forEach(function (el) {
+      if (el.tagName !== 'P' || isQ(el) || !el.parentNode) return;
+      var prev = el.previousElementSibling;
+      if (!isMedia(prev)) return;
+      while (isMedia(prev)) prev = prev.previousElementSibling;
+      if (!prev || !prev.classList.contains('u-a')) return;
+      var cont = document.createElement('div');
+      cont.className = 'u-a u-a-cont';
+      el.before(cont);
+      var cur = el;
+      while (cur && cur.tagName === 'P' && !isQ(cur)) {
+        var nx = cur.nextElementSibling;
+        cont.appendChild(cur);
+        cur = nx;
+      }
+    });
+
     /* 인용구 아래 인터뷰이 이름 */
     if (name) {
       body.querySelectorAll('blockquote').forEach(function (bq) {
