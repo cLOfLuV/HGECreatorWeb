@@ -29,7 +29,7 @@ tags:
   - 치지직
   - 토크
 published: true
-featured: false
+featured: true
 featured_order: 1
 ---
 
