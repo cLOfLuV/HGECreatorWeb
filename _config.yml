@@ -1,0 +1,45 @@
+# HGE Creator 사이트 설정 (Jekyll — GitHub Pages가 자동으로 읽습니다)
+# 기존 페이지(index.html, en/, indie-rgb/)는 Jekyll이 손대지 않고 그대로 올립니다.
+# HGE Universe 웹진만 이 설정을 씁니다.
+
+title: HGE Creator
+url: "https://hgecreator.com"
+baseurl: ""
+timezone: Asia/Seoul
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+collections:
+  interviews:
+    output: true
+    permalink: /universe/:name/
+
+# 검색엔진용 사이트맵(/sitemap.xml) 자동 생성 — GitHub Pages 기본 지원 플러그인
+plugins:
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: ""
+      type: interviews
+    values:
+      layout: interview
+  - scope:
+      path: "universe/admin"
+    values:
+      sitemap: false
+  # 검색엔진 소유 확인용 파일은 사이트맵에서 뺍니다
+  - scope:
+      path: "google16a3006916b84ab6.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "naver0254f2d9b454d70529d6e0f7ee4feaed.html"
+    values:
+      sitemap: false
+
+exclude:
+  - README.md
+  - hge-universe-upload   # 업로드용 압축 폴더가 실수로 올라가도 사이트에 나오지 않게

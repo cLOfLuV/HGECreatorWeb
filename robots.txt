@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /universe/admin/
+
+Sitemap: https://hgecreator.com/sitemap.xml

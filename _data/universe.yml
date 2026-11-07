@@ -1,0 +1,40 @@
+# HGE Universe 공통 설정
+# 인터뷰 신청 버튼이 여는 주소 (웹진의 모든 '인터뷰 신청' 버튼에 적용)
+# 구글 폼을 만든 뒤, 아래 따옴표 안을 폼 신청 주소(https://forms.gle/... 형태)로 바꿔주세요.
+# https 주소면 버튼을 누를 때 새 탭으로 열립니다.
+apply_url: "https://forms.gle/6gYwi5EX7enQot1C8"
+
+tagline: 게임과 크리에이터가 만드는 작은 우주
+description: HGE Creator가 만드는 크리에이터 인터뷰 웹진. 스트리머, 아티스트, 게임 개발팀의 이야기를 담습니다.
+
+# 카테고리(행성) — 글쓰기 화면의 카테고리 값(key)과 같아야 합니다
+categories:
+  - key: STREAMER
+    slug: streamer
+    desc: 버츄얼·실사·캐릭터 스트리머의 방송 이야기
+    color: "#1A8FCF"
+    tint: "#DCEEFA"
+    ink: "#0B5A88"
+  - key: ARTIST
+    slug: artist
+    desc: 일러스트·모델링·영상·음악을 만드는 사람들
+    color: "#6355CC"
+    tint: "#E7E3FB"
+    ink: "#4537A8"
+  - key: GAME
+    slug: game
+    desc: 콜라보한 인디 게임과 개발팀의 뒷이야기
+    color: "#00A090"
+    tint: "#D4F2EC"
+    ink: "#00675C"
+  - key: SPECIAL
+    slug: special
+    desc: 행사 현장, 대회, HGE 팀 비하인드
+    color: "#E07A3F"
+    tint: "#FCE6D8"
+    ink: "#9C4313"
+
+formats:
+  cover: 커버 인터뷰
+  standard: 스탠다드 인터뷰
+  qna10: 10문 10답
