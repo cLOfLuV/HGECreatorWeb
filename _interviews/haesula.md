@@ -9,7 +9,7 @@ cover: /universe/images/uploads/haesula-cover.jpg
 cover_caption: 버츄얼 스트리머 해설아
 author: 유혜나 기자
 interviewee:
-  name: 설아
+  name: 해설아
   photo: /universe/images/uploads/haesula-avatar.jpg
   bio: 치지직·유튜브 버튜버 · 해설·토크·게임 · 팬덤 '온님'
   links:
