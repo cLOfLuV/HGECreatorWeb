@@ -80,7 +80,7 @@ Q. 키리사키 세이 방송에서만 볼 수 있는 콘텐츠가 있다면요?
 
 게임은 요즘 '승리의 여신: 니케'를 많이 하고 있고, 가끔 '배틀그라운드'나 '용과 같이' 시리즈 같은 액션 게임도 즐겨요.
 
-![게임 방송 중 '헉' 하고 놀란 키리사키 세이](/universe/images/uploads/kirisaki-sei-stream.jpg)
+![게임 방송 중인 키리사키 세이](/universe/images/uploads/kirisaki-sei-stream.jpg)
 
 Q. 캐릭터의 세계관과 설정(RP)을 소개해 주세요.
 
