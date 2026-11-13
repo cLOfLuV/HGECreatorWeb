@@ -29,8 +29,8 @@ tags:
   - 토크
   - 노래
 published: true
-featured: true
-featured_order: 3
+featured: false
+featured_order: null
 ---
 
 ## 1막 · 문을 열며
