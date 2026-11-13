@@ -30,8 +30,8 @@ tags:
   - 인디게임
   - 로그라이크
 published: true
-featured: true
-featured_order: 2
+featured: false
+featured_order: null
 ---
 
 
