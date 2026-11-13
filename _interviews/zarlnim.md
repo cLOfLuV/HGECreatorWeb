@@ -30,8 +30,8 @@ tags:
   - 그림
   - 잘님
 published: true
-featured: false
-featured_order: null
+featured: true
+featured_order: 2
 ---
 
 
