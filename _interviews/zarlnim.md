@@ -29,7 +29,7 @@ tags:
   - 소통
   - 그림
   - 잘님
-published: false
+published: true
 featured: false
 featured_order: null
 ---
