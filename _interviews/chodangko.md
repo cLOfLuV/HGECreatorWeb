@@ -28,8 +28,8 @@ tags:
   - 치지직
   - 토크
 published: true
-featured: false
-featured_order: null
+featured: true
+featured_order: 4
 ---
 
 
