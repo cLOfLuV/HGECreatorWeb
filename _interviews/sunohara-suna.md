@@ -29,8 +29,8 @@ tags:
   - 치지직
   - 토크
 published: true
-featured: true
-featured_order: 1
+featured: false
+featured_order: null
 ---
 
 
