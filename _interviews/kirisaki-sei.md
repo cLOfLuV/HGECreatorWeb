@@ -29,8 +29,8 @@ tags:
   - 서큐버스
   - 치지직
 published: true
-featured: false
-featured_order: null
+featured: true
+featured_order: 3
 ---
 
 
