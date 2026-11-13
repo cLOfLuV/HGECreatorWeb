@@ -31,8 +31,8 @@ tags:
   - 플리뱅
   - 노래
 published: true
-featured: true
-featured_order: 4
+featured: false
+featured_order: null
 ---
 
 
