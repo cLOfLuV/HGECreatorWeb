@@ -30,8 +30,8 @@ tags:
   - 치지직
   - 린세 이데
 published: true
-featured: false
-featured_order: null
+featured: true
+featured_order: 1
 ---
 
 
