@@ -1,0 +1,2 @@
+{%- assign it = include.it -%}
+{"title": {{ it.title | jsonify }}, "subtitle": {{ it.subtitle | jsonify }}, "category": {{ it.category | jsonify }}, "format": {{ it.format | jsonify }}, "date": {{ it.date | date: "%Y-%m-%d" | jsonify }}, "interviewee": {{ it.interviewee.name | jsonify }}, "url": {{ it.url | absolute_url | jsonify }}, "cover": {% if it.cover and it.cover != "" %}{{ it.cover | absolute_url | jsonify }}{% else %}null{% endif %}}

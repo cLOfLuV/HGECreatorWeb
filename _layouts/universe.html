@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{%- assign U = site.data.universe -%}
+{%- if page.title and page.title != "" -%}{%- assign doc_title = page.title | append: " · HGE Universe" -%}{%- else -%}{%- assign doc_title = "HGE Universe — 크리에이터 인터뷰 웹진" -%}{%- endif -%}
+{%- assign doc_desc = page.subtitle | default: page.description | default: U.description -%}
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ doc_title | escape }}</title>
+<meta name="description" content="{{ doc_desc | strip_html | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="HGE Universe">
+<meta property="og:type" content="{% if page.collection == 'interviews' %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ doc_title | escape }}">
+<meta property="og:description" content="{{ doc_desc | strip_html | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+{%- if page.cover %}
+<meta property="og:image" content="{{ page.cover | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+{%- endif %}
+<link rel="alternate" type="application/rss+xml" title="HGE Universe" href="/universe/rss.xml">
+{%- if page.collection == 'interviews' %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.subtitle | default: page.lead | default: U.description | strip_html | jsonify }},
+  {%- if page.cover and page.cover != "" %}
+  "image": [{{ page.cover | absolute_url | jsonify }}],
+  {%- endif %}
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.date | date_to_xmlschema | jsonify }},
+  "author": {"@type": "Person", "name": {{ page.author | default: "HGE Universe 편집부" | jsonify }}},
+  "publisher": {"@type": "Organization", "name": "HGE Creator", "url": "https://hgecreator.com/", "logo": {"@type": "ImageObject", "url": "https://hgecreator.com/android-chrome-512x512.png"}},
+  "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+  "articleSection": {{ page.category | jsonify }},
+  "keywords": {{ page.tags | join: ", " | jsonify }},
+  "inLanguage": "ko-KR"
+}
+</script>
+{%- endif %}
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/universe/assets/universe.css">
+</head>
+<body>
+
+<div class="u-topbar">
+  <div class="u-wrap u-topbar-in">
+    {%- if page.is_home %}
+    <a class="u-back" href="/">← HGE Creator로 돌아가기</a>
+    {%- else %}
+    <a class="u-logo" href="/universe/">HGE <span>UNIVERSE</span></a>
+    {%- endif %}
+    <nav class="u-topnav" aria-label="카테고리">
+      {%- unless page.is_home %}
+      {%- for c in U.categories %}
+      <a href="/universe/{{ c.slug }}/"{% if page.category == c.key %} class="on" style="--cat:{{ c.color }}" aria-current="page"{% endif %}>{{ c.key }}</a>
+      {%- endfor %}
+      {%- endunless %}
+    </nav>
+    <a class="u-btn u-btn-fill u-btn-sm" href="{{ U.apply_url }}"{% if U.apply_url contains "http" %} target="_blank" rel="noopener"{% endif %}>인터뷰 신청</a>
+  </div>
+</div>
+
+<main>
+{{ content }}
+</main>
+
+<footer class="u-footer">
+  <div class="u-wrap u-footer-in">
+    <p class="u-footer-logo">HGE <span>UNIVERSE</span> <small>by HGE Creator</small></p>
+    <nav class="u-footer-links" aria-label="바로가기">
+      <a href="/">HGE Creator</a>
+      <a href="/universe/about/">웹진 소개</a>
+      <a href="https://x.com/HGE_Creator" target="_blank" rel="noopener">X (@HGE_Creator)</a>
+      <a href="{{ U.apply_url }}"{% if U.apply_url contains "http" %} target="_blank" rel="noopener"{% endif %}>인터뷰 신청</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/universe/assets/universe.js" defer></script>
+</body>
+</html>
