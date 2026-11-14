@@ -30,8 +30,8 @@ tags:
   - 스플래툰
   - 나능요
 published: true
-featured: false
-featured_order: null
+featured: true
+featured_order: 4
 ---
 
 
