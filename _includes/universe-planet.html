@@ -1,4 +1,4 @@
-{%- comment -%} 행성 그림. 사용: {% include universe-planet.html c=카테고리 cls="추가클래스" %} {%- endcomment -%}
+{%- comment -%} 행성 그림. 사용법: include 할 때 c 에 카테고리, cls 에 추가 클래스를 넘겨요. {%- endcomment -%}
 {%- if include.c.planet and include.c.planet != "" -%}
 <img class="u-planet-img {{ include.cls }}" src="{{ include.c.planet }}" alt="" aria-hidden="true" width="240" height="240" loading="lazy" decoding="async">
 {%- else -%}
