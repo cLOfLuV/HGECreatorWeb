@@ -1,0 +1,39 @@
+---
+layout: universe
+---
+{%- assign U = site.data.universe -%}
+{%- assign cat = U.categories | where: "key", page.category | first -%}
+{%- assign list = site.interviews | where: "category", page.category | sort: "date" | reverse -%}
+<header class="u-cathead" style="--cat:{{ cat.color }};--cat-tint:{{ cat.tint }};--cat-ink:{{ cat.ink }}">
+  <div class="u-wrap u-cathead-in">
+    <span class="u-planet u-planet-xl" aria-hidden="true"></span>
+    <div>
+      <p class="u-crumb"><a href="/universe/">HGE Universe</a> / 행성</p>
+      <h1 class="u-cattitle">{{ cat.key }}</h1>
+      <p class="u-catdesc">{{ cat.desc }} · {{ list.size }}편</p>
+    </div>
+  </div>
+</header>
+
+<section class="u-wrap u-section-sm">
+  {%- if list.size > 0 %}
+  <div class="u-tabs" role="group" aria-label="포맷 필터">
+    <button type="button" class="on" aria-pressed="true" data-filter="all">전체</button>
+    {%- for f in U.formats %}
+    <button type="button" aria-pressed="false" data-filter="{{ f[0] }}">{{ f[1] }}</button>
+    {%- endfor %}
+  </div>
+  <div class="u-grid3" data-filter-list>
+    {%- for it in list %}
+    {% include universe-card.html it=it boxed=true hide_badge=true show_date=true %}
+    {%- endfor %}
+  </div>
+  <p class="u-empty" data-filter-empty hidden>이 포맷의 인터뷰는 아직 없어요.</p>
+  {%- else %}
+  <div class="u-emptybox">
+    <p class="u-emptybox-title">{{ cat.key }} 행성의 첫 인터뷰를 준비하고 있어요</p>
+    <p>인터뷰를 하고 싶은 크리에이터라면 먼저 신청해 주세요.</p>
+    <a class="u-btn u-btn-fill" href="{{ U.apply_url }}"{% if U.apply_url contains "http" %} target="_blank" rel="noopener"{% endif %}>인터뷰 신청하기</a>
+  </div>
+  {%- endif %}
+</section>

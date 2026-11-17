@@ -3,19 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HGE Creator — 인디게임 × 크리에이터 콜라보 플랫폼</title>
+<title>HGE Creator — 게임 × 크리에이터 콜라보 플랫폼</title>
+<meta name="description" content="2,000명 이상의 크리에이터가 함께하는 게임 × 크리에이터 콜라보 플랫폼 HGE Creator. 인디게임 콜라보와 크리에이터 인터뷰 웹진 HGE Universe를 만나보세요.">
+<link rel="canonical" href="https://hgecreator.com/">
+<link rel="alternate" hreflang="ko" href="https://hgecreator.com/">
+<link rel="alternate" hreflang="en" href="https://hgecreator.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://hgecreator.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HGE Creator">
+<meta property="og:title" content="HGE Creator — 게임 × 크리에이터 콜라보 플랫폼">
+<meta property="og:description" content="2,000명 이상의 크리에이터가 함께하는 게임 × 크리에이터 콜라보 플랫폼">
+<meta property="og:url" content="https://hgecreator.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@700;900&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; font-size:16px; }
 :root {
-  --bg:#08080f; --bg2:#0e0e1c; --bg3:#13132a; --surf:#1a1a30;
-  --white:#f4f4f8; --muted:#8888aa; --dim:#444466;
-  --acc:#5b5ef4; --acc2:#e040c0; --acc3:#00d9a0;
-  --bdr:rgba(255,255,255,0.07); --bdr2:rgba(255,255,255,0.13);
+  --bg:#deeef8; --bg2:#e8f4fc; --bg3:#f5faff; --surf:#c8e0f0;
+  --white:#0f1f2e; --muted:#3d6880; --dim:#7aaabe;
+  --acc:#1a8fcf; --acc2:#6355cc; --acc3:#00a090;
+  --bdr:rgba(26,143,207,0.18); --bdr2:rgba(26,143,207,0.38);
+  --grad1:linear-gradient(135deg,var(--acc),var(--acc2));
+  --grad2:linear-gradient(135deg,var(--acc3),var(--acc));
 }
-body { background:var(--bg); color:var(--white); font-family:'Noto Sans KR',sans-serif; overflow-x:hidden; line-height:1.6; }
+body {
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Noto Sans KR',sans-serif;
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  /* 전체 배경 — 미세 도트 패턴 + 하늘색 그라데이션 */
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(26,143,207,.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(99,85,204,.10) 0%, transparent 50%),
+    radial-gradient(rgba(26,143,207,.07) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+}
 img { display:block; max-width:100%; }
 a { text-decoration:none; color:inherit; }
 ul { list-style:none; }
@@ -27,8 +52,9 @@ ul { list-style:none; }
   position:fixed; inset:0 0 auto; z-index:200;
   display:flex; align-items:center;
   padding:0 3.5rem; height:64px;
-  background:rgba(8,8,15,0.92); backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--bdr);
+  background:rgba(214,235,248,0.92); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--bdr2);
+  box-shadow:0 1px 24px rgba(26,143,207,.10);
 }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:4px; margin-right:auto; }
 .nav-logo em { color:var(--acc); font-style:normal; }
@@ -38,80 +64,164 @@ ul { list-style:none; }
 .nav-sns { display:flex; gap:1rem; margin-left:2rem; }
 .nav-sns a { width:32px; height:32px; border:1px solid var(--bdr2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.72rem; color:var(--muted); font-family:'Space Mono',monospace; transition:all .2s; }
 .nav-sns a:hover { border-color:var(--acc); color:var(--white); }
+.lang-btn { font-family:'Space Mono',monospace; font-size:.7rem; letter-spacing:1px; padding:.3rem .8rem; border:1px solid var(--bdr2); border-radius:999px; color:var(--muted); background:transparent; cursor:pointer; transition:all .2s; text-decoration:none; display:flex; align-items:center; gap:.3rem; width:auto !important; height:auto !important; }
+.lang-btn:hover { border-color:var(--acc); color:var(--acc); }
 
 /* HERO */
 #hero { padding-top:64px; height:100vh; min-height:640px; position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.hero-reel { position:absolute; inset:0; display:flex; }
-.hero-slide { flex:0 0 100%; height:100%; position:relative; }
-.hero-slide-art { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.hero-reel { position:absolute; inset:0; }
+.hero-slide { position:absolute; inset:0; opacity:0; transition:opacity .9s ease; }
+.hero-slide.active { opacity:1; }
+.hero-slide-art {width:100%; height:100%; display:flex; align-items:center; justify-content:center; position:relative; }
 .hs1{background:linear-gradient(160deg,#0a0a22,#1c0c3a 50%,#0d1a3a);}
 .hs2{background:linear-gradient(160deg,#0f0a00,#2a1500 50%,#150a20);}
 .hs3{background:linear-gradient(160deg,#000d20,#001840 50%,#0a0020);}
 .hs4{background:linear-gradient(160deg,#1a0020,#30005a 50%,#0a0030);}
-.s-ov { position:absolute; inset:0; background:linear-gradient(to right,rgba(8,8,15,.85) 40%,rgba(8,8,15,.2)); }
-.s-ovb { position:absolute; inset:0; background:linear-gradient(to top,rgba(8,8,15,1) 0%,transparent 40%); }
+.hero-bg1{background:#1a0a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/backroom.webp') center/cover;}
+.hero-bg2{background:#200030 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/biheng.webp') center/cover;}
+.hero-bg3{background:#001a10 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/peble.webp') center/cover;}
+.hero-bg4{background:#0a0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/exorcist.webp') center/cover;}
+.hero-bg5{background:#1a0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/sohee.webp') center/cover;}
+.hero-bg6{background:#0a1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/whitepitol.webp') center/cover;}
+.hero-bg7{background:#1a1000 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/gladimaker.webp') center/cover;}
+.hero-bg8{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/tiny.webp') center/cover;}
+.s-ov { position:absolute; inset:0; background:linear-gradient(to right,rgba(10,22,38,.80) 40%,rgba(10,22,38,.15)); }
+.s-ovb { position:absolute; inset:0; background:linear-gradient(to top,var(--bg) 0%,transparent 40%); }
 .s-emoji { position:relative; z-index:1; font-size:6rem; filter:drop-shadow(0 20px 60px rgba(0,0,0,.8)); }
-.hero-content { position:relative; z-index:10; text-align:center; padding:0 2rem; }
+.hero-content { position:relative; z-index:10; text-align:center; padding:0 2rem; color:#f0f4f8; }
 .hero-eyebrow {
   display:inline-flex; align-items:center; gap:.6rem;
-  font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:3px; color:var(--acc3);
-  padding:.35rem 1rem; border:1px solid rgba(0,217,160,.25); border-radius:999px;
-  background:rgba(0,217,160,.07); margin-bottom:1.5rem;
+  font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:3px; color:#a0f8e8;
+  padding:.35rem 1rem; border:1px solid rgba(0,184,160,.3); border-radius:999px;
+  background:rgba(0,184,160,.09); margin-bottom:1.5rem;
   animation:fadeY .8s both;
 }
 .hero-eyebrow::before { content:'◆'; font-size:.4rem; }
 .hero-h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.2rem,8vw,7rem); letter-spacing:6px; line-height:1; animation:fadeY .8s .1s both; }
 .hero-h1 .gr { background:linear-gradient(90deg,var(--acc),var(--acc2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.hero-sub { margin-top:1.2rem; font-size:1rem; color:var(--muted); line-height:1.8; animation:fadeY .8s .2s both; }
+.hero-sub { margin-top:1.2rem; font-size:1rem; color:rgba(240,244,248,.75); line-height:1.8; animation:fadeY .8s .2s both; }
 .hero-actions { margin-top:2rem; display:flex; gap:1rem; justify-content:center; animation:fadeY .8s .3s both; }
 .btn-fill { padding:.75rem 2rem; background:var(--acc); color:#fff; font-weight:700; font-size:.82rem; border:none; border-radius:6px; cursor:pointer; letter-spacing:1px; transition:all .2s; font-family:'Space Mono',monospace; }
-.btn-fill:hover { background:#7274f8; transform:translateY(-2px); }
+.btn-fill:hover { background:#1a8fc8; transform:translateY(-2px); }
 .btn-out { padding:.75rem 2rem; background:transparent; color:var(--white); font-size:.82rem; border:1px solid var(--bdr2); border-radius:6px; letter-spacing:1px; transition:all .2s; font-family:'Space Mono',monospace; }
 .btn-out:hover { border-color:var(--white); }
 .hero-dots { position:absolute; bottom:5rem; left:50%; transform:translateX(-50%); display:flex; gap:.6rem; z-index:10; }
 .hero-dot { width:6px; height:6px; border-radius:50%; background:var(--dim); cursor:pointer; transition:all .3s; }
 .hero-dot.on { background:var(--acc); width:24px; border-radius:3px; }
-.hero-scr { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.4rem; z-index:10; color:var(--dim); font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:2px; animation:bob 2s infinite; }
+.hero-scr { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.4rem; z-index:10; color:rgba(240,244,248,.5); font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:2px; animation:bob 2s infinite; }
 @keyframes fadeY { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
 /* SECTIONS */
 .sec { padding:5rem 3.5rem; max-width:1300px; margin:0 auto; }
-.sec-bg2 { background:var(--bg2); }
-.sec-label { display:inline-flex; align-items:center; gap:.7rem; font-family:'Space Mono',monospace; font-size:.67rem; letter-spacing:3px; color:var(--acc); margin-bottom:.8rem; }
+.sec-bg2 {
+  background:linear-gradient(180deg, rgba(200,224,240,.55) 0%, rgba(232,244,252,.4) 100%);
+  position:relative;
+}
+.sec-bg2::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 60% at 85% 50%, rgba(99,85,204,.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+.sec-label {
+  display:inline-flex; align-items:center; gap:.7rem;
+  font-family:'Space Mono',monospace; font-size:.67rem; letter-spacing:3px;
+  color:var(--acc); margin-bottom:.8rem;
+  background:rgba(26,143,207,.08);
+  padding:.3rem .8rem .3rem .6rem;
+  border-radius:999px;
+  border:1px solid rgba(26,143,207,.2);
+}
 .sec-label::before { content:''; width:20px; height:1px; background:var(--acc); }
-.sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; line-height:1.1; }
+.sec-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,4vw,3.2rem); letter-spacing:3px; line-height:1.1;
+  background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
 .sec-desc { color:var(--muted); font-size:.92rem; margin-top:.8rem; line-height:1.8; }
 .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
 .reveal.in { opacity:1; transform:none; }
 
+/* 섹션 구분 장식선 */
+.sec-divider {
+  width:100%; max-width:1300px; margin:0 auto;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--bdr2) 30%, rgba(99,85,204,.3) 60%, transparent);
+}
+
 /* VOD CHIP */
 .chip-row { display:flex; gap:.6rem; margin-bottom:2.5rem; flex-wrap:wrap; }
-.chip { padding:.4rem 1.1rem; border:1px solid var(--bdr2); border-radius:999px; font-size:.75rem; color:var(--muted); cursor:pointer; font-family:'Space Mono',monospace; letter-spacing:1px; transition:all .2s; background:transparent; }
-.chip:hover,.chip.on { background:var(--acc); border-color:var(--acc); color:#fff; }
+.chip {
+  padding:.4rem 1.1rem; border:1px solid var(--bdr2); border-radius:999px;
+  font-size:.75rem; color:var(--muted); cursor:pointer;
+  font-family:'Space Mono',monospace; letter-spacing:1px; transition:all .2s;
+  background:rgba(26,143,207,.06);
+}
+.chip:hover { background:rgba(26,143,207,.14); border-color:var(--acc); color:var(--acc); }
+.chip.on {
+  background:var(--grad1); border-color:transparent; color:#fff;
+  box-shadow:0 2px 12px rgba(26,143,207,.3);
+}
 
 /* VOD GRID */
 .vod-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
-.vod-card { position:relative; border-radius:10px; overflow:hidden; cursor:pointer; display:block; background:var(--bg3); border:1px solid var(--bdr); transition:transform .25s,box-shadow .25s; }
-.vod-card:hover { transform:translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,.6); border-color:var(--bdr2); }
+.vod-card {
+  position:relative; border-radius:12px; overflow:hidden; cursor:pointer; display:block;
+  background:var(--bg3);
+  border:1px solid var(--bdr);
+  transition:transform .28s,box-shadow .28s,border-color .28s;
+  box-shadow:0 2px 12px rgba(26,143,207,.08);
+}
+.vod-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(26,143,207,.22), 0 0 0 2px rgba(26,143,207,.18);
+  border-color:var(--acc);
+}
 .vod-feat { grid-column:span 2; }
 .vod-thumb { aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.vt1{background:linear-gradient(135deg,#0a2040,#1a5090);}
-.vt2{background:linear-gradient(135deg,#200a00,#6a2500);}
-.vt3{background:linear-gradient(135deg,#0a1030,#204080);}
-.vt4{background:linear-gradient(135deg,#200030,#600090);}
-.vt5{background:linear-gradient(135deg,#001a10,#004030);}
-.vt6{background:linear-gradient(135deg,#1a1000,#504000);}
+.vt1{background:#1a0a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/backroom.webp') center/cover;}
+.vt2{background:#200030 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/biheng.webp') center/cover;}
+.vt3{background:#001a10 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/peble.webp') center/cover;}
+.vt4{background:#0a0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/exorcist.webp') center/cover;}
+.vt5{background:#1a0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/sohee.webp') center/cover;}
+.vt6{background:#0a1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/whitepitol.webp') center/cover;}
+.vt7{background:#1a1000 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/gladimaker.webp') center/cover;}
+.vt8{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/tiny.webp') center/cover;}
+.vt9{background:#1a0a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/unionvirus.webp') center/cover;}
+.vt10{background:#0a0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/thecoma.webp') center/cover;}
+.vt11{background:#0d1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/7trials.webp') center/cover;}
+.vt12{background:#0a1a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/cosmiccoop.webp') center/cover;}
+.vt13{background:#1a0808 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/lastslide.webp') center/cover;}
+.vt14{background:#0a0a20 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/stardust.webp') center/cover;}
+.vt15{background:#100a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/araha.webp') center/cover;}
+.vt16{background:#0f0a1a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/gonggosonyeo.webp') center/cover;}
+.vt17{background:#0a0f0f url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/quiet.webp') center/cover;}
+.vt18{background:#0f100a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/newspaper.webp') center/cover;}
+.vt19{background:#120a0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/coma2b.webp') center/cover;}
+.vt20{background:#0a120f url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/fridge.webp') center/cover;}
+.vt21{background:#080f14 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/backroomcleaners.webp') center/cover;}
+.vt22{background:#14080a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/pacostep.webp') center/cover;}
+.vt23{background:#0a0a14 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/blankcalibration.webp') center/cover;}
+.vt24{background:#0f0808 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/lobotomy.webp') center/cover;}
+.vt25{background:#0a080f url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/nientum.webp') center/cover;}
+.vt26{background:#0f0a08 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/kaijuharvest.webp') center/cover;}
+.vt27{background:#0a0f0a url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/codeexit.webp') center/cover;}
+.vt28{background:#1a0a10 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/yanderevirus.webp') center/cover;}
+.vt29{background:#0a0a0f url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/frenchconnection.webp') center/cover;}
+.vt30{background:#0f0a0f url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/cometomycome.webp') center/cover;}
+.vt31{background:#100a0f url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/gwigwisaljeon.webp') center/cover;}
+.vt32{background:#0a0f14 url('https://cLOfLuV.github.io/HGECreatorWeb/images/vod/jaildice.webp') center/cover;}
 .vt-e{background:var(--surf);}
-.v-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(8,8,15,.95)); }
+.v-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 35%,rgba(222,238,248,.96)); }
 .v-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; opacity:0; transition:opacity .2s; }
 .vod-card:hover .v-play { opacity:1; }
-.v-pbtn { width:54px; height:54px; border-radius:50%; background:rgba(91,94,244,.85); display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
+.v-pbtn { width:54px; height:54px; border-radius:50%; background:rgba(43,159,216,.85); display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
 .v-pbtn svg { width:20px; fill:#fff; margin-left:3px; }
 .v-art { position:relative; z-index:1; font-size:3rem; }
 .vod-feat .v-art { font-size:4.5rem; }
-.v-tag { position:absolute; top:.8rem; left:.8rem; z-index:4; font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:1px; padding:.25rem .65rem; border-radius:999px; background:rgba(8,8,15,.7); border:1px solid var(--bdr2); color:var(--muted); }
-.v-ftag { position:absolute; top:.8rem; right:.8rem; z-index:4; font-family:'Space Mono',monospace; font-size:.62rem; padding:.25rem .65rem; border-radius:999px; background:rgba(91,94,244,.2); border:1px solid rgba(91,94,244,.4); color:#a0a2ff; }
+.v-tag { position:absolute; top:.8rem; left:.8rem; z-index:4; font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:1px; padding:.25rem .65rem; border-radius:999px; background:rgba(238,246,251,.82); border:1px solid var(--bdr2); color:var(--muted); }
+.v-ftag { position:absolute; top:.8rem; right:.8rem; z-index:4; font-family:'Space Mono',monospace; font-size:.62rem; padding:.25rem .65rem; border-radius:999px; background:rgba(43,159,216,.18); border:1px solid rgba(43,159,216,.4); color:#1a7aaa; }
 .v-info { padding:1rem 1.1rem 1.2rem; }
 .v-title { font-weight:700; font-size:.95rem; margin-bottom:.3rem; line-height:1.3; }
 .v-meta { display:flex; align-items:center; gap:1rem; font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); margin-top:.5rem; }
@@ -123,46 +233,76 @@ ul { list-style:none; }
 
 /* CREATOR GRID */
 .creator-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem; }
-.c-card { background:var(--bg3); border:1px solid var(--bdr); border-radius:12px; overflow:hidden; transition:all .25s; cursor:pointer; position:relative; }
-.c-card:hover { border-color:var(--bdr2); transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.5); }
+.c-card {
+  display:flex; flex-direction:column;
+  background:var(--bg3);
+  border:1px solid var(--bdr);
+  border-radius:14px; overflow:hidden; transition:all .28s; cursor:pointer; position:relative;
+  box-shadow:0 2px 10px rgba(26,143,207,.07);
+}
+.c-card:hover {
+  border-color:var(--acc); transform:translateY(-5px);
+  box-shadow:0 14px 36px rgba(26,143,207,.2), 0 0 0 2px rgba(26,143,207,.14);
+}
 .c-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; opacity:0; transition:opacity .2s; }
 .c-card[data-t="s"]::before{background:var(--acc);} .c-card[data-t="r"]::before{background:var(--acc2);} .c-card[data-t="f"]::before{background:var(--acc3);}
 .c-card:hover::before { opacity:1; }
+.c-img {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center top;
+  z-index:0;
+}
+.c-img-fallback {
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.5rem;
+}
 .c-av { width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-.ca1{background:linear-gradient(135deg,#0f2060,#2040a0);}
-.ca2{background:linear-gradient(135deg,#300060,#6010a0);}
-.ca3{background:linear-gradient(135deg,#006020,#00a040);}
+.ca1{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/creator/rucu.webp') center/cover;}
+.ca2{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/creator/nanu.webp') center/cover;}
+.ca3{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/creator/pipi.webp') center/cover;}
 .ca4{background:linear-gradient(135deg,#601000,#a02000);}
 .ca5{background:linear-gradient(135deg,#006060,#0090a0);}
 .ca6{background:linear-gradient(135deg,#400060,#800090);}
 .ca7{background:linear-gradient(135deg,#004060,#0060a0);}
 .ca8{background:linear-gradient(135deg,#502000,#904000);}
 .ca-e{background:var(--surf);}
-.c-av-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(19,19,42,.9)); }
+.c-av-ov { position:absolute; inset:0; background:linear-gradient(180deg,transparent 50%,rgba(238,246,251,.55)); z-index:1; }
 .c-av-art { position:relative; z-index:1; font-size:3.5rem; }
 .c-plat { position:absolute; bottom:.6rem; right:.6rem; z-index:2; display:flex; gap:.3rem; }
-.pb { font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:1px; padding:.2rem .5rem; border-radius:999px; border:1px solid var(--bdr2); background:rgba(8,8,15,.7); color:var(--muted); }
-.pb-tw{border-color:rgba(100,65,165,.5);color:#a090cc;} .pb-yt{border-color:rgba(255,0,0,.35);color:#ff8080;} .pb-ch{border-color:rgba(0,180,120,.35);color:#60d0a0;}
-.c-info { padding:.9rem 1rem 1.1rem; }
+.pb { font-family:'Space Mono',monospace; font-size:.55rem; letter-spacing:1px; padding:.2rem .5rem; border-radius:999px; border:1px solid var(--bdr2); background:rgba(238,246,251,.82); color:var(--muted); }
+.pb-tw{border-color:rgba(100,65,165,.5);color:#a090cc;} .pb-yt{border-color:rgba(255,0,0,.35);color:#ff8080;} .pb-ch{border-color:rgba(0,180,120,.35);color:#60d0a0;} .pb-soop{border-color:rgba(255,140,0,.4);color:#ffaa44;} .pb-cime{border-color:rgba(80,160,255,.4);color:#80c0ff;}
+.c-info {padding:.9rem 1rem 1.1rem; display:flex; flex-direction:column; flex:1; }
 .c-name { font-weight:700; font-size:.92rem; margin-bottom:.2rem; }
-.c-tag  { font-size:.75rem; color:var(--muted); }
-.c-tbadge { display:inline-block; margin-top:.5rem; font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:1px; padding:.2rem .6rem; border-radius:999px; }
-.tb-s{background:rgba(91,94,244,.12);color:#a0a2ff;border:1px solid rgba(91,94,244,.3);}
-.tb-r{background:rgba(224,64,192,.12);color:#f0a0e0;border:1px solid rgba(224,64,192,.3);}
-.tb-f{background:rgba(0,217,160,.12);color:#70e8c0;border:1px solid rgba(0,217,160,.3);}
+.c-tag  { font-size:.75rem; color:var(--muted); margin-bottom:.5rem; }
+.c-tbadge { display:inline-block; margin-top:auto; padding-top:.5rem; font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:1px; padding:.2rem .6rem; border-radius:999px; align-self:flex-start; }
+.tb-s{background:rgba(43,159,216,.12);color:#1a7aaa;border:1px solid rgba(43,159,216,.3);}
+.tb-d{background:rgba(0,184,160,.12);color:#007a6a;border:1px solid rgba(0,184,160,.3);}
+.tb-r{background:rgba(124,111,223,.12);color:#5a4ab0;border:1px solid rgba(124,111,223,.3);}
+.tb-f{background:rgba(0,184,160,.12);color:#007a6a;border:1px solid rgba(0,184,160,.3);}
 .c-add { border:1px dashed var(--dim); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.4rem; min-height:260px; color:var(--dim); font-size:.75rem; font-family:'Space Mono',monospace; letter-spacing:1px; background:transparent; }
 .add-ico { font-size:1.5rem; }
 
 /* PROJECT GRID */
 .proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
-.p-card { background:var(--bg3); border:1px solid var(--bdr); border-radius:12px; overflow:hidden; transition:all .25s; }
-.p-card:hover { border-color:var(--bdr2); transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.5); }
+.p-card {
+  background:var(--bg3); border:1px solid var(--bdr); border-radius:14px; overflow:hidden; transition:all .28s;
+  box-shadow:0 2px 12px rgba(26,143,207,.08);
+}
+.p-card:hover {
+  border-color:var(--acc); transform:translateY(-4px);
+  box-shadow:0 14px 36px rgba(26,143,207,.18), 0 0 0 2px rgba(26,143,207,.14);
+}
 .p-banner { height:140px; display:flex; align-items:center; justify-content:center; font-size:3rem; position:relative; overflow:hidden; }
-.pb1{background:linear-gradient(135deg,#080820,#1a1060);} .pb2{background:linear-gradient(135deg,#080820,#200840);} .pb3{background:linear-gradient(135deg,#080820,#002030);} .pb-e{background:var(--surf);}
+.pb1{background:#0a2040 url('https://cLOfLuV.github.io/HGECreatorWeb/images/project/dream.webp') center/cover;} .pb2{background:#200a00 url('https://cLOfLuV.github.io/HGECreatorWeb/images/project/hgecup.webp') center/cover;} .pb3{background:linear-gradient(135deg,#080820,#002030);} .pb-e{background:var(--surf);}
+/* 버츄얼 IN 홍대 프로젝트 배너 */
+.pb4{background:#08080f url('https://cLOfLuV.github.io/HGECreatorWeb/images/project/virtual-in-hongdae.webp') center/cover;position:relative;}
+a.p-card{display:block;}
 .p-status { position:absolute; top:.8rem; left:.8rem; font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:1.5px; padding:.25rem .65rem; border-radius:999px; }
-.ps-live{background:rgba(0,217,160,.15);border:1px solid rgba(0,217,160,.4);color:var(--acc3);}
-.ps-up{background:rgba(91,94,244,.15);border:1px solid rgba(91,94,244,.4);color:#a0a2ff;}
-.ps-done{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);}
+.ps-live{background:rgba(0,184,160,.15);border:1px solid rgba(0,184,160,.4);color:#007a6a;}
+.ps-up{background:rgba(43,159,216,.15);border:1px solid rgba(43,159,216,.4);color:#1a6090;}
+.ps-done{background:rgba(90,122,148,.06);border:1px solid var(--bdr2);color:var(--muted);}
 .p-body { padding:1.2rem 1.3rem 1.4rem; }
 .p-title { font-weight:700; font-size:1rem; margin-bottom:.4rem; }
 .p-desc { font-size:.82rem; color:var(--muted); line-height:1.7; }
@@ -171,33 +311,176 @@ ul { list-style:none; }
 .p-add { border:1px dashed var(--dim); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; min-height:280px; color:var(--dim); font-size:.78rem; font-family:'Space Mono',monospace; letter-spacing:1px; }
 
 /* ABOUT */
-.about-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
-.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--bdr); border:1px solid var(--bdr); border-radius:10px; overflow:hidden; }
-.astat { background:var(--bg3); padding:2rem; }
-.astat .n { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; letter-spacing:2px; background:linear-gradient(135deg,var(--acc),var(--acc2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
-.astat .l { color:var(--muted); font-size:.8rem; margin-top:.3rem; }
+.about-inner { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+.about-stats {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  background:var(--bdr2); border:1px solid var(--bdr2);
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 4px 24px rgba(26,143,207,.12);
+}
+.astat {
+  background:var(--bg3); padding:1.5rem;
+  position:relative; overflow:hidden;
+}
+.astat::after {
+  content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+  background:var(--grad1); opacity:.7;
+}
+.astat:nth-child(2)::after { background:var(--grad2); }
+.astat:nth-child(3)::after { background:linear-gradient(180deg,var(--acc2),var(--acc3)); }
+.astat:nth-child(4)::after { background:var(--grad1); }
+.astat .n {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,3.5vw,3.5rem); letter-spacing:2px;
+  background:linear-gradient(135deg,var(--acc),var(--acc2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1;
+}
+.astat .l { color:var(--muted); font-size:clamp(.65rem,.8vw,.8rem); margin-top:.3rem; line-height:1.4; }
 .pill-row { display:flex; gap:.8rem; margin-top:2rem; flex-wrap:wrap; }
-.pill { padding:.5rem 1.1rem; border:1px solid var(--bdr2); border-radius:999px; font-size:.8rem; color:var(--muted); }
+.pill {
+  padding:.5rem 1.1rem; border:1px solid var(--bdr2); border-radius:999px;
+  font-size:.8rem; color:var(--muted);
+  background:rgba(26,143,207,.06);
+}
 .cta-row { display:flex; gap:1rem; margin-top:2.5rem; }
 
 /* JOIN */
 #join { padding:5rem 3.5rem; text-align:center; position:relative; overflow:hidden; }
-.join-bg { position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 100%,rgba(91,94,244,.1) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 50%,rgba(224,64,192,.08) 0%,transparent 70%); }
+.join-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 110%, rgba(26,143,207,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 15% 50%, rgba(99,85,204,.12) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 90% 20%, rgba(0,160,144,.10) 0%, transparent 60%);
+}
 .join-inner { position:relative; z-index:1; max-width:680px; margin:0 auto; }
 .join-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.2rem,5vw,4rem); letter-spacing:3px; margin-bottom:1rem; }
 .join-title .gr { background:linear-gradient(90deg,var(--acc),var(--acc2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .join-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2.5rem 0; }
-.jcard { padding:1.4rem 1.2rem; border:1px solid var(--bdr); border-radius:10px; background:var(--bg3); font-size:.82rem; color:var(--muted); line-height:1.6; text-align:left; }
+.jcard {
+  padding:1.4rem 1.2rem; border:1px solid var(--bdr2); border-radius:14px;
+  background:linear-gradient(135deg, var(--bg3) 60%, rgba(200,224,240,.5));
+  font-size:.82rem; color:var(--muted); line-height:1.6; text-align:left;
+  box-shadow:0 2px 12px rgba(26,143,207,.09);
+  transition:transform .2s, box-shadow .2s;
+}
+.jcard:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(26,143,207,.16); }
 .jcard strong { display:block; color:var(--white); margin-bottom:.3rem; font-size:.88rem; }
 .join-links { display:flex; gap:1.2rem; justify-content:center; margin-top:1.2rem; flex-wrap:wrap; }
-.j-link { display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.8rem; border:1px solid var(--bdr2); border-radius:999px; font-family:'Space Mono',monospace; font-size:.78rem; color:var(--acc); transition:all .2s; }
-.j-link:hover { border-color:var(--acc); background:rgba(91,94,244,.08); }
+.j-link {
+  display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.8rem;
+  border:1px solid var(--bdr2); border-radius:999px;
+  font-family:'Space Mono',monospace; font-size:.78rem; color:var(--acc);
+  transition:all .2s;
+  background:rgba(26,143,207,.05);
+}
+.j-link:hover { border-color:var(--acc); background:rgba(26,143,207,.12); transform:translateY(-2px); }
 
 /* FOOTER */
 footer { padding:1.8rem 3.5rem; border-top:1px solid var(--bdr); display:flex; align-items:center; justify-content:space-between; font-family:'Space Mono',monospace; font-size:.65rem; color:var(--dim); }
 .f-links { display:flex; gap:1.5rem; }
 footer a { color:var(--dim); transition:color .2s; }
 footer a:hover { color:var(--muted); }
+
+/* ── 태블릿 (768px 이하) ── */
+@media (max-width: 768px) {
+  /* NAV */
+  #nav { padding:0 1.2rem; }
+  .nav-menu { display:none; }
+  .nav-sns { margin-left:auto; }
+
+  /* HERO */
+  .hero-sub { font-size:.88rem; }
+
+  /* SECTION 여백 */
+  .sec { padding:3rem 1.2rem; }
+  #join { padding:3rem 1.2rem; }
+  footer { padding:1.4rem 1.2rem; flex-direction:column; gap:.8rem; text-align:center; }
+  .f-links { flex-wrap:wrap; justify-content:center; gap:1rem; }
+
+  /* VOD: 4열 → 2열 */
+  .vod-grid { grid-template-columns:repeat(2,1fr); }
+  .vod-feat { grid-column:span 2; }
+
+  /* CREATOR: 5열 → 3열 */
+  .creator-grid { grid-template-columns:repeat(3,1fr); gap:.8rem; }
+
+  /* PROJECT: 3열 → 1열 */
+  .proj-grid { grid-template-columns:1fr; }
+
+  /* ABOUT: 2열 → 1열 */
+  .about-inner { grid-template-columns:1fr; gap:2.5rem; }
+
+  /* ABOUT STATS: 1열로 전환 시 숫자 크기 복원 */
+  .astat { padding:1.5rem 1.8rem; }
+  .astat .n { font-size:2.8rem; }
+  .astat .l { font-size:.78rem; }
+
+  /* JOIN CARDS: 3열 → 1열 */
+  .join-cards { grid-template-columns:1fr; }
+
+  /* ABOUT STATS: 유지 */
+  .about-stats { grid-template-columns:1fr 1fr; }
+}
+
+/* ── 모바일 (480px 이하) ── */
+@media (max-width: 480px) {
+  /* VOD: 2열 유지, featured만 전체폭 */
+  .vod-grid { grid-template-columns:repeat(2,1fr); gap:.7rem; }
+  .vod-feat { grid-column:span 2; }
+
+  /* CREATOR: 3열 → 2열 */
+  .creator-grid { grid-template-columns:repeat(2,1fr); gap:.6rem; }
+  .c-name { font-size:.8rem; }
+  .c-tag  { font-size:.68rem; }
+
+  /* 페이지네이션 */
+  .pagination { gap:.3rem; }
+  .pg-btn { width:30px; height:30px; font-size:.72rem; }
+  .pg-prev, .pg-next { padding:0 .7rem; font-size:.68rem; }
+
+  /* HERO */
+  .hero-actions { flex-direction:column; align-items:center; }
+  .btn-fill, .btn-out { width:100%; max-width:260px; text-align:center; }
+
+  /* ABOUT STATS: 모바일 최적화 */
+  .astat { padding:1.2rem; }
+  .astat .n { font-size:2.2rem; }
+  .astat .l { font-size:.72rem; }
+}
+
+/* ── HGE UNIVERSE 미리보기 (웹진 /universe/feed.json에서 자동으로 채워짐) ── */
+.uv-head { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem; }
+.uv-more { display:inline-flex; align-items:center; min-height:44px; padding:0 1.4rem; border-radius:999px; border:1.5px solid var(--acc); background:var(--bg3); font-family:'Space Mono',monospace; font-size:.78rem; font-weight:700; letter-spacing:1px; color:var(--acc); transition:all .2s; white-space:nowrap; }
+.uv-more:hover { background:var(--acc); color:#fff; }
+.uv-grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:1.4rem; }
+.uv-grid.uv-single { grid-template-columns:minmax(0,760px); justify-content:center; }
+.uv-big, .uv-mini { background:var(--bg3); border:1px solid var(--bdr); border-radius:14px; overflow:hidden; color:var(--white); box-shadow:0 2px 12px rgba(26,143,207,.08); transition:transform .28s, box-shadow .28s, border-color .28s; }
+.uv-big:hover, .uv-mini:hover { transform:translateY(-4px); border-color:var(--acc); box-shadow:0 14px 36px rgba(26,143,207,.2); }
+.uv-big { display:flex; flex-direction:column; }
+.uv-img { position:relative; aspect-ratio:16/9; overflow:hidden; }
+.uv-img img { width:100%; height:100%; object-fit:cover; }
+.uv-cs { position:absolute; top:14px; left:14px; padding:5px 12px; border-radius:999px; background:#0f1f2e; color:#fff; font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:2px; }
+.uv-big .uv-text { padding:1.4rem 1.5rem 1.6rem; }
+.uv-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:.7rem; font-weight:700; letter-spacing:.08em; line-height:1.2; }
+.uv-badge i { width:8px; height:8px; border-radius:50%; }
+.uv-title { margin-top:.8rem; font-family:'Noto Serif KR',serif; font-weight:900; font-size:1.55rem; line-height:1.4; word-break:keep-all; }
+.uv-quote { margin-top:.7rem; font-size:.92rem; line-height:1.7; color:var(--muted); }
+.uv-minis { display:flex; flex-direction:column; gap:1rem; }
+.uv-mini { flex:1; display:flex; gap:1rem; align-items:center; padding:.9rem; }
+.uv-mini .uv-img { flex:0 0 168px; width:168px; border-radius:10px; }
+.uv-mini .uv-badge { padding:0; background:none !important; }
+.uv-mini .uv-title { margin-top:.35rem; font-weight:700; font-size:1.05rem; line-height:1.45; }
+@media (max-width:768px) { .uv-grid { grid-template-columns:1fr; } }
+@media (max-width:480px) {
+  .uv-big .uv-text { padding:1rem 1rem 1.2rem; }
+  .uv-title { font-size:1.2rem; }
+  .uv-minis { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; }
+  .uv-mini { flex-direction:column; align-items:stretch; gap:0; padding:0; }
+  .uv-mini .uv-img { width:100%; flex-basis:auto; border-radius:0; }
+  .uv-mini .uv-text { padding:.6rem .75rem .85rem; }
+  .uv-mini .uv-title { font-size:.88rem; }
+}
 </style>
 </head>
 <body>
@@ -207,6 +490,7 @@ footer a:hover { color:var(--muted); }
   <a class="nav-logo" href="#"><em>HGE</em> CREATOR</a>
   <ul class="nav-menu">
     <li><a href="#vod">방송</a></li>
+    <li><a href="/universe/">UNIVERSE</a></li>
     <li><a href="#creators">크리에이터</a></li>
     <li><a href="#projects">프로젝트</a></li>
     <li><a href="#about">소개</a></li>
@@ -215,34 +499,44 @@ footer a:hover { color:var(--muted); }
   <div class="nav-sns">
     <a href="https://x.com/HGE_Creator" target="_blank" title="X">𝕏</a>
     <a href="https://hgecreator.com" target="_blank" title="Web">W</a>
+    <a href="./en/" class="lang-btn">🌐 EN</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-reel" id="reel">
-    <div class="hero-slide"><div class="hero-slide-art hs1"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">🐠</span></div></div>
-    <div class="hero-slide"><div class="hero-slide-art hs2"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">⚔️</span></div></div>
-    <div class="hero-slide"><div class="hero-slide-art hs3"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">⛏️</span></div></div>
-    <div class="hero-slide"><div class="hero-slide-art hs4"><div class="s-ov"></div><div class="s-ovb"></div><span class="s-emoji">✈️</span></div></div>
-  </div>
+ <div class="hero-reel" id="reel">
+  <div class="hero-slide"><div class="hero-slide-art hero-bg1"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg2"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg3"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg4"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg5"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg6"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg7"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+  <div class="hero-slide"><div class="hero-slide-art hero-bg8"><div class="s-ov"></div><div class="s-ovb"></div></div></div>
+</div>
+
+<!-- hero-reel 닫기 -->
 
   <div class="hero-content">
-    <div class="hero-eyebrow">인디게임 × 크리에이터 콜라보 커뮤니티</div>
-    <h1 class="hero-h1">GAME<br><span class="gr">CREATOR</span></h1>
-    <p class="hero-sub">좋아하는 게임을 함께 즐기는 크리에이터 1,000명+<br>인디게임과 크리에이터의 상생 플랫폼, HGE Creator</p>
+    <h1 class="hero-h1">HGE<br><span class="gr">CREATOR</span></h1>
+    <p class="hero-sub">게임을 통해 성장하는 크리에이터!<br>게임과 크리에이터의 상생 플랫폼, HGE Creator</p>
     <div class="hero-actions">
       <a href="#vod" class="btn-fill">방송 보러가기 ▶</a>
       <a href="#creators" class="btn-out">크리에이터 보기</a>
     </div>
   </div>
 
-  <div class="hero-dots" id="dots">
-    <div class="hero-dot on" data-i="0"></div>
-    <div class="hero-dot" data-i="1"></div>
-    <div class="hero-dot" data-i="2"></div>
-    <div class="hero-dot" data-i="3"></div>
-  </div>
+<div class="hero-dots" id="dots">
+  <div class="hero-dot on" data-i="0"></div>
+  <div class="hero-dot" data-i="1"></div>
+  <div class="hero-dot" data-i="2"></div>
+  <div class="hero-dot" data-i="3"></div>
+  <div class="hero-dot" data-i="4"></div>
+  <div class="hero-dot" data-i="5"></div>
+  <div class="hero-dot" data-i="6"></div>
+  <div class="hero-dot" data-i="7"></div>
+</div>
 
   <div class="hero-scr">
     <svg width="12" height="18" viewBox="0 0 12 18" fill="none">
@@ -254,94 +548,472 @@ footer a:hover { color:var(--muted); }
   </div>
 </section>
 
+
 <!-- ① VOD -->
 <section id="vod">
   <div class="sec">
     <div class="sec-head reveal" style="margin-bottom:2rem;">
       <div class="sec-label">COLLAB BROADCASTS</div>
-      <h2 class="sec-title">콜라보 방송 모아보기</h2>
-      <p class="sec-desc">HGE Creator 소속 크리에이터들이 함께한 인디게임 콜라보 방송. 썸네일을 클릭해 방송을 확인하세요.</p>
+      <h2 class="sec-title">최근 콜라보 방송 모아보기</h2>
+      <p class="sec-desc">HGE Creator 크리에이터들이 함께한 게임 콜라보 방송. 썸네일을 클릭해 방송을 확인하세요.</p>
     </div>
 
     <div class="chip-row reveal">
       <button class="chip on" data-f="all">ALL</button>
-      <button class="chip" data-f="casual">캐주얼 / 시뮬레이션</button>
-      <button class="chip" data-f="strategy">카드 / 전략</button>
-      <button class="chip" data-f="defense">디펜스 / 방치형</button>
+      <button class="chip" data-f="horror">공포</button>
+      <button class="chip" data-f="rpg">RPG / 액션</button>
+      <button class="chip" data-f="story">스토리</button>
+      <button class="chip" data-f="puzzle">퍼즐</button>
       <button class="chip" data-f="novel">비주얼 노벨</button>
+      <button class="chip" data-f="casual">캐주얼</button>
     </div>
 
     <div class="vod-grid reveal">
 
-      <a class="vod-card vod-feat" href="#" data-cat="casual">
+      <!-- Row 1: 백룸컴퍼니(feat) + 비행?청춘!(feat) -->
+      <a class="vod-card vod-feat" href="#" data-cat="horror">
         <div class="vod-thumb vt1">
           <div class="v-ov"></div>
-          <span class="v-tag">캐주얼 / 시뮬레이션</span>
+          <span class="v-tag">공포 / 멀티</span>
           <span class="v-ftag">FEATURED</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">🐠</span>
         </div>
         <div class="v-info">
-          <div class="v-title">타이니 아쿠아리움 — 대규모 콜라보 방송</div>
-          <p class="v-meta"><span>GAMERSKY 퍼블리싱</span><span class="dot">·</span><span>크리에이터 58명</span><span class="dot">·</span><span>2024</span></p>
-          <div class="v-link">방송 목록 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+          <div class="v-title">백룸컴퍼니</div>
+          <p class="v-meta"><span>공포 / 멀티플레이</span><span class="dot">·</span><span>2025</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
         </div>
       </a>
 
       <a class="vod-card vod-feat" href="#" data-cat="novel">
-        <div class="vod-thumb vt4">
+        <div class="vod-thumb vt2">
           <div class="v-ov"></div>
           <span class="v-tag">비주얼 노벨 / 인디</span>
-          <span class="v-ftag">역대 최대 규모</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">✈️</span>
         </div>
         <div class="v-info">
-          <div class="v-title">비행? 청춘! — 2차창작 팬덤 형성 콜라보</div>
-          <p class="v-meta"><span>크리에이터 83명 참여</span><span class="dot">·</span><span>2차창작 연계</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-title">비행? 청춘!</div>
+          <p class="v-meta"><span>크리에이터 83명 참여</span><span class="dot">·</span><span>2024</span></p>
           <div class="v-link">방송 목록 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
         </div>
       </a>
 
-      <a class="vod-card" href="#" data-cat="strategy">
-        <div class="vod-thumb vt2">
-          <div class="v-ov"></div>
-          <span class="v-tag">카드 / 전략</span>
-          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">⚔️</span>
-        </div>
-        <div class="v-info">
-          <div class="v-title">삼국 영웅 : 혈월의 전설</div>
-          <p class="v-meta"><span>18만+ 노출 증가</span><span class="dot">·</span><span>2024</span></p>
-          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
-        </div>
-      </a>
-
-      <a class="vod-card" href="#" data-cat="defense">
+      <!-- Row 2: 페블나이츠(feat) + 전국퇴마사협회(feat) -->
+      <a class="vod-card vod-feat" href="#" data-cat="rpg">
         <div class="vod-thumb vt3">
           <div class="v-ov"></div>
-          <span class="v-tag">디펜스 / 방치형</span>
+          <span class="v-tag">RPG / 액션</span>
           <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-          <span class="v-art">⛏️</span>
         </div>
         <div class="v-info">
-          <div class="v-title">이세계 채광 디펜스</div>
-          <p class="v-meta"><span>유사 장르 가시성 확보</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-title">페블나이츠</div>
+          <p class="v-meta"><span>RPG / 액션</span><span class="dot">·</span><span>2026</span></p>
           <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
         </div>
       </a>
 
-      <!-- empty slots -->
-      <div class="vod-card" data-cat="_e">
-        <div class="vod-thumb vt-e"><div class="v-empty"><span class="v-plus">＋</span><span>방송 추가 예정</span></div></div>
-        <div class="v-info"><div class="v-title" style="color:var(--dim);">Coming Soon</div><p class="v-meta">—</p></div>
-      </div>
-      <div class="vod-card" data-cat="_e">
-        <div class="vod-thumb vt-e"><div class="v-empty"><span class="v-plus">＋</span><span>방송 추가 예정</span></div></div>
-        <div class="v-info"><div class="v-title" style="color:var(--dim);">Coming Soon</div><p class="v-meta">—</p></div>
-      </div>
+      <a class="vod-card vod-feat" href="#" data-cat="horror">
+        <div class="vod-thumb vt4">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 스토리</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">전국퇴마사협회</div>
+          <p class="v-meta"><span>공포 / 스토리</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 3: 소희 + 흰피톨 + 글라디메이커 + 타이니아쿠아리움 -->
+      <a class="vod-card" href="#" data-cat="story">
+        <div class="vod-thumb vt5">
+          <div class="v-ov"></div>
+          <span class="v-tag">내러티브 / 스토리</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">소희</div>
+          <p class="v-meta"><span>내러티브 / 스토리</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="puzzle">
+        <div class="vod-thumb vt6">
+          <div class="v-ov"></div>
+          <span class="v-tag">퍼즐 / 어드벤처</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">흰피톨</div>
+          <p class="v-meta"><span>퍼즐 / 어드벤처</span><span class="dot">·</span><span>2024</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="rpg">
+        <div class="vod-thumb vt7">
+          <div class="v-ov"></div>
+          <span class="v-tag">오토 배틀 / RPG</span>
+          <span class="v-ftag" style="background:rgba(0,184,160,.15);border-color:rgba(0,184,160,.4);color:#007a6a;">출시 동시</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">글라디메이커</div>
+          <p class="v-meta"><span>오토 배틀 / RPG</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt8">
+          <div class="v-ov"></div>
+          <span class="v-tag">캐주얼 / 시뮬레이션</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">타이니 아쿠아리움</div>
+          <p class="v-meta"><span>크리에이터 58명</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 목록 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 4: 위니언 바이러스 + The Coma + 7Trials + Cosmic Coop -->
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt9">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 스토리</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">위니언 바이러스</div>
+          <p class="v-meta"><span>공포 / 스토리</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt10">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 스토리</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">The Coma</div>
+          <p class="v-meta"><span>공포 / 스토리</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="rpg">
+        <div class="vod-thumb vt11">
+          <div class="v-ov"></div>
+          <span class="v-tag">3D 로그라이트</span>
+          <span class="v-ftag" style="background:rgba(124,111,223,.15);border-color:rgba(124,111,223,.4);color:#5a4ab0;">HGE 독점 선공개</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">7Trials</div>
+          <p class="v-meta"><span>3D 로그라이트</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt12">
+          <div class="v-ov"></div>
+          <span class="v-tag">농장 경영</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Cosmic Coop</div>
+          <p class="v-meta"><span>농장 경영</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 5: 마지막 슬라이드 + 스타더스트 + 아라하 + 공고소녀 -->
+      <a class="vod-card" href="#" data-cat="rpg">
+        <div class="vod-thumb vt13">
+          <div class="v-ov"></div>
+          <span class="v-tag">액션</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">마지막 슬라이드는 네 몫이야</div>
+          <p class="v-meta"><span>액션</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="rpg">
+        <div class="vod-thumb vt14">
+          <div class="v-ov"></div>
+          <span class="v-tag">SRPG</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">스타더스트 : 별과 마녀</div>
+          <p class="v-meta"><span>SRPG</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt15">
+          <div class="v-ov"></div>
+          <span class="v-tag">1인칭 / 공포</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">아라하 : 이은도의 저주</div>
+          <p class="v-meta"><span>1인칭 / 공포</span><span class="dot">·</span><span>2020</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt16">
+          <div class="v-ov"></div>
+          <span class="v-tag">비주얼 노벨</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">공고소녀</div>
+          <p class="v-meta"><span>비주얼 노벨</span><span class="dot">·</span><span>2025</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 6: Quiet + 그날의 신문 + The Coma 2B + 냉장고에 넣어버려! -->
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt17">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 협동</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Quiet</div>
+          <p class="v-meta"><span>공포 / 협동</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="story">
+        <div class="vod-thumb vt18">
+          <div class="v-ov"></div>
+          <span class="v-tag">역사 / 시뮬레이션</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">그날의 신문</div>
+          <p class="v-meta"><span>역사 / 시뮬레이션</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt19">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">The Coma 2B</div>
+          <p class="v-meta"><span>공포</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="puzzle">
+        <div class="vod-thumb vt20">
+          <div class="v-ov"></div>
+          <span class="v-tag">퍼즐 / 협동</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">냉장고에 넣어버려!</div>
+          <p class="v-meta"><span>퍼즐 / 협동</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 7: Backroom Cleaners + PACOSTEP + 빈 칸을 채워줘!#1 + Lobotomy -->
+      <a class="vod-card" href="#" data-cat="rpg">
+        <div class="vod-thumb vt21">
+          <div class="v-ov"></div>
+          <span class="v-tag">TPS / 협동</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Backroom Cleaners</div>
+          <p class="v-meta"><span>TPS / 협동</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt22">
+          <div class="v-ov"></div>
+          <span class="v-tag">플랫포머</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">PACOSTEP</div>
+          <p class="v-meta"><span>플랫포머</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt23">
+          <div class="v-ov"></div>
+          <span class="v-tag">비주얼 노벨</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">빈 칸을 채워줘!#1</div>
+          <p class="v-meta"><span>비주얼 노벨</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt24">
+          <div class="v-ov"></div>
+          <span class="v-tag">1인칭 / 공포</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Lobotomy</div>
+          <p class="v-meta"><span>1인칭 / 공포</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 8 -->
+      <a class="vod-card" href="#" data-cat="rhythm">
+        <div class="vod-thumb vt25">
+          <div class="v-ov"></div>
+          <span class="v-tag">리듬게임</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Nientum - Op.ZERO</div>
+          <p class="v-meta"><span>리듬게임</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="action">
+        <div class="vod-thumb vt26">
+          <div class="v-ov"></div>
+          <span class="v-tag">액션</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Kaiju Harvest</div>
+          <p class="v-meta"><span>액션</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="horror">
+        <div class="vod-thumb vt27">
+          <div class="v-ov"></div>
+          <span class="v-tag">공포 / 협동</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">CODE EXIT</div>
+          <p class="v-meta"><span>공포 / 협동</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt28">
+          <div class="v-ov"></div>
+          <span class="v-tag">협동 / IP</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">얀데레 바이러스</div>
+          <p class="v-meta"><span>협동 / IP</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Row 9 -->
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt29">
+          <div class="v-ov"></div>
+          <span class="v-tag">비주얼 노벨</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">프렌치 커넥션</div>
+          <p class="v-meta"><span>비주얼 노벨</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt30">
+          <div class="v-ov"></div>
+          <span class="v-tag">비주얼 노벨</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Come To My Party!</div>
+          <p class="v-meta"><span>비주얼 노벨</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt31">
+          <div class="v-ov"></div>
+          <span class="v-tag">비주얼 노벨</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">귀귀살전</div>
+          <p class="v-meta"><span>비주얼 노벨</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="vod-card" href="#" data-cat="casual">
+        <div class="vod-thumb vt32">
+          <div class="v-ov"></div>
+          <span class="v-tag">퍼즐</span>
+          <div class="v-play"><div class="v-pbtn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="v-info">
+          <div class="v-title">Jail Dice</div>
+          <p class="v-meta"><span>퍼즐</span><span class="dot">·</span><span>2026</span></p>
+          <div class="v-link">방송 보기 <svg viewBox="0 0 10 10" fill="currentColor"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg></div>
+        </div>
+      </a>
 
     </div>
+  </div>
+</section>
+
+<!-- ①-2 HGE UNIVERSE — 웹진 미리보기 (글쓰기 화면에서 '메인 노출'한 인터뷰가 자동으로 들어옴, 0편이면 숨김) -->
+<section class="uv-section" hidden>
+  <div class="sec">
+    <div class="uv-head reveal">
+      <div>
+        <div class="sec-label">HGE UNIVERSE</div>
+        <h2 class="sec-title">CREATOR INTERVIEW</h2>
+        <p class="sec-desc">HGE Creator가 만난 크리에이터와 게임 개발팀의 이야기</p>
+      </div>
+      <a class="uv-more" href="/universe/">웹진 전체보기 →</a>
+    </div>
+    <div class="uv-grid" id="uv-grid"></div>
   </div>
 </section>
 
@@ -351,33 +1023,27 @@ footer a:hover { color:var(--muted); }
     <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;">
       <div>
         <div class="sec-label">CREATOR ROSTER</div>
-        <h2 class="sec-title">소속 크리에이터</h2>
-        <p class="sec-desc">인디게임을 사랑하는 스트리머 · 리뷰어 · 2차창작 크리에이터 1,000명+</p>
+        <h2 class="sec-title">콜라보 크리에이터</h2>
+        <p class="sec-desc">게임을 사랑하는 스트리머 · 리뷰어 · 2차창작 크리에이터 1,000명+</p>
       </div>
       <div class="chip-row" style="margin-bottom:0;">
-        <button class="chip on" data-cf="all">ALL</button>
-        <button class="chip" data-cf="s">스트리머</button>
-        <button class="chip" data-cf="r">리뷰어</button>
-        <button class="chip" data-cf="f">2차창작</button>
+<button class="chip on" data-cf="all">ALL</button>
+<button class="chip" data-cf="스트리머">스트리머</button>
+<button class="chip" data-cf="디자이너">디자이너</button>
       </div>
     </div>
 
-    <div class="creator-grid reveal">
-      <div class="c-card" data-t="s"><div class="c-av ca1"><div class="c-av-ov"></div><span class="c-av-art">🎮</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">인디게임 전문 스트리머</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-card" data-t="r"><div class="c-av ca2"><div class="c-av-ov"></div><span class="c-av-art">🎯</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">전략 · 카드게임 리뷰어</div><span class="c-tbadge tb-r">리뷰어</span></div></div>
-      <div class="c-card" data-t="f"><div class="c-av ca3"><div class="c-av-ov"></div><span class="c-av-art">🎨</span><div class="c-plat"><span class="pb pb-tw">Twitch</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">2차창작 · 노벨게임</div><span class="c-tbadge tb-f">2차창작</span></div></div>
-      <div class="c-card" data-t="s"><div class="c-av ca4"><div class="c-av-ov"></div><span class="c-av-art">⚡</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">RPG · 방치형 게임</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-card" data-t="r"><div class="c-av ca5"><div class="c-av-ov"></div><span class="c-av-art">🌿</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">힐링 · 시뮬레이션</div><span class="c-tbadge tb-r">리뷰어</span></div></div>
-      <div class="c-card" data-t="s"><div class="c-av ca6"><div class="c-av-ov"></div><span class="c-av-art">🔥</span><div class="c-plat"><span class="pb pb-tw">Twitch</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">액션 · 멀티플랫폼</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-card" data-t="f"><div class="c-av ca7"><div class="c-av-ov"></div><span class="c-av-art">💙</span><div class="c-plat"><span class="pb pb-yt">YouTube</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">2차창작 · 팬아트</div><span class="c-tbadge tb-f">2차창작</span></div></div>
-      <div class="c-card" data-t="s"><div class="c-av ca8"><div class="c-av-ov"></div><span class="c-av-art">🎵</span><div class="c-plat"><span class="pb pb-ch">CHZZK</span><span class="pb pb-yt">YT</span></div></div><div class="c-info"><div class="c-name">크리에이터 닉네임</div><div class="c-tag">멀티플랫폼 방송인</div><span class="c-tbadge tb-s">스트리머</span></div></div>
-      <div class="c-add"><span class="add-ico">＋</span><span>크리에이터 추가</span></div>
-      <div class="c-add"><span class="add-ico">＋</span><span>크리에이터 추가</span></div>
+    <!-- 로딩 표시 -->
+    <div id="creator-loading" style="text-align:center;padding:3rem;color:var(--muted);font-size:.9rem;">
+      크리에이터 목록 불러오는 중...
     </div>
 
-    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
-      <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;">현재 표시된 크리에이터 외 <strong style="color:var(--white);">900명+</strong> 소속 중</p>
-      <a href="#join" class="btn-out">크리에이터 가입 문의</a>
+    <!-- 카드가 여기에 자동으로 들어옴 -->
+    <div class="creator-grid" id="creator-grid"></div>
+
+    <div style="text-align:center;margin-top:2.5rem;">
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;" id="creator-count"></p>
+      <a href="https://discord.gg/WzXTnaEBeY" class="btn-out" target="_blank">크리에이터 참여 신청</a>
     </div>
   </div>
 </section>
@@ -386,34 +1052,36 @@ footer a:hover { color:var(--muted); }
 <section id="projects">
   <div class="sec">
     <div class="sec-head reveal">
-      <div class="sec-label">COLLAB PROJECTS</div>
+      <div class="sec-label">HGE PROJECTS</div>
       <h2 class="sec-title">진행 중인 프로젝트</h2>
-      <p class="sec-desc">현재 HGE Creator가 진행 중이거나 준비 중인 콜라보레이션 프로젝트</p>
+      <p class="sec-desc">현재 HGE Creator가 진행 중이거나 준비 중인 프로젝트</p>
     </div>
 
     <div class="proj-grid reveal">
       <div class="p-card">
-        <div class="p-banner pb1"><span class="p-status ps-live">● LIVE</span><span>🎮</span></div>
+        <div class="p-banner pb1"><span class="p-status ps-live">● LIVE</span><span></span></div>
         <div class="p-body">
-          <div class="p-title">프로젝트명을 입력하세요</div>
-          <p class="p-desc">진행 중인 콜라보레이션 프로젝트 설명을 입력해주세요. 게임 장르, 참여 크리에이터 수, 기간 등을 기재할 수 있습니다.</p>
-          <div class="p-meta"><span class="hi">● 진행 중</span><span>·</span><span>크리에이터 ?명</span></div>
+          <div class="p-title">Virtual Dream</div>
+          <p class="p-desc">버츄얼 스트리머 100인이 캐릭터로 등장하는 참여형 비주얼 노벨 게임 프로젝트</p>
+          <div class="p-meta"><span class="hi">● 진행 중</span><span>·</span><span>크리에이터 100명</span></div>
         </div>
       </div>
       <div class="p-card">
-        <div class="p-banner pb2"><span class="p-status ps-up">UPCOMING</span><span>🃏</span></div>
+        <div class="p-banner pb2"><span class="p-status ps-live">● LIVE</span><span></span></div>
         <div class="p-body">
-          <div class="p-title">프로젝트명을 입력하세요</div>
-          <p class="p-desc">예정된 콜라보레이션 프로젝트 설명을 입력해주세요. 시작 예정일, 참여 규모 등을 기재하세요.</p>
+          <div class="p-title">HGE CUP</div>
+          <p class="p-desc">국내 최초 인디게임 E-SPORTS. 게임사와 직접 운영하는 신개념 리그</p>
           <div class="p-meta"><span>예정</span><span>·</span><span>모집 예정</span></div>
         </div>
       </div>
       <div class="p-card">
-        <div class="p-banner pb3"><span class="p-status" style="background:rgba(255,255,255,.05);border:1px solid var(--bdr2);color:var(--muted);">COMPLETED</span><span>✅</span></div>
+        <div class="p-banner pb4">
+          <span class="p-status ps-live">● 진행 중</span>
+        </div>
         <div class="p-body">
-          <div class="p-title">프로젝트명을 입력하세요</div>
-          <p class="p-desc">완료된 프로젝트 설명. 성과나 결과를 간략히 기재하실 수 있습니다.</p>
-          <div class="p-meta"><span>완료</span><span>·</span><span>결과 보기 →</span></div>
+          <div class="p-title">버츄얼 IN 홍대</div>
+          <p class="p-desc">국내 최초 버츄얼 인터랙티브 부스 — 홍대 거리에서 만나는 버츄얼 크리에이터 × 인디게임 콜라보 이벤트</p>
+          <div class="p-meta"><span class="hi">● 국내최초</span><span>·</span><span>버츄얼 인터랙티브 부스</span></div>
         </div>
       </div>
       <div class="p-add"><span style="font-size:1.8rem;color:var(--dim);">＋</span><span>프로젝트 추가</span></div>
@@ -429,15 +1097,15 @@ footer a:hover { color:var(--muted); }
     <div class="about-inner reveal">
       <div>
         <div class="sec-label">ABOUT HGE CREATOR</div>
-        <h2 class="sec-title">인디게임과<br>크리에이터의 상생</h2>
-        <p class="sec-desc" style="margin-top:1.2rem;">HGE Creator는 인디게임을 사랑하는 크리에이터들이 모인 커뮤니티 플랫폼입니다.<br><br><strong style="color:var(--white);">'게임의 재미'</strong>로 콜라보에 참여하는 크리에이터들이 인디게임 개발사와 직접 연결됩니다. 광고가 아닌 진정성 있는 콘텐츠로 게임과 크리에이터, 팬이 함께 성장합니다.</p>
-        <div class="pill-row"><span class="pill">스트리머 1,000+</span><span class="pill">인디게임 전문</span><span class="pill">글로벌 MCN 파트너</span><span class="pill">일본 · 중국 연계</span></div>
-        <div class="cta-row"><a href="#join" class="btn-fill">콜라보 문의하기</a><a href="https://hgecreator.com" target="_blank" class="btn-out">공식 웹사이트</a></div>
+        <h2 class="sec-title">게임과<br>크리에이터의 상생</h2>
+        <p class="sec-desc" style="margin-top:1.2rem;">HGE Creator는 게임을 사랑하는 크리에이터들이 모인 커뮤니티 플랫폼입니다.<br><br>콜라보를 통해 게임 개발사와 크리에이터가 직접 연결됩니다. 진정성 있는 콘텐츠로 게임과 크리에이터, 팬이 함께 성장합니다.</p>
+        <div class="pill-row"><span class="pill">스트리머 2,000+</span><span class="pill">인디게임 전문</span><span class="pill">글로벌 MCN 파트너</span><span class="pill">일본 · 중국 연계</span></div>
+        <div class="cta-row"><a href="https://forms.gle/XkWVdjBBJGy3YjHK7" class="btn-fill" target="_blank" rel="noopener noreferrer">콜라보 신청하기</a><a href="https://hgecreator.com" target="_blank" class="btn-out">공식 웹사이트</a></div>
       </div>
       <div class="about-stats">
-        <div class="astat"><div class="n">1,000+</div><div class="l">소속 크리에이터</div></div>
-        <div class="astat"><div class="n">12+</div><div class="l">콜라보 게임 타이틀</div></div>
-        <div class="astat"><div class="n">83명</div><div class="l">최대 단일 콜라보 참여</div></div>
+        <div class="astat"><div class="n">2,000+</div><div class="l">크리에이터</div></div>
+        <div class="astat"><div class="n">80개 이상</div><div class="l">콜라보 게임 타이틀</div></div>
+        <div class="astat"><div class="n">294명</div><div class="l">최대 단일 콜라보 참여</div></div>
         <div class="astat"><div class="n">2만+</div><div class="l">SNS 평균 조회수/콘텐츠</div></div>
       </div>
     </div>
@@ -452,8 +1120,8 @@ footer a:hover { color:var(--muted); }
     <h2 class="join-title">함께 <span class="gr">성장</span>해요</h2>
     <p class="sec-desc" style="margin-bottom:0;">크리에이터로 합류하거나, 게임 콜라보를 원하는 개발사라면 언제든 연락주세요.</p>
     <div class="join-cards">
-      <div class="jcard"><strong>🎙 크리에이터 합류</strong>인디게임 방송을 즐기는 스트리머·리뷰어·2차창작 크리에이터라면 누구나 지원 가능합니다.</div>
-      <div class="jcard"><strong>🎮 게임사 콜라보</strong>출시 예정이거나 홍보가 필요한 인디 게임이 있다면 콜라보레이션을 함께 기획합니다.</div>
+      <div class="jcard"><strong>🎙 크리에이터 합류</strong>게임 방송을 즐기는 스트리머·리뷰어·2차창작 크리에이터라면 누구나 지원 가능합니다.</div>
+      <div class="jcard"><strong>🎮 게임사 콜라보</strong>출시 예정이거나 홍보가 필요한 게임이 있다면 콜라보레이션을 함께 기획합니다.</div>
       <div class="jcard"><strong>🤝 파트너십</strong>스폰서십·협찬·이벤트 제휴 등 다양한 형태의 파트너십을 논의할 수 있습니다.</div>
     </div>
     <a href="mailto:kyle@hgecreator.com" class="btn-fill" style="font-size:.9rem;padding:.9rem 2.5rem;">kyle@hgecreator.com 으로 문의하기</a>
@@ -478,11 +1146,13 @@ footer a:hover { color:var(--muted); }
 const slides=[...document.querySelectorAll('.hero-slide')];
 const dots=[...document.querySelectorAll('.hero-dot')];
 let cur=0,tmr;
-slides.forEach((s,i)=>s.style.transform=`translateX(${i*100}%)`);
+slides[0].classList.add('active');
 function go(i){
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('on');
   cur=(i+slides.length)%slides.length;
-  slides.forEach((s,j)=>{s.style.transition='transform .9s cubic-bezier(.77,0,.18,1)';s.style.transform=`translateX(${(j-cur)*100}%)`;});
-  dots.forEach((d,j)=>d.classList.toggle('on',j===cur));
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('on');
 }
 dots.forEach(d=>d.addEventListener('click',()=>{clearInterval(tmr);go(+d.dataset.i);tmr=setInterval(()=>go(cur+1),5000);}));
 tmr=setInterval(()=>go(cur+1),5000);
@@ -521,7 +1191,7 @@ document.querySelectorAll('[data-cf]').forEach(b=>{
 });
 
 /* REVEAL */
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.08});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 /* NAV ACTIVE */
@@ -532,6 +1202,199 @@ window.addEventListener('scroll',()=>{
   ss.forEach(s=>{if(window.scrollY>=s.offsetTop-100)id=s.id;});
   as.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
 },{passive:true});
+
+/* ── CREATORS FROM GOOGLE SHEETS ── */
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUbZJIPam640i4hzKCkF7LEjSm5wASDrUGdGOSKLls6ytMx_kBdC8EIRQhviMX9HxCf9w5Kj1q0DpR/pub?output=csv';
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cur = '';
+  let inQ = false;
+
+  text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '"') {
+      if (inQ && text[i+1] === '"') { cur += '"'; i++; }
+      else { inQ = !inQ; }
+    } else if (ch === ',' && !inQ) {
+      row.push(cur.trim());
+      cur = '';
+    } else if (ch === '\n' && !inQ) {
+      row.push(cur.trim());
+      if (row.some(c => c !== '')) rows.push(row);
+      row = [];
+      cur = '';
+    } else {
+      if (inQ || ch !== '\n') cur += ch;
+    }
+  }
+  if (cur || row.length > 0) {
+    row.push(cur.trim());
+    if (row.some(c => c !== '')) rows.push(row);
+  }
+  return rows;
+}
+
+function driveToImg(url) {
+  // https://drive.google.com/open?id=XXXXX → 썸네일 URL로 변환
+  const match = url.match(/id=([a-zA-Z0-9_-]+)/);
+  if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w400`;
+  return url;
+}
+
+function getPlatformBadges(platformStr) {
+  const map = {
+    'chzzk':   { cls:'pb-ch', label:'CHZZK' },
+    'youtube': { cls:'pb-yt', label:'YouTube' },
+    'twitch':  { cls:'pb-tw', label:'Twitch' },
+  'soop':    { cls:'pb-soop', label:'SOOP' },
+  'cime':    { cls:'pb-cime', label:'CIMe' },
+  };
+  return platformStr.split(',')
+    .map(p => p.trim().toLowerCase())
+    .filter(p => map[p])
+    .map(p => `<span class="pb ${map[p].cls}">${map[p].label}</span>`)
+    .join('');
+}
+
+const TYPE_BADGE = {
+  '스트리머': 'tb-s',
+  '디자이너': 'tb-d',
+};
+
+async function loadCreators() {
+  try {
+    const res = await fetch(SHEET_CSV_URL);
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    // 1행 = 헤더
+    const headers = rows[0];
+
+    // 열 인덱스를 헤더 이름으로 찾기
+    const idx = {
+      name:     headers.findIndex(h => h.includes('활동명')),
+      type:     headers.findIndex(h => h.includes('활동 분야')),
+      genre:    headers.findIndex(h => h.includes('한 줄 소개')),
+      platform: headers.findIndex(h => h.includes('플랫폼')),
+      link:     headers.findIndex(h => h.includes('채널 링크')),
+      photo:    headers.findIndex(h => h.includes('프로필 사진')),
+      approved: headers.findIndex(h => h.includes('승인')),
+    };
+
+    const creators = rows.slice(1)
+      .filter(row => row.length > 2)  // 빈 행 제거
+      .filter(row => {
+        // 승인 열이 없으면 전부 표시, 있으면 TRUE만
+        if (idx.approved === -1) return false;
+        return (row[idx.approved] || '').trim().toUpperCase() === 'TRUE';
+      })
+      .map(row => ({
+        name:     row[idx.name]     || '',
+        type:     row[idx.type]     || '',
+        genre:    row[idx.genre]    || '',
+        platform: row[idx.platform] || '',
+        link:     row[idx.link]     || '#',
+        photo:    row[idx.photo]    || '',
+      }));
+
+    renderCreators(creators);
+  } catch(e) {
+    document.getElementById('creator-loading').textContent = '크리에이터 목록을 불러오지 못했습니다.';
+    console.error(e);
+  }
+}
+
+function renderCreators(creators) {
+  const grid = document.getElementById('creator-grid');
+  const loading = document.getElementById('creator-loading');
+  const count = document.getElementById('creator-count');
+
+  loading.style.display = 'none';
+  count.innerHTML = `현재 1932명 콜라보 활동 중`;
+
+  grid.innerHTML = creators.map(c => {
+    const badgeCls = TYPE_BADGE[c.type] || 'tb-s';
+    const imgUrl = c.photo ? driveToImg(c.photo) : '';
+    const avatarHtml = imgUrl
+      ? `<img class="c-img" src="${imgUrl}" alt="${c.name}" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+
+    return `
+      <a class="c-card" data-t="${c.type}" href="${c.link}" target="_blank" rel="noopener">
+        <div class="c-av">
+          ${avatarHtml}
+          <div class="c-img-fallback" style="${imgUrl ? 'display:none' : ''}">🎮</div>
+          <div class="c-av-ov"></div>
+          <div class="c-plat">${getPlatformBadges(c.platform)}</div>
+        </div>
+        <div class="c-info">
+          <div class="c-name">${c.name}</div>
+          <div class="c-tag">${c.genre}</div>
+          <span class="c-tbadge ${badgeCls}">${c.type}</span>
+        </div>
+      </a>`;
+  }).join('');
+
+  // 필터
+  document.querySelectorAll('[data-cf]').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('[data-cf]').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      const f = b.dataset.cf;
+      document.querySelectorAll('#creator-grid .c-card').forEach(c => {
+        c.style.display = (f === 'all' || c.dataset.t === f) ? '' : 'none';
+      });
+    });
+  });
+}
+
+/* IP 기반 언어 자동 감지 */
+(async()=>{
+  if(/bot|crawl|spider|slurp|yeti|daum|bingpreview|lighthouse/i.test(navigator.userAgent)) return; // 검색 로봇은 한국어 페이지 그대로
+  if(sessionStorage.getItem('lang-checked')) return;
+  sessionStorage.setItem('lang-checked','1');
+  try{
+    const r=await fetch('https://ipapi.co/json/');
+    const d=await r.json();
+    if(d.country_code && d.country_code !== 'KR'){
+      window.location.href='./en/';
+    }
+  }catch(e){}
+})();
+
+loadCreators();
+/* ── HGE UNIVERSE 미리보기: 웹진에서 '메인 노출'로 고른 인터뷰 최대 4편 ── */
+(function(){
+  const box=document.getElementById('uv-grid');
+  if(!box) return;
+  const sec=box.closest('.uv-section');
+  const CAT={STREAMER:['#1A8FCF','#DCEEFA','#0B5A88'],ARTIST:['#6355CC','#E7E3FB','#4537A8'],GAME:['#00A090','#D4F2EC','#00675C'],SPECIAL:['#E07A3F','#FCE6D8','#9C4313']};
+  const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const col=c=>CAT[c]||CAT.STREAMER;
+  const badge=c=>`<span class="uv-badge" style="background:${col(c)[1]};color:${col(c)[2]}"><i style="background:${col(c)[0]}"></i>${esc(c)}</span>`;
+  const img=(it,cs)=>`<div class="uv-img" style="background:${col(it.category)[1]}">${it.cover?`<img src="${esc(it.cover)}" alt="" loading="lazy">`:''}${cs?'<span class="uv-cs">COVER STORY</span>':''}</div>`;
+  fetch('/universe/feed.json',{cache:'no-cache'})
+    .then(r=>r.ok?r.json():null)
+    .then(d=>{
+      const list=((d&&d.featured)||[]).slice(0,4);
+      if(!list.length) return;
+      const first=list[0], rest=list.slice(1);
+      let h=`<a class="uv-big" href="${esc(first.url)}">${img(first,true)}<div class="uv-text">${badge(first.category)}<h3 class="uv-title">${esc(first.title)}</h3>${first.subtitle?`<p class="uv-quote">“${esc(first.subtitle)}”</p>`:''}</div></a>`;
+      if(rest.length){
+        h+='<div class="uv-minis">'+rest.map(it=>`<a class="uv-mini" href="${esc(it.url)}">${img(it,false)}<div class="uv-text">${badge(it.category)}<h3 class="uv-title">${esc(it.title)}</h3></div></a>`).join('')+'</div>';
+      } else {
+        box.classList.add('uv-single');
+      }
+      box.innerHTML=h;
+      sec.hidden=false;
+    })
+    .catch(()=>{});
+})();
 </script>
 </body>
 </html>
