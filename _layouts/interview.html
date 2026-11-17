@@ -57,6 +57,7 @@ layout: universe
     <div class="u-body" data-name="{{ who | escape }}">
 {{ content }}
     </div>
+    <p class="u-endmark" aria-hidden="true">{% include universe-mascot.html mood="smile" cls="u-mascot-end" %}</p>
 
     {%- if page.game.show == true and page.game.name and page.game.name != "" %}
     <aside class="u-game" aria-label="이 인터뷰의 게임">
@@ -94,7 +95,7 @@ layout: universe
 {%- if shown > 0 %}
 <section class="u-band">
   <div class="u-wrap">
-    <h2 class="u-h2 u-h2-planet" style="--cat:{{ cat.color }};--cat-tint:{{ cat.tint }}"><i aria-hidden="true"></i>{{ page.category }} 행성의 다른 인터뷰</h2>
+    <h2 class="u-h2 u-h2-planet" style="--cat:{{ cat.color }};--cat-tint:{{ cat.tint }}">{% if cat.planet %}<img class="u-h2-planet-img" src="{{ cat.planet }}" alt="" aria-hidden="true" width="240" height="240" loading="lazy">{% else %}<i aria-hidden="true"></i>{% endif %}{{ page.category }} 행성의 다른 인터뷰</h2>
     <div class="u-grid3">{{ related }}</div>
   </div>
 </section>
@@ -102,7 +103,8 @@ layout: universe
 
 <section class="u-wrap u-section">
   <div class="u-hgebar">
-    <div>
+    {% include universe-mascot.html mood="sparkle" cls="u-mascot-bar" %}
+    <div class="u-hgebar-copy">
       <p class="u-eyebrow u-eyebrow-light">HGE CREATOR</p>
       <p class="u-hgebar-text">게임을 좋아하는 크리에이터들이 모여 함께 만드는 콜라보 플랫폼</p>
     </div>

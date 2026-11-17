@@ -210,11 +210,57 @@ a.u-badge:hover { color: var(--cat-ink); }
 .u-footer-logo small { font-family: var(--sans); font-size: 13px; letter-spacing: 0; color: var(--muted); }
 .u-footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; font-weight: 500; }
 
+
+/* 마스코트·행성 그림 */
+@keyframes u-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes u-drift { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(4px, -10px) rotate(6deg); } }
+.u-mascot { display: block; height: auto; pointer-events: none; user-select: none; }
+/* 행성 그림은 240px 캔버스 중앙에 본체(지름 128px)가 같은 크기로 들어가 있어요. 여백이 있으니 박스를 크게, 바깥 여백은 음수 margin으로 상쇄 */
+.u-planet-img { display: block; width: 108px; height: 108px; margin: -18px; object-fit: contain; background: none; border-radius: 0; box-shadow: none !important; }
+.u-planet-card .u-planet-img { width: 116px; height: 116px; margin: -27px 0 -27px -27px; transition: transform .3s; }
+.u-planet-card:hover .u-planet-img { transform: rotate(-10deg) scale(1.08); }
+.u-planet-img.u-planet-xl { flex: 0 0 180px; width: 180px; height: 180px; margin: -30px; box-shadow: none; filter: drop-shadow(0 10px 18px rgba(15, 31, 46, .12)); animation: u-drift 7s ease-in-out infinite; }
+.u-planet-img.u-planet-sm { display: inline-block; width: 44px; height: 44px; vertical-align: middle; margin: -12px 0 -10px -10px; }
+.u-catnav-in a .u-catnav-planet { width: 38px; height: 38px; margin: 0 -8px 0 -9px; object-fit: contain; flex: 0 0 38px; }
+.u-h2-planet-img { width: 56px; height: 56px; margin: -12px -6px -12px -13px; object-fit: contain; }
+
+/* 마스트헤드 장식 */
+.u-mast-deco { position: relative; }
+.u-mast-deco > *:not(.u-orbit):not(.u-mascot) { position: relative; z-index: 1; }
+.u-orbit { position: absolute; z-index: 0; height: auto; pointer-events: none; animation: u-drift 8s ease-in-out infinite; }
+.u-orbit-1 { width: 84px; left: 7%; top: 22px; }
+.u-orbit-2 { width: 84px; left: 14%; bottom: 10px; animation-delay: -2s; }
+.u-orbit-3 { width: 84px; right: 8%; bottom: 10px; animation-delay: -4s; }
+.u-orbit-4 { width: 84px; right: 5%; top: 46px; animation-delay: -6s; }
+.u-mascot-mast { position: absolute; z-index: 2; width: 150px; right: calc(50% - 470px); top: 18px; animation: u-bob 4s ease-in-out infinite; }
+
+/* 위치별 마스코트 */
+.u-mascot-callout { width: 150px; margin: -20px auto 6px; }
+.u-mascot-empty { width: 132px; margin: 0 auto 4px; }
+.u-mascot-inline { display: inline-block; width: 44px; vertical-align: middle; margin-right: 8px; }
+.u-cathead-in { position: relative; }
+.u-mascot-cathead { position: absolute; right: 40px; bottom: -6px; width: 170px; animation: u-bob 4.5s ease-in-out infinite; }
+.u-endmark { display: flex; justify-content: center; margin: 56px 0 0; }
+.u-mascot-end { width: 76px; opacity: .95; }
+.u-hgebar { position: relative; }
+.u-hgebar-copy { flex: 1 1 320px; }
+.u-mascot-bar { flex: 0 0 auto; width: 96px; margin: -14px -4px -14px -8px; }
+.u-footer-logo { display: flex; align-items: center; gap: 10px; }
+.u-mascot-foot { width: 46px; }
+.u-h2-mascot { display: flex; align-items: center; gap: 10px; }
+.u-mascot-h2 { width: 64px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .u-orbit, .u-mascot-mast, .u-mascot-cathead, .u-planet-img.u-planet-xl { animation: none; }
+}
+
 /* 반응형 */
 @media (max-width: 960px) {
   .u-grid3, .u-grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .u-cover { grid-template-columns: 1fr; gap: 28px; }
   .u-topnav { display: none; }
+  .u-mascot-mast { right: 2%; width: 120px; }
+  .u-mascot-cathead { width: 130px; right: 16px; }
 }
 @media (max-width: 620px) {
   .u-wrap { padding: 0 16px; }
@@ -271,4 +317,17 @@ a.u-badge:hover { color: var(--cat-ink); }
   .u-share { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
   .u-hgebar { padding: 28px 24px; }
   .u-hgebar-text { font-size: 19px; }
+  .u-mascot-mast { width: 66px; right: 8px; top: 54px; }
+  .u-orbit-1 { width: 54px; left: 0; top: 4px; }
+  .u-orbit-2 { width: 54px; left: 4%; bottom: -4px; }
+  .u-orbit-3 { width: 54px; right: 2%; bottom: -4px; }
+  .u-orbit-4 { display: none; }
+  .u-mascot-cathead { width: 88px; right: 12px; top: 26px; bottom: auto; }
+  .u-cattitle { font-size: clamp(48px, 15vw, 72px); }
+  .u-planet-img.u-planet-xl { flex-basis: 104px; width: 104px; height: 104px; margin: -20px; box-shadow: none; }
+  .u-planet-card .u-planet-img { width: 80px; height: 80px; margin: -19px 0 -19px -19px; }
+  .u-mascot-callout { width: 116px; margin-top: -8px; }
+  .u-mascot-empty { width: 104px; }
+  .u-mascot-bar { width: 72px; margin: -6px 0 0 -6px; }
+  .u-mascot-foot { display: none; }
 }
